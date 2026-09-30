@@ -1,0 +1,19 @@
+'use strict';
+(()=>{
+class BattleAudio{
+ constructor(){this.ctx=null;this.enabled=false;this.volume=.45;this.lastBeat=-1;this.lastFX=-1;this.music=true;this.ready=false}
+ async init(){if(this.ctx){if(this.ctx.state==='suspended')await this.ctx.resume();return}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error('浏览器不支持音频');this.ctx=new AC();const c=this.ctx;this.master=c.createGain();this.master.gain.value=0;const compressor=c.createDynamicsCompressor();compressor.threshold.value=-17;compressor.ratio.value=4;this.master.connect(compressor);compressor.connect(c.destination);
+ let buffer=c.createBuffer(1,c.sampleRate*3,c.sampleRate),a=buffer.getChannelData(0),r=J.rng(7127),last=0;for(let i=0;i<a.length;i++){let white=r()*2-1;last=(last+.025*white)/1.025;a[i]=last*5}this.noiseBuffer=buffer;
+ this.wind=c.createBufferSource();this.wind.buffer=buffer;this.wind.loop=true;let filter=c.createBiquadFilter();filter.type='lowpass';filter.frequency.value=620;this.windGain=c.createGain();this.windGain.gain.value=.17;this.wind.connect(filter);filter.connect(this.windGain);this.windGain.connect(this.master);this.wind.start();this.ready=true;await c.resume();}
+ async toggle(){this.enabled=!this.enabled;if(this.enabled)await this.init();this.sync(J.app?.playing||false);return this.enabled}
+ sync(playing){if(!this.ctx)return;let v=this.enabled&&playing?this.volume:0;this.master.gain.setTargetAtTime(v,this.ctx.currentTime,.09)}
+ drum(strength=1,high=false){let c=this.ctx,now=c.currentTime;let o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(high?147:86,now);o.frequency.exponentialRampToValueAtTime(high?62:36,now+.21);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.33*strength,now+.007);g.gain.exponentialRampToValueAtTime(.0001,now+.8);o.connect(g);g.connect(this.master);o.start(now);o.stop(now+.85);}
+ note(freq,duration=3,gain=.07){let c=this.ctx,now=c.currentTime;for(let detune of[-3,3]){let o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='triangle';o.frequency.value=freq;o.detune.value=detune;f.type='lowpass';f.frequency.value=740;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(gain*.5,now+.28);g.gain.exponentialRampToValueAtTime(.0001,now+duration);o.connect(f);f.connect(g);g.connect(this.master);o.start(now);o.stop(now+duration+.1)}}
+ rustle(strength=.15,metal=false){let c=this.ctx,now=c.currentTime,s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=this.noiseBuffer;f.type=metal?'bandpass':'highpass';f.frequency.value=metal?2300:900;f.Q.value=metal?4:.7;g.gain.setValueAtTime(strength,now);g.gain.exponentialRampToValueAtTime(.0001,now+(metal?.17:.34));s.connect(f);f.connect(g);g.connect(this.master);s.start(now,(now*.7)%1);s.stop(now+.4);if(metal){let o=c.createOscillator(),gg=c.createGain();o.type='sine';o.frequency.value=1260+(Math.floor(now*7)%5)*174;gg.gain.setValueAtTime(.023,now);gg.gain.exponentialRampToValueAtTime(.0001,now+.14);o.connect(gg);gg.connect(this.master);o.start();o.stop(now+.2)}}
+ update(t,playing,camera){if(!this.ctx||!this.enabled)return;this.sync(playing);if(!playing)return;let phase=J.phaseAt(t),real=this.ctx.currentTime,beat=Math.floor(real*1.2);let battle=phase>=3&&phase<=6;
+ if(beat!==this.lastBeat){this.lastBeat=beat;if(this.music){if(beat%4===0)this.drum(battle?.65:.32);if(battle&&beat%4===2)this.drum(.36,true);if(beat%4===0){let melody=[110,130.81,146.83,164.81,196,164.81,146.83,130.81],f=melody[Math.floor(beat/4)%melody.length];this.note(f,3.7,battle?.062:.085);if(beat%8===0)this.note(55,6,.05)}}}
+ let fx=Math.floor(real*(battle?5:1.8));if(fx!==this.lastFX){this.lastFX=fx;if(battle)this.rustle(.20,true);else if(phase>=1&&phase<4)this.rustle(.15,false)}let riverDistance=Math.abs(camera.target[2]-J.riverZ(camera.target[0]));this.windGain.gain.setTargetAtTime(riverDistance<100?.32:.16,real,.4);
+ }
+}
+J.BattleAudio=BattleAudio;
+})();
