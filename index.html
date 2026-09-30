@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="description" content="巨鹿之战V3：30个电影式镜头、动态将领标签、自由机位、时间轴、行军方向线。离线三维战役观察程序。"><title>巨鹿之战 · 战场纪实 V3</title><style>:root{--ink:#101a1e;--paper:#eee7d9;--muted:#a3afa7;--gold:#d9bd7c;--line:#d5d2b62b;--panel:#142027ed;--chu:#d47e65;--qin:#b2c8ce;--ally:#83bb9f;--bottom:109px}
+*{box-sizing:border-box}html,body{padding:0;margin:0;width:100%;height:100%;overflow:hidden;background:#788382;color:var(--paper);font:12px Arial,"Noto Sans CJK SC","Microsoft YaHei",sans-serif}button,select,input{font:inherit}button,select{color:inherit}button{cursor:pointer;background:#142027d6;border:1px solid var(--line);border-radius:3px;padding:7px 11px;transition:background .15s,border-color .15s}button:hover{background:#455052;border-color:#d9bd7c80}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}button.active,button[aria-pressed=true]{background:#cdb27526;border-color:#d9bd7c99;color:#f3dfb5}button:disabled{opacity:.45}a{color:var(--gold)}[hidden]{display:none!important}#stage{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;outline:0}#stage.dragging{cursor:grabbing}#vignette{position:fixed;inset:0;pointer-events:none;background:linear-gradient(0deg,#08171b8c 0%,transparent 36%,transparent 79%,#101b2459 100%),radial-gradient(ellipse at 45% 42%,transparent 46%,#15212a36 100%)}#stems{position:fixed;inset:0;pointer-events:none;z-index:4}#labels{position:fixed;inset:0;pointer-events:none;z-index:5}.world-label{position:absolute;left:0;top:0;pointer-events:auto;width:166px;padding:7px 10px 6px;background:#0c1922ce;border:1px solid #d5d2b642;border-left:2px solid var(--qin);text-align:left;box-shadow:0 4px 18px #0002;will-change:transform;line-height:1.4}.world-label[data-team="1"]{border-left-color:var(--chu)}.world-label[data-team="2"]{border-left-color:var(--ally)}.world-label[data-team="3"]{border-left-color:var(--gold)}.world-label b{font-size:12px;letter-spacing:.5px;font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.world-label small{display:flex;justify-content:space-between;gap:8px;font-size:9px;margin-top:3px;color:#b8c5bb}.world-label.selected{background:#172a31ed;border-color:#d9bd7c80;box-shadow:0 3px 16px #08171a44}.world-label.selected b{color:#f5e0ad}.world-label small em{font-style:normal;font-family:ui-monospace,monospace;font-size:9px;white-space:nowrap}
+.topbar{position:fixed;z-index:20;top:0;left:0;right:0;height:48px;background:#0b171bed;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;gap:16px}.brand{display:flex;gap:12px;align-items:center}.seal{font:20px "Noto Serif CJK SC",SimSun,serif;width:28px;height:30px;line-height:28px;text-align:center;border:1px solid #a79468;color:#d9bd7c}.brand h1{font:20px "Noto Serif CJK SC",SimSun,serif;margin:0;letter-spacing:2px;display:flex;align-items:center;gap:17px}.brand h1 small{font:9px Arial,"Microsoft YaHei",sans-serif;letter-spacing:3px;color:#b1b9ac;border-left:1px solid #b9bba336;padding-left:17px}.topmid{font-size:10px;letter-spacing:2px;color:#a1afa4}.toptools{display:flex;align-items:center;gap:14px;font-size:10px}.toptools button{background:none;border:0;padding:4px 0;color:#c0c6b8}.version{color:#85948b;font:10px ui-monospace,monospace}#sideToggle{display:none}.status-dot{display:inline-block;width:5px;height:5px;margin-right:7px;border-radius:50%;background:var(--gold)}
+.viewbar{position:fixed;z-index:15;top:66px;left:22px;display:flex;gap:5px;max-width:calc(100% - 330px)}.viewbar button{height:31px;padding:0 13px;font-size:11px;white-space:nowrap}.viewbar #guide{margin-right:6px}.viewbar #guide.active{background:#b8a275;color:#132126;border-color:#dac38c}.viewbar #paths{font-size:10px;margin-left:5px}.compass{position:fixed;top:120px;left:23px;width:39px;height:39px;border:1px solid #ecdfb95c;border-radius:50%;text-align:center;pointer-events:none;z-index:6}.compass #rose{width:100%;height:100%}.compass span{display:block;font:8px Georgia;color:#f0e2b8;margin-top:3px}.compass b{font-size:21px;line-height:18px;display:block;font-weight:400}.compass:after{position:absolute;left:8px;right:8px;top:50%;height:1px;content:'';background:#ddd1ae55}
+#cameraDeck{position:fixed;z-index:14;left:83px;top:112px;display:flex;align-items:center;gap:8px;max-width:calc(100% - 395px)}#forceSelect{background:#0f2026bf;border:1px solid #bfbc9636;color:#d8dece;font-size:10px;height:30px;width:128px;padding:0 7px;border-radius:3px}.angle-buttons{display:flex;gap:3px}.angle-buttons button{font-size:10px;padding:6px 9px;background:#14202791}.angle-buttons button.active{background:#cdb27535}.side{position:fixed;z-index:12;right:20px;top:66px;width:246px;max-height:calc(100% - 188px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#657269 transparent;background:var(--panel);border:1px solid #d5d2b629;border-radius:4px;box-shadow:0 10px 32px #0811162b;backdrop-filter:blur(10px)}.side-tabs{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding:10px 15px}.side-tabs button{border:0;background:none;padding:2px 0;color:#9aa89f;font-size:11px}.side-tabs button.active{color:#e6cf98}.side-tabs #chapterNo{margin-left:auto;font:9px ui-monospace,monospace;letter-spacing:2px;color:#b6bdad}.side-heading{padding:14px 15px 8px;display:flex;justify-content:space-between;gap:8px;color:#8f9f98;font-size:9px;letter-spacing:.8px}.side h2{font:22px "Noto Serif CJK SC",SimSun,serif;letter-spacing:1px;font-weight:400;margin:0 15px 10px;line-height:1.35}.side p{font-size:11px;line-height:1.85;color:#b9c4b7;margin:0 15px 13px}.supply-row{display:flex;justify-content:space-between;padding:10px 15px;background:#b3985820;border-block:1px solid var(--line);font-size:10px}.supply-row strong{font-weight:400;color:#dcc285}.supply-row strong.cut{color:#e09478}#eventStrip{padding:11px 15px;display:flex;gap:13px;line-height:1.7;border-bottom:1px solid var(--line)}#eventStrip small{font-size:9px;flex-shrink:0;color:#869b91}#eventStrip span{color:#d1d7c6;font-size:10px}.focus-panel{padding:13px 15px 11px}.focus-kicker{display:flex;justify-content:space-between;color:#81988c;font-size:9px;letter-spacing:1px}.focus-kicker #focusAction{color:#d8bd83}.focus-panel h3{font:22px "Noto Serif CJK SC",SimSun,serif;margin:7px 0 4px;letter-spacing:2px}.focus-panel #focusUnit{color:#9dafa2;font-size:10px}.motion-meter{height:78px;position:relative;margin:4px 0 0}.motion-meter svg{width:180px;height:76px;display:block;margin:auto}.motion-meter #speedNeedle{transform-origin:90px 65px;transition:transform .3s linear}.speed-value{position:absolute;top:20px;left:0;right:0;text-align:center}.speed-value strong{display:block;font:24px ui-monospace,monospace;color:#e3d2a7;text-shadow:0 2px 4px #152027}.speed-value span{display:block;font-size:8px;color:#83998d;margin-top:3px}.speed-meta{display:flex;justify-content:space-between;font-size:8px;color:#8d9f94;margin-top:-2px}#followFocus{display:block;width:100%;margin-top:11px;padding:7px;font-size:10px;background:#85997f13;color:#d1d6c1}.map-head{padding:10px 15px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9px;letter-spacing:1px;color:#8f9f94}#map{display:block;width:216px;height:112px;margin:7px auto 0;cursor:crosshair;touch-action:none}#sourceHint{font-size:8px;line-height:1.6;color:#6f887c;padding:7px 15px 10px}#forceRoster{padding:8px;max-height:235px;overflow:auto}#forceRoster button{display:flex;width:100%;text-align:left;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid #babb9e1f;border-radius:0;padding:9px 7px;background:none}#forceRoster b{font-size:11px;display:block;font-weight:400}#forceRoster small{font-size:9px;color:#9aaa9b;display:block;margin-top:3px}#forceRoster i{font-size:9px;font-style:normal;color:#c8b780}#forceRoster button.active{background:#cdb27519}
+.caption{position:fixed;z-index:8;left:30px;bottom:155px;max-width:calc(100% - 345px);pointer-events:none;text-shadow:0 2px 16px #071e22,0 1px 3px #07121db0}.caption-meta{display:flex;align-items:center;gap:18px;margin-bottom:12px;font-size:9px;letter-spacing:2px;color:#d9c899}.caption-meta #cameraDescription{color:#b5c4bc;font-size:9px;letter-spacing:1px}.caption h2{font:34px "Noto Serif CJK SC",SimSun,serif;margin:0 0 10px;letter-spacing:3px;line-height:1.35}.caption p{font-size:12px;line-height:1.9;letter-spacing:.5px;color:#e6e9d9;max-width:630px;margin:0}.caption:before{content:'';display:block;width:30px;height:1px;background:#d9bd7c;margin-bottom:17px}#placeTitle{position:fixed;z-index:4;left:0;top:0;pointer-events:none;text-align:center;opacity:0;width:420px;transform:translate(-500px,-500px);text-shadow:0 3px 22px #16282b77,0 1px 4px #1f363c88;color:#fcf1d8;will-change:transform,opacity}#placeTitle span{font-size:10px;letter-spacing:4px;display:block;margin-bottom:12px;color:#f2e5c9c9}#placeTitle strong{font:56px "Noto Serif CJK SC",SimSun,serif;letter-spacing:7px;font-weight:400;line-height:1.4}#placeTitle i{display:block;width:45px;height:1px;margin:13px auto 0;background:linear-gradient(90deg,transparent,#f2dfb7,transparent)}#returnDirector{position:fixed;z-index:16;bottom:calc(var(--bottom) + 14px);left:50%;transform:translateX(-50%);background:#11282eea;border:1px solid #cfb57a9e;font-size:11px;display:none;padding:9px 16px;white-space:nowrap}#returnDirector span{color:#93a69b;font-size:9px;margin-left:10px}.manual-view #returnDirector{display:block}
+#scaleHud{position:fixed;left:30px;bottom:calc(var(--bottom) + 9px);z-index:7;color:#d8dec9;pointer-events:none;font:9px ui-monospace,monospace;text-shadow:0 1px 4px #15242c}#scaleRule{width:95px;height:6px;border:1px solid #daceb0b3;border-top:0;display:flex;justify-content:space-between;margin-bottom:5px}#scaleRule i{height:4px;width:1px;background:#dbd2a7b3}#scaleHud small{font-size:8px;color:#b3c5b5;margin-left:8px}
+#perf{display:none;position:fixed;left:23px;top:169px;font:9px/1.6 ui-monospace,monospace;background:#102127dd;padding:9px;z-index:10;white-space:pre;color:#d6dec7}.show-perf #perf{display:block}
+.intro{position:fixed;z-index:17;left:8%;top:25%;max-width:600px;pointer-events:none;text-shadow:0 2px 18px #17333299}.intro .eyebrow{font-size:10px;letter-spacing:5px;color:#e4d6b0}.intro h2{font:78px "Noto Serif CJK SC",SimSun,serif;font-weight:400;letter-spacing:14px;line-height:1.35;margin:14px 0 13px}.intro>p{font-size:19px;letter-spacing:2px;line-height:1.6;margin:0 0 17px;color:#f1ead8}.intro-copy{font-size:12px;line-height:1.95;color:#d3ddcc;letter-spacing:.7px}.intro .actions{display:flex;gap:10px;pointer-events:auto;margin-top:26px}.intro button{padding:13px 22px;font-size:12px;letter-spacing:1px}.intro #start{background:#c4aa75;color:#0e2026;border-color:#e5c78e;font-weight:600}.intro #start:hover{background:#e1c78e}.intro .boundary{font-size:10px;line-height:1.95;color:#b8c7b8;letter-spacing:.3px;margin-top:20px}.prestart .caption,.prestart #labels,.prestart #stems,.prestart #scaleHud,.prestart #cameraDeck,.prestart #placeTitle{visibility:hidden}.prestart .side{opacity:.56}.prestart .viewbar{opacity:.5}.intro.hidden{display:none}
+.bottom{position:fixed;z-index:20;left:0;right:0;bottom:0;background:#0b171bf5;border-top:1px solid var(--line);padding:11px 23px 10px;min-height:var(--bottom)}.timeline{height:32px;position:relative;margin:0 7px 2px}.track{position:absolute;top:2px;left:0;right:0;background:#445248;height:2px}#trackFill{width:0;height:2px;background:#d1b677}#trackThumb{position:absolute;left:0;top:-3px;width:9px;height:9px;transform:translateX(-50%) rotate(45deg);background:#f0d595;box-shadow:0 0 0 3px #e9cf9520}#seek{position:absolute;top:-11px;left:0;margin:0;width:100%;height:27px;opacity:.01;cursor:pointer;z-index:4}#seek:focus-visible{opacity:1;accent-color:var(--gold)}.chapter-marker{position:absolute;top:13px;transform:translateX(-50%);border:0;border-radius:0;background:none;padding:3px 5px;font-size:9px;white-space:nowrap;color:#8f9e8e;z-index:5;line-height:1.2}.chapter-marker.current{color:#f1d69b;background:none}.chapter-marker:hover{background:#394642}.chapter-marker:first-of-type{transform:none}.controlrow{display:flex;gap:10px;align-items:center;justify-content:space-between}.playcluster,.speedcluster,.utility{display:flex;align-items:center;gap:5px}.playcluster button{height:30px;width:34px;padding:0;font-size:17px}.playcluster #play{color:#ecce8e;width:39px}.clock{font:12px ui-monospace,monospace;color:#e3d9c0;margin:0 6px;white-space:nowrap}.clock small{color:#819687;font-size:10px}.speedcluster{gap:4px}.speedcluster>span{font-size:9px;color:#7f9487;margin-right:4px}.speedcluster button{font-size:10px;height:29px;padding:0 10px}.utility button,.utility select{height:29px;font-size:10px;padding:0 9px}.utility select{background:#16292d;border:1px solid var(--line);border-radius:3px;max-width:91px}.bottom-foot{display:flex;justify-content:space-between;gap:14px;font-size:8px;letter-spacing:.35px;color:#718b7c;margin-top:8px}.bottom-foot #modeName{color:#a4b49e}.bottom-foot .keyhelp{color:#829184}
+#restoreUI{display:none;position:fixed;bottom:18px;right:18px;z-index:40;color:#d9dfcc;font-size:10px}.clean .hud,.clean .caption{display:none!important}.clean #restoreUI{display:block}.clean #labels{opacity:.7}.clean #vignette{background:radial-gradient(ellipse at 50% 42%,transparent 50%,#15212a36 100%)}.clean #returnDirector{display:none!important}#toast{position:fixed;bottom:160px;left:50%;transform:translateX(-50%);max-width:85%;z-index:80;padding:11px 18px;background:#0b252ae8;border:1px solid #bcb07b88;border-radius:3px;font-size:11px;color:#e5dec7;opacity:0;transition:opacity .15s;pointer-events:none;line-height:1.7}.toast-on #toast{opacity:1}#ending{display:none;position:fixed;z-index:25;left:50%;top:45%;transform:translate(-50%,-50%);text-align:center;padding:33px 39px;background:#0e2229eb;border:1px solid #b8a57780;backdrop-filter:blur(12px);border-radius:3px;box-shadow:0 15px 55px #0004}#ending h3{font:37px "Noto Serif CJK SC",SimSun,serif;letter-spacing:6px;margin:0 0 17px}#ending p{font-size:12px;color:#c1c9b3;margin:0 0 25px}.completed:not(.continue-looking) #ending{display:block}#ending button{margin:0 5px;color:#ecd8aa}
+dialog{border:1px solid #b5aa7873;border-radius:5px;background:#14272c;color:#e7e1cd;width:min(710px,91vw);max-height:85vh;padding:0;box-shadow:0 25px 80px #0008}dialog::backdrop{background:#08161cd4;backdrop-filter:blur(5px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#14272c}.dialog-head h2{font:24px "Noto Serif CJK SC",SimSun,serif;margin:0;letter-spacing:2px}.dialog-head button{font-size:24px;line-height:1;border:0;background:none;padding:1px 7px}.dialog-body{padding:18px 27px 30px;font-size:12px;line-height:1.95;color:#bdcbb8}.dialog-body h3{font-size:13px;letter-spacing:.5px;color:#e0c98e;margin:24px 0 11px;font-weight:500}.dialog-body p{margin:10px 0}.dialog-body blockquote{margin:13px 0;padding:12px 17px;border-left:2px solid #a38d5e;background:#a3985220;font-family:SimSun,serif;font-size:14px;color:#dadac1}.warning{background:#aa875c18;padding:13px 16px;border-left:2px solid #b5a574}.source-tag{font-size:10px;color:#899b86}.help-grid{display:grid;grid-template-columns:145px 1fr;gap:12px 17px;margin:20px 0}.help-grid b{font-weight:500;color:#e1d5ac}.setting{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:48px;border-bottom:1px solid var(--line)}.setting input[type=checkbox]{accent-color:var(--gold);width:15px;height:15px}.setting input[type=range]{accent-color:var(--gold);width:150px}.setting select{background:#1a3338;border:1px solid var(--line);padding:6px 10px;border-radius:3px}.setting button{font-size:11px}.setting small{color:#e1c483;margin-left:8px}#loading{position:fixed;inset:0;z-index:100;background:#10232b;display:flex;flex-direction:column;justify-content:center;align-items:center}.loading-title{font:38px "Noto Serif CJK SC",SimSun,serif;letter-spacing:9px;margin-bottom:27px}.loading-line{width:180px;height:1px;background:#b4a87650;position:relative;overflow:hidden}.loading-line:after{content:'';position:absolute;top:0;left:-40%;height:1px;width:40%;background:#f4d694;animation:load 1.2s ease infinite}#loadSub{color:#849e90;font-size:11px;letter-spacing:2px;margin-top:21px}.error-panel{max-width:560px;padding:30px;line-height:1.9}.error-panel h2{font-size:24px}.error-panel p{color:#b8c9b6;word-break:break-word}@keyframes load{to{left:100%}}
+@media(min-width:1650px){.side{width:275px;right:27px;max-height:calc(100% - 185px)}.side p{font-size:12px;line-height:1.95}.side h2{font-size:24px}#map{width:245px;height:128px}.viewbar{left:30px}.caption{left:40px;bottom:170px;max-width:calc(100% - 405px)}.caption h2{font-size:40px}.caption p{font-size:14px;max-width:780px}#cameraDeck{left:91px}.focus-panel{padding:17px 18px}.side-heading{padding-top:18px}.side h2,.side p{margin-left:18px;margin-right:18px}}
+@media(max-width:1100px){.topmid{display:none}.side{width:228px;right:13px;top:62px}.viewbar{left:14px;top:62px;max-width:calc(100% - 270px)}.viewbar button{font-size:10px;padding:0 10px;height:29px}.viewbar #paths{margin-left:0}.caption{left:22px;max-width:calc(100% - 284px);bottom:158px}.caption h2{font-size:29px}.caption p{font-size:11px}.side h2{font-size:20px}.side p{font-size:10px}.focus-panel h3{font-size:20px}.topbar{padding-inline:15px}#map{width:198px;height:103px}#cameraDeck{left:65px;top:105px;max-width:calc(100% - 325px);gap:5px}.angle-buttons button{padding:6px 6px;font-size:9px}#forceSelect{width:110px}.compass{left:16px;top:105px;width:34px;height:34px}.speedcluster button{padding:0 7px}.utility button,.utility select{padding:0 7px;font-size:9px}.utility{gap:4px}.bottom-foot .keyhelp{display:none}.intro{left:6%;top:24%;max-width:55%}.intro h2{font-size:65px}.intro>p{font-size:16px}#returnDirector span{display:none}#placeTitle{width:350px}#placeTitle strong{font-size:46px}}
+@media(max-width:800px){:root{--bottom:133px}.topbar{height:43px;padding:0 12px}.brand h1{font-size:18px;gap:8px}.brand h1 small{font-size:8px;padding-left:9px;letter-spacing:1px}.seal{width:24px;height:26px;line-height:23px;font-size:18px}.brand{gap:8px}.toptools{gap:11px;font-size:9px}#topStatus,.version{display:none}#sideToggle{display:block}.viewbar{top:56px;left:12px;right:12px;max-width:none;overflow:auto;scrollbar-width:none;white-space:nowrap;gap:4px}.viewbar button{flex-shrink:0;height:29px;font-size:10px;padding:0 11px}.side{display:none;top:97px;right:11px;width:232px;max-height:calc(100% - 240px)}.side.open{display:block}.prestart .side{display:none}.compass{top:101px;left:13px;width:31px;height:31px}.compass b{font-size:18px}.compass span{font-size:7px}#cameraDeck{top:98px;left:54px;right:12px;max-width:none;gap:5px;flex-wrap:wrap}.angle-buttons{gap:3px}.angle-buttons button{padding:6px 7px;font-size:9px}#forceSelect{width:109px;height:27px}.caption{left:19px;bottom:186px;max-width:calc(100% - 35px)}.caption h2{font-size:27px;letter-spacing:2px;margin-bottom:9px}.caption p{font-size:11px;line-height:1.85;max-width:520px}.caption-meta{font-size:8px;gap:10px;letter-spacing:1px;margin-bottom:8px}.caption-meta #cameraDescription{font-size:8px}.caption:before{margin-bottom:12px;width:22px}.intro{top:25%;left:7%;max-width:86%}.intro h2{font-size:64px;letter-spacing:7px;margin:15px 0}.intro>p{font-size:17px;letter-spacing:1px}.intro .eyebrow{font-size:9px;letter-spacing:3px}.intro .actions{gap:8px;margin-top:23px}.intro button{padding:12px 17px;font-size:11px}.intro .boundary{font-size:9px}.intro-copy{font-size:11px}.bottom{padding:9px 12px 9px}.timeline{height:28px;margin-bottom:2px}.chapter-marker{font-size:8px;padding:3px 2px}.controlrow{flex-wrap:wrap;row-gap:7px}.playcluster button{height:28px;width:29px}.playcluster #play{width:35px}.clock{font-size:11px;margin-left:3px}.speedcluster button{padding:0 9px;height:27px;font-size:10px}.utility{width:100%;justify-content:space-between;gap:4px}.utility button,.utility select{height:25px;padding:0 9px;font-size:9px;max-width:none}.bottom-foot{font-size:7px;gap:8px;margin-top:6px}.bottom-foot>span:nth-child(2){max-width:250px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.world-label{width:142px;padding:6px 8px}.world-label b{font-size:11px}.world-label small{font-size:8px}.world-label small em{font-size:8px}#placeTitle{width:300px}#placeTitle strong{font-size:37px;letter-spacing:4px}#placeTitle span{font-size:8px;letter-spacing:2px}#scaleHud{left:19px;font-size:8px;bottom:calc(var(--bottom) + 10px)}#scaleHud small{font-size:7px}#returnDirector{left:auto;right:12px;transform:none;padding:7px 10px;font-size:10px;bottom:calc(var(--bottom) + 11px)}#returnDirector span{display:none}#toast{bottom:200px;font-size:10px;padding:9px 12px}#perf{left:13px;top:172px;font-size:8px}.help-grid{grid-template-columns:105px 1fr;gap:10px}.dialog-head{padding:17px}.dialog-head h2{font-size:21px}.dialog-body{padding:15px 18px 23px;font-size:11px}.setting{gap:10px}#ending{width:85%;padding:26px 20px}#ending h3{font-size:30px}.clean #labels{display:none}}
+@media(max-height:590px){:root{--bottom:86px}.topbar{height:37px}.topmid{display:none}.brand h1{font-size:17px}.brand h1 small{font-size:8px}.seal{height:25px;line-height:23px;width:24px}.viewbar{top:48px;left:13px}.viewbar button{height:26px;font-size:9px;padding:0 9px}#sideToggle{display:block}.side{display:none;top:47px;right:12px;max-height:calc(100% - 145px);width:231px}.side.open{display:block}#cameraDeck{top:83px;left:58px;max-width:calc(100% - 76px)}.compass{top:83px;left:15px;width:29px;height:29px}.compass b{font-size:17px}.compass span{font-size:6px}#forceSelect{height:25px;width:118px}.angle-buttons button{font-size:9px;padding:5px 9px}.caption{bottom:130px;left:22px;max-width:75%}.caption h2{font-size:24px;letter-spacing:2px;margin-bottom:6px}.caption p{font-size:10px;max-width:600px}.caption:before{display:none}.caption-meta{font-size:8px;margin-bottom:7px}.caption-meta #cameraDescription{font-size:8px}.intro{top:26%;left:7%;max-width:75%}.intro h2{font-size:48px;margin:8px 0 9px;letter-spacing:9px}.intro>p{font-size:14px;margin-bottom:8px}.intro-copy{font-size:10px;line-height:1.6}.intro .eyebrow{font-size:8px}.intro .actions{margin-top:17px}.intro button{font-size:10px;padding:9px 16px}.intro .boundary{display:none}.bottom{padding:8px 16px 6px}.timeline{height:27px;margin:0 8px 2px}.controlrow{flex-wrap:nowrap;gap:10px}.utility{width:auto;margin:0}.playcluster button{height:26px;font-size:15px;width:26px}.playcluster #play{width:32px}.clock{font-size:10px}.speedcluster button{font-size:9px;height:25px;padding:0 7px}.speedcluster>span{display:none}.utility button,.utility select{font-size:9px;padding:0 7px;height:25px}.bottom-foot{margin-top:5px;font-size:7px}.bottom-foot .keyhelp{display:none}#placeTitle strong{font-size:36px}#placeTitle span{font-size:8px}#placeTitle{width:320px}#scaleHud{font-size:8px;bottom:99px}#returnDirector{bottom:99px;padding:7px 10px;font-size:9px}#returnDirector span{display:none}#perf{top:124px;left:15px;font-size:8px}#toast{bottom:140px}#eventStrip{display:none}.focus-panel{padding:10px 14px}.side p{font-size:10px}.motion-meter{height:70px}.side h2{font-size:18px}.map-head,#map,#sourceHint{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.loading-line:after{animation:none}}
+
+/* V2 polish: readable force identity; compact world-space typography. */
+.world-label{background:linear-gradient(100deg,#101f27da,#17272bae);border-top:0;border-right:0;border-bottom:1px solid #c1bf9c24;box-shadow:0 3px 13px #14232626}
+.world-label b{font-size:12px;font-weight:600}.world-label .unit{display:block;color:#b8c9bd;font-size:8px;margin-top:2px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.world-label small{margin-top:3px;font-size:8px}.world-label.selected{border:1px solid #d9bd7c77;border-left:2px solid #e5c17f;background:#132a32dd}
+@media(max-width:800px){.world-label .unit{font-size:7px}.world-label b{font-size:11px}}
+
+/* Reserve the real footer height, including wrapped controls and browser font metrics. */
+#returnDirector{bottom:calc(var(--actual-bottom,var(--bottom)) + 14px)}
+#scaleHud{bottom:calc(var(--actual-bottom,var(--bottom)) + 10px)}
+@media(max-width:800px) and (min-height:591px){
+ .controlrow{column-gap:6px}
+ .speedcluster{gap:3px}
+ .speedcluster>span{display:none}
+ .speedcluster button{padding:0 7px}
+ .caption{bottom:calc(var(--actual-bottom,var(--bottom)) + 53px)}
+ #returnDirector{bottom:calc(var(--actual-bottom,var(--bottom)) + 11px)}
+}
+
+/* An opened mobile panel must be above the camera toolbar. */
+.side.open{z-index:18}
+
+/* V3 · documentary overlays. Real text, fixed card geometry, compositor-only motion. */
+:root{--panel:#132328f3;--paper:#f1ead8;--muted:#aebbb0;--gold:#d8bc7e;--bottom:109px}
+.topbar{background:#0c191df5}.brand h1 small{letter-spacing:2px}.version{color:#cbb67f}
+.side{backdrop-filter:none;box-shadow:0 12px 38px #05111538;border-color:#bfc4a42d;scrollbar-width:thin}
+.side h2{font-size:20px;margin-top:2px;line-height:1.5}.side p{font-size:11px;line-height:1.85}
+.side-heading{padding-top:12px}.side-tabs{padding-block:10px}.side-heading #shotNo{font-variant-numeric:tabular-nums}
+#eventStrip{padding-block:8px}.focus-panel{padding-block:11px 9px}.focus-panel h3{font-size:22px;letter-spacing:1px;margin-top:6px}
+.motion-meter{height:48px;margin:0}.motion-meter svg{display:none}.speed-value{top:7px;text-align:left;display:flex;align-items:baseline;gap:9px}.speed-value strong{font-size:24px}.speed-value span{font-size:8px;color:#b2bfa9}.speed-meta{font-size:8px;color:#9dafa1}#followFocus{margin-top:9px;padding:6px}
+.map-head,#map,#sourceHint{display:none}#forceRoster{max-height:230px}
+#localMap{border-top:1px solid #ced0aa26;padding:10px 13px 11px}.inset-head{display:flex;justify-content:space-between;font-size:9px;letter-spacing:1px;color:#a6b9a6}.inset-head i{font-size:9px;color:#d4bb80;font-style:normal;letter-spacing:0}#insetTitle{font:11px/1.7 Arial,"Microsoft YaHei",sans-serif;color:#d2d8c2;display:block;font-weight:400;margin:4px 0 7px}#inset{display:block;width:100%;height:auto;border:1px solid #a0b39e27;cursor:zoom-in}#inspectLocal{display:block;font-size:10px;margin:8px 0 0;width:100%;padding:7px;color:#dec994;background:#c8bb7820}
+.world-label{width:174px;height:61px;padding:7px 10px;background:linear-gradient(105deg,#11262ce8,#172a30cb);border:0;border-left:2px solid #b2c8ce;box-shadow:0 4px 12px #0002;contain:layout style paint;opacity:0;visibility:hidden;will-change:transform,opacity;transition:none!important}
+.world-label.selected{border:0;border-left:2px solid #e0c58a;background:linear-gradient(105deg,#13282fed,#1b3032d9);box-shadow:0 3px 16px #04171b2b}
+.world-label b{font-size:12px;font-weight:500;line-height:16px;letter-spacing:.6px}.world-label .unit{font-size:8px;margin:1px 0 0;line-height:12px}.world-label small{height:11px;line-height:11px;margin-top:2px;font-size:8px;gap:3px;white-space:nowrap}.world-label small em{font-size:8px;white-space:nowrap;font-variant-numeric:tabular-nums}.world-label small span{flex-shrink:0}
+#landmarks{position:fixed;inset:0;pointer-events:none;z-index:3}.landmark{position:absolute;top:0;left:0;font:11px "Noto Serif CJK SC",SimSun,serif;letter-spacing:2px;white-space:nowrap;text-shadow:0 2px 8px #09212bcf;color:#edebcf;will-change:transform,opacity}.landmark:before{content:'';position:absolute;width:1px;height:12px;top:21px;left:50%;background:#dfdac187}
+.caption{left:32px;max-width:min(620px,calc(100% - 350px));bottom:calc(var(--actual-bottom,var(--bottom)) + 56px);will-change:transform,opacity;z-index:7}.caption-meta{margin-bottom:9px;letter-spacing:2px;font-size:9px;color:#ddc58d}.caption h2{font-size:32px;letter-spacing:2px;line-height:1.3;margin-bottom:10px}.caption p{font-size:12px;line-height:1.8;max-width:570px;color:#ebeee0}.caption:before{width:36px;margin-bottom:12px;opacity:.8}
+#chapterCurtain{position:fixed;z-index:6;left:0;right:285px;top:31%;padding:0 30px;text-align:center;pointer-events:none;opacity:0;color:#f1ecda;text-shadow:0 2px 3px #23303466,0 4px 34px #122e3588;will-change:transform,opacity}
+#chapterKicker{font-size:10px;letter-spacing:5px;color:#ead6a6}#chapterBig{font:58px/1.35 "Noto Serif CJK SC",SimSun,serif;letter-spacing:6px;font-weight:400;margin:15px 0 18px}#chapterRule{display:block;height:1px;width:60%;max-width:440px;margin:auto;background:linear-gradient(90deg,transparent,#ddcba0,transparent);transform-origin:center;will-change:transform}#chapterSub{font-size:12px;letter-spacing:2px;color:#ece7d3;margin:15px 0 0;line-height:1.8}
+#travelNotice{position:fixed;z-index:28;left:50%;top:58px;transform:translateX(-50%);background:#11252cec;border:1px solid #c6b17a77;color:#e2cf9c;display:flex;align-items:center;gap:12px;padding:10px 13px 11px;font-size:11px;box-shadow:0 6px 20px #0002;white-space:nowrap}.travel-mark{font-size:23px;line-height:17px}#travelNotice button{font-size:9px;padding:3px 6px;border:0;background:#e4cd941b}#travelProgress{position:absolute;bottom:-1px;height:2px;background:#ddbc75;left:0;right:0;transform-origin:left center}
+#nextBeat,#loopBeat{font-size:15px;letter-spacing:-1px}#loopBeat.active{color:#f0d79e;background:#d7bc772e}
+#chaptersDialog{width:min(700px,92vw)}#chapterChoices{display:grid;grid-template-columns:1fr;gap:5px;margin-top:18px}.chapter-choice{display:flex;text-align:left;align-items:center;padding:11px 12px;gap:16px;border:1px solid #aeb58c25;background:#0b1b201f}.chapter-choice:hover{background:#b9b07f15}.chapter-index{font:24px Georgia,serif;color:#ab9767;flex-shrink:0}.chapter-choice b{font:17px "Noto Serif CJK SC",SimSun,serif;font-weight:400;display:block;margin-bottom:3px;color:#e5dcc0}.chapter-choice small{font-size:10px;color:#a7bba8}.chapter-choice em{font:10px ui-monospace,monospace;margin-left:auto;white-space:nowrap;color:#c4b384}
+.clean #landmarks,.clean #localMap,.clean #chapterCurtain{display:none!important}
+@media(min-width:1650px){#chapterCurtain{right:326px}#chapterBig{font-size:69px}.caption h2{font-size:38px}.caption p{font-size:13px;max-width:650px}.caption{max-width:700px;left:40px}#localMap{padding-inline:17px}}
+@media(max-width:1100px){#chapterCurtain{right:255px}#chapterBig{font-size:42px;letter-spacing:3px}#chapterSub{font-size:11px;letter-spacing:1px}.caption{max-width:calc(100% - 290px);left:22px}.caption h2{font-size:28px}.caption p{font-size:11px}.playcluster{gap:4px}.playcluster button{width:28px}.utility button,.utility select{padding-inline:6px}.speedcluster button{padding-inline:6px}}
+@media(max-width:800px){:root{--bottom:133px}.world-label{width:150px;height:61px;padding:7px 8px}.world-label b{font-size:11px}.world-label .unit{font-size:7px}.world-label small em{font-size:7px}.world-label small{font-size:7px}#chapterCurtain{right:0;top:32%;padding-inline:18px}#chapterBig{font-size:40px;letter-spacing:3px;margin-top:14px}#chapterKicker{font-size:9px;letter-spacing:3px}#chapterSub{font-size:11px;line-height:1.8;letter-spacing:1px}.caption{max-width:calc(100% - 38px);left:19px;bottom:calc(var(--actual-bottom,var(--bottom)) + 53px)}.caption h2{font-size:26px}.caption p{font-size:10px;line-height:1.8}.caption-meta{font-size:8px}.caption-meta #cameraDescription{font-size:8px}.controlrow{column-gap:8px}.playcluster{gap:3px}.playcluster button{width:25px}.playcluster #play{width:29px}.clock{font-size:10px;margin-inline:2px}.clock small{font-size:8px}.speedcluster{gap:2px}.speedcluster button{padding-inline:6px;font-size:9px}.side.open{max-height:calc(100% - 250px)}.chapter-choice{padding:10px 7px;gap:10px}.chapter-choice b{font-size:15px}.chapter-choice small{font-size:9px}.chapter-index{font-size:19px}#travelNotice{top:145px;max-width:calc(100% - 28px);font-size:10px}.landmark{font-size:10px;letter-spacing:1px}.intro h2{font-size:60px}}
+@media(max-height:590px){:root{--bottom:89px}#chapterCurtain{right:0;top:31%;padding-inline:50px}#chapterBig{font-size:37px;margin:9px 0 11px}#chapterKicker{font-size:8px}#chapterSub{font-size:10px;margin-top:10px}.caption{max-width:calc(100% - 100px);bottom:calc(var(--actual-bottom,var(--bottom)) + 32px);left:22px}.caption h2{font-size:22px;margin-bottom:6px}.caption p{font-size:10px}.caption-meta{margin-bottom:5px}#localMap{padding:8px 12px}.side.open{max-height:calc(100% - 148px)}#inset{max-height:102px}.side p{font-size:10px}.playcluster button{width:25px;height:25px}.clock{font-size:10px}.speedcluster button{font-size:9px;padding-inline:6px}.utility button,.utility select{font-size:9px;padding-inline:6px}.controlrow{gap:7px}#travelNotice{top:41px}.landmark{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#chapterCurtain,.caption{transform:none!important}}
+
+/* Keep the local observation control above the fold at laptop sizes. */
+.side{max-height:calc(100% - var(--actual-bottom,var(--bottom)) - 85px)}
+#inspectLocal{position:sticky;bottom:0;background:#263637;z-index:1}
+@media(min-width:801px) and (min-height:591px) and (max-height:880px){
+ .side-heading{padding-top:10px;padding-bottom:6px}.side h2{font-size:20px;margin-bottom:7px}
+ .side p{font-size:10px;line-height:1.7;margin-bottom:9px}
+ #eventStrip{padding:7px 15px}.supply-row{padding-block:8px}
+ .focus-panel{padding-top:9px;padding-bottom:8px}.focus-panel h3{font-size:20px;margin-top:4px}
+ .motion-meter{height:35px}.speed-value{top:3px}.speed-value strong{font-size:21px}
+ #followFocus{margin-top:7px;padding:5px}#localMap{padding-top:8px}
+ #inset{aspect-ratio:448/210;height:103px}#insetTitle{margin-bottom:4px}
+}
+
+/* No full-window live backdrop filters over the WebGL scene. */
+dialog::backdrop{backdrop-filter:none;background:#08161ce8}#ending{backdrop-filter:none}
+</style></head>
+<body class="prestart">
+<canvas id="stage" tabindex="0" aria-label="巨鹿三维战场。拖动旋转、滚轮缩放；点击军阵跟拍。"></canvas>
+<div id="vignette"></div><canvas id="stems" aria-hidden="true"></canvas><div id="labels"></div>
+<div id="landmarks" aria-hidden="true"></div><section id="chapterCurtain" aria-hidden="true"><span id="chapterKicker"></span><h2 id="chapterBig"></h2><i id="chapterRule"></i><p id="chapterSub"></p></section>
+<div id="placeTitle" aria-hidden="true"><span id="placeEyebrow">巨鹿一带 · 空间示意</span><strong id="placeName"></strong><i></i></div>
+<header class="topbar hud"><div class="brand"><span class="seal">鹿</span><h1>巨鹿之战 <small>战 场 纪 实</small></h1></div><div class="topmid">时间自行推进 · 镜头由你选择</div><div class="toptools"><span id="topStatus">时间暂停</span><button id="sideToggle">战况</button><button id="chapterMenu">关键节点</button><button id="help">操作</button><span class="version">V3.0</span></div></header>
+<nav class="viewbar hud" aria-label="镜头模式"><button id="guide" class="active" aria-pressed="true">◉ 电影导览</button><button data-view="overview">全景</button><button data-view="river">渡口</button><button data-view="supply">粮道</button><button data-view="battle">交锋</button><button data-view="city">城楼</button><button id="paths" class="active" aria-pressed="true">方向线</button></nav>
+<section id="cameraDeck" class="hud" aria-label="部队跟拍机位"><select id="forceSelect" aria-label="选择跟拍部队"></select><div class="angle-buttons"><button data-angle="rear">后随</button><button data-angle="side">侧拍</button><button data-angle="front">迎面</button><button data-angle="orbit">环绕</button><button data-angle="overhead">俯瞰</button><button data-angle="contact">交锋线</button></div></section>
+<div class="compass hud"><div id="rose"><span>N</span><b>↑</b></div></div><div id="perf" class="hud"></div>
+<button id="returnDirector" class="hud">◉ 返回电影导览 <span>战局继续，不从头播放</span></button>
+<aside class="side hud" id="side"><div class="side-tabs"><button id="tabSituation" class="active">战况</button><button id="tabForces">部队</button><span id="chapterNo">01 / 08</span></div>
+<div id="situationBody"><div class="side-heading"><span id="shotNo">镜头 01 / 30</span><span id="shotType">电影导览</span></div><h2 id="chapterTitle"></h2><p id="chapterText"></p><div class="supply-row"><span>秦军补给</span><strong id="supplyStatus"></strong></div><div id="eventStrip"><small>当前事件</small><span id="eventText"></span></div></div>
+<div id="forceRoster" hidden></div>
+<div class="focus-panel"><div class="focus-kicker"><span>此刻关注</span><span id="focusAction"></span></div><h3 id="focusName"></h3><div id="focusUnit"></div><div class="motion-meter"><svg viewBox="0 0 180 76" aria-hidden="true"><path d="M18 65 A72 72 0 0 1 162 65" fill="none" stroke="#566266" stroke-width="2"/><path d="M27 62 L21 61 M41 30 L36 25 M90 3 L90 12 M139 30 L144 25 M153 62 L159 61" stroke="#afbaae" stroke-width="1"/><line id="speedNeedle" x1="90" y1="65" x2="30" y2="65" stroke="#d4b67a" stroke-width="2"/><circle cx="90" cy="65" r="4" fill="#d4b67a"/></svg><div class="speed-value"><strong id="marchSpeed">0.0</strong><span>场景米 / 演示秒</span></div></div><div class="speed-meta"><span>1× 基准速度</span><span id="actualSpeed">播放 1×</span></div><button id="followFocus">跟拍这支部队 ↗</button></div>
+<section id="localMap"><div class="inset-head"><span>局部态势</span><i id="insetState"></i></div><b id="insetTitle"></b><canvas id="inset" width="448" height="246" aria-label="当前部队局部态势示意，点击靠近观察"></canvas><button id="inspectLocal">靠近这支部队 ↗</button></section><div class="map-head"><span>全局关系</span><span>点按定位</span></div><canvas id="map" width="480" height="250" aria-label="巨鹿战场小地图，点击定位"></canvas><div id="sourceHint"></div></aside>
+<section class="caption"><div class="caption-meta"><span id="captionKicker"></span><span id="cameraDescription"></span></div><h2 id="captionTitle"></h2><p id="captionText"></p></section>
+<div id="scaleHud" class="hud"><div id="scaleRule"><i></i><i></i><i></i></div><span id="scaleText"></span><small>焦点平面 · 模型距离</small></div>
+<section class="intro" id="intro"><div class="eyebrow">可观察的历史 / 第一役</div><h2>巨鹿之战</h2><p>这一次，跟着镜头走进战场。</p><div class="intro-copy">五分钟战役，连续镜头与动态战况。<br>不操作，像电影一样观看；拖动，接管你的视角。</div><div class="actions"><button id="start">开始电影导览　▶</button><button id="explore">自由进入战场</button></div><div class="boundary">只控制时间与镜头，不指挥军队，不改变结果。<br>依据史料组织事件 · 地形、分队与战术动作示意重建</div></section>
+<footer class="bottom hud"><div class="timeline" id="timeline"><div class="track"><div id="trackFill"></div><div id="trackThumb"></div></div><input id="seek" type="range" min="0" max="300" step="0.01" value="0" aria-label="演示时间轴"></div><div class="controlrow"><div class="playcluster"><button id="play" aria-label="播放">▶</button><button id="nextBeat" aria-label="推进至下一关键节点" title="推进至下一关键节点 · ]">⏭</button><button id="loopBeat" aria-label="循环当前章节" aria-pressed="false" title="循环当前章节">↻</button><button id="restart" aria-label="重播">↺</button><div class="clock"><span id="timeNow">0:00</span><small> / 5:00</small></div></div><div class="speedcluster"><span>回放</span><button data-speed="0.25">¼×</button><button data-speed="0.5">½×</button><button data-speed="1" class="active">1×</button><button data-speed="2">2×</button><button data-speed="4">4×</button></div><div class="utility"><button id="sound">声音 关</button><button id="sources">史料</button><select id="quality" aria-label="渲染画质"><option value="auto">画质 自动</option><option value="smooth">流畅优先</option><option value="balanced">画质 均衡</option><option value="sharp">清晰优先</option></select><button id="settings">设置</button><button id="hideUI">净览</button><button id="fullscreen">全屏</button></div></div><div class="bottom-foot"><span id="modeName">电影导览</span><span>演示时长、模型米制与行军速度不等于历史实测</span><span class="keyhelp">拖动接管 · 空格暂停 · ← → 回看 · D 回到电影导览</span></div></footer>
+<aside id="travelNotice" hidden><span class="travel-mark">»</span><span id="travelTitle"></span><button id="cancelTravel" aria-label="取消快速推进">取消</button><i id="travelProgress"></i></aside><button id="restoreUI">显示界面 · H</button><div id="toast" role="status"></div>
+<section id="ending"><h3>巨鹿解围</h3><p>战役停在这里，镜头仍然属于你。</p><button id="replayEnd">重看这一役</button><button id="stayEnd">留在战场</button></section>
+<dialog id="chaptersDialog"><div class="dialog-head"><h2>进入一个关键时刻</h2><button data-close="chaptersDialog" aria-label="关闭">×</button></div><div class="dialog-body"><p class="source-tag">时间由你选择，战局仍按既定过程演示。点击章节会平滑前往；底部 ⏭ 可快速推进到下一关键点。</p><div id="chapterChoices"></div></div></dialog><dialog id="sourcesDialog"><div class="dialog-head"><h2>史料与重建边界</h2><button data-close="sourcesDialog" aria-label="关闭">×</button></div><div class="dialog-body"><p class="warning">本程序是依据史料组织的三维战役演示，不是对秦末地形、精确兵力与逐分钟战术的考古复原。任何时刻都可以回看，但不能改变战役结果。</p><h3>01 / 事件主线</h3><p>巨鹿被围、章邯输粮、楚军先遣渡河、主力渡河与毁舟、断甬道、楚秦交战、诸侯进击、王离被俘与巨鹿解围，以《史记》有关记载为主要依据。</p><h3>02 / 《史记·项羽本纪》</h3><blockquote>“皆沈船，破釜甑，燒廬舍，持三日糧。”<br>“九戰，絕其甬道。”</blockquote><p>本纪突出楚军的作战与项羽的战后地位；它没有提供足以逐场重建“九战”的完整部署。程序因此使用反复交锋的示意，而不是编造九套确切战术。</p><p><a href="https://zh.wikisource.org/wiki/史記/卷007" target="_blank" rel="noopener noreferrer">阅读《史记》卷七原文 ↗</a> <span class="source-tag">公开古籍文本 · 维基文库转录</span></p><h3>03 / 《史记·张耳陈馀列传》</h3><blockquote>“項羽兵數絶章邯甬道，王離軍乏食。”<br>“章邯引兵解，諸侯軍乃敢撃圍鉅鹿秦軍。”</blockquote><p>列传更多呈现粮道、围城与诸侯军的关系。本演示用它补充战场空间关系；两篇记载的叙事次序与侧重并不完全相同，不能机械拼接为确定无疑的分钟表。</p><p><a href="https://zh.wikisource.org/wiki/史記/卷089" target="_blank" rel="noopener noreferrer">阅读《史记》卷八十九原文 ↗</a> <span class="source-tag">公开古籍文本 · 维基文库转录</span></p><h3>04 / 哪些属于示意设计</h3><p>地表起伏、河道与渡口形状、城池和营垒外观、粮道具体走向、军阵数量及间距、旗色、兵器形制组合、个体动作、箭矢、火烟、伤亡和散退，均用于解释和观察，不主张为考证确定的历史细节。水道只标示渡河关系，不把现今河道直接当作秦末河道。</p><p>画面中的兵卒数量不是实际参战人数；模型内的受损与倒地状态不是历史伤亡统计。五分钟是叙事压缩后的演示长度，不是战役真实持续时间。</p><h3>05 / 将领、分队与动态数字</h3><p>英布为当阳君、先渡河击秦，另据《史记·黥布列传》。陈馀军巨鹿北、张敖收代兵来援，据《张耳陈馀列传》。标签中的“西侧分队”“护道分队”“北东部”是便于观察的示意编组，不是考证确认的左军、右军番号。苏角、涉间虽见于战役记载，本程序不据此虚构其确切阵位。</p><p><a href="https://zh.wikisource.org/wiki/史記/卷091" target="_blank" rel="noopener noreferrer">阅读《史记》卷九十一原文 ↗</a></p><p>场景以兵卒约两米的模型尺寸建立内部米制。比例尺只量取焦点平面上的模型距离；行进速度由模型路线对演示时间求导。不等于历史真实公里数、行军速度或战役持续时间。界面不虚构历史时刻与伤亡百分比。</p><p>电影导览为30个时间绑定镜头。镜头、军阵位置、方向箭头、事件文字随时间轴一同恢复；不同史料的顺序差异没有被当作确定的逐秒历史。</p><h3>06 / 本场结束在哪里</h3><p>本场结束于巨鹿解围及战后态势。章邯部与项羽后来的相持、再战、议降是后续过程，未被拼入“围城秦军败”这一刻。</p><p class="source-tag">来源核对：2026-09-29。本程序不包含原参考视频或其画面资产。场景、模型、动画和配乐声效均由程序生成。</p></div></dialog>
+<dialog id="helpDialog"><div class="dialog-head"><h2>观察，而不指挥</h2><button data-close="helpDialog" aria-label="关闭">×</button></div><div class="dialog-body"><p>军队会按既定时间线自动行进与交战。拖动、缩放、切换视角和点击地图都只影响你的观察，不改变战局。</p><div class="help-grid"><b>鼠标左键拖动</b><span>围绕观察中心旋转镜头。</span><b>滚轮</b><span>拉近或拉远；可以靠近看到兵卒动作。</span><b>右键 / Shift 拖动</b><span>平移观察中心。</span><b>双击地面</b><span>将观察中心移动到该位置。</span><b>单指 / 双指</b><span>单指旋转；双指捏合缩放，双指一起移动平移。</span><b>时间轴</b><span>任意拖动、倒看或点击章节。战场状态同时重建。</span><b>电影导览</b><span>按战役阶段自动观察；拖动画面即接管镜头。</span><b>部队跟拍</b><span>选择任意已列出的部队，切换后随、侧拍、迎面、环绕、俯瞰和交锋线；不改变时间线。</span><b>点击旗标 / 小地图</b><span>定位到相应军队或地面位置。</span><b>空格 / ← →</b><span>播放与暂停 / 前后五秒；Shift + 方向键前后十五秒。</span><b>I J K L / 0</b><span>平移视点 / 回到全景。</span><b>⏭ / ]</b><span>平滑推进至下一关键点；推进途中可以取消。</span><b>↻ 循环</b><span>循环观看当前章节。取消循环后继续完整战役。</span><b>局部态势 / 靠近</b><span>右侧实时显示当前部队附近的示意图；点击后进入近距离观察。</span><b>D</b><span>回到当前时刻的电影导览，不重播战役。</span><b>H / F / M</b><span>净览 / 全屏 / 静音切换。</span></div><h3>保持流畅</h3><p>先使用“画质 自动”。较弱的设备可改为“流畅优先”。设置中可以打开帧率监测，并导出最近最多 900 帧的真实运行记录。切到后台会暂停演示，避免回来时错过战役。</p><p class="warning">直接在浏览器中打开 HTML 即可。无需安装、联网或上传资料。移动端建议横屏；本程序不包含语音解说，侧栏文字、环境声与配乐共同说明战局。</p></div></dialog>
+<dialog id="settingsDialog"><div class="dialog-head"><h2>观察设置</h2><button data-close="settingsDialog" aria-label="关闭">×</button></div><div class="dialog-body"><div class="setting"><span>渲染画质</span><select id="qualityDialog"><option value="auto">自动平衡</option><option value="smooth">流畅优先</option><option value="balanced">均衡</option><option value="sharp">清晰优先</option></select></div><div class="setting"><span>总音量 <small id="volumeValue">45%</small></span><input id="volume" aria-label="总音量" type="range" min="0" max="100" value="45"></div><div class="setting"><label for="musicToggle">背景音乐</label><input type="checkbox" id="musicToggle" checked></div><div class="setting"><label for="labelToggle">地名与军队标签</label><input type="checkbox" id="labelToggle" checked></div><div class="setting"><label for="pathToggle">行军方向与速度线</label><input type="checkbox" id="pathToggle" checked></div><div class="setting"><label for="placeToggle">战场地名</label><input type="checkbox" id="placeToggle" checked></div><div class="setting"><label for="cinemaToggle">电影章节标题</label><input type="checkbox" id="cinemaToggle" checked></div><div class="setting"><label for="insetToggle">动态局部态势</label><input type="checkbox" id="insetToggle" checked></div><div class="setting"><label for="autoReturn">自由观察20秒后自动回导览</label><input type="checkbox" id="autoReturn"></div><div class="setting"><label for="perfToggle">显示帧率与渲染信息</label><input type="checkbox" id="perfToggle"></div><div class="setting"><span>保存当前战场画面</span><button id="screenshot">保存 PNG</button></div><div class="setting"><span>最近最多 900 帧的运行记录</span><button id="exportDiag">导出诊断</button></div><p class="source-tag">帧率取决于本机图形硬件、浏览器和屏幕分辨率。自动画质调整渲染分辨率；较弱设备与流畅模式采用远景轻量兵卒轮廓，近景仍为三维模型，不减少部队、不改变时间线。诊断只保存到本地，不会发送任何数据。</p></div></dialog>
+
+<div id="loading"><div class="loading-title">巨鹿之战</div><div class="loading-line"></div><p id="loadSub">准备连续战场与镜头</p></div>
+<script>/* Julu / direct WebGL2 micro-battle renderer. Original implementation. */
+'use strict';
+const J = window.J = {};
+J.clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+J.mix=(a,b,t)=>a+(b-a)*t;
+J.smooth=(a,b,x)=>{x=J.clamp((x-a)/(b-a));return x*x*(3-2*x)};
+J.rng=(seed=207)=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+J.v3={sub:(a,b)=>a.map((v,i)=>v-b[i]),add:(a,b)=>a.map((v,i)=>v+b[i]),dot:(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],norm:a=>{let n=Math.hypot(...a)||1;return a.map(v=>v/n)}};
+J.mat={
+ perspective(fov,aspect,near,far){let f=1/Math.tan(fov/2),nf=1/(near-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0])},
+ lookAt(eye,target){const z=J.v3.norm(J.v3.sub(eye,target)),x=J.v3.norm(J.v3.cross([0,1,0],z)),y=J.v3.cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-J.v3.dot(x,eye),-J.v3.dot(y,eye),-J.v3.dot(z,eye),1])},
+ mul(a,b){let out=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)out[c*4+r]=a[r]*b[c*4]+a[r+4]*b[c*4+1]+a[r+8]*b[c*4+2]+a[r+12]*b[c*4+3];return out},
+ project(p,m){let x=p[0],y=p[1],z=p[2],w=m[3]*x+m[7]*y+m[11]*z+m[15];return [(m[0]*x+m[4]*y+m[8]*z+m[12])/w,(m[1]*x+m[5]*y+m[9]*z+m[13])/w,(m[2]*x+m[6]*y+m[10]*z+m[14])/w,w]}
+};
+J.color=(hex)=>{if(Array.isArray(hex))return hex;let h=parseInt(hex.replace('#',''),16);return[(h>>16&255)/255,(h>>8&255)/255,(h&255)/255]};
+class Geometry{
+ constructor(){this.p=[];this.n=[];this.c=[];this.part=[];this.uv=[]}
+ tri(a,b,c,color,part=0,uv=null,normals=null){let n=normals?null:J.v3.norm(J.v3.cross(J.v3.sub(b,a),J.v3.sub(c,a)));color=J.color(color);[a,b,c].forEach((v,i)=>{this.p.push(...v);this.n.push(...(normals?normals[i]:n));this.c.push(...color);this.part.push(part);this.uv.push(...(uv?uv[i]:[0,0]))});return this}
+ quad(a,b,c,d,color,part=0,uv=null){this.tri(a,b,c,color,part,uv?[uv[0],uv[1],uv[2]]:null);this.tri(a,c,d,color,part,uv?[uv[0],uv[2],uv[3]]:null);return this}
+ box(x,y,z,w,h,d,color,yaw=0,part=0){let pts=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(p=>{let xx=p[0]*w/2,zz=p[2]*d/2;return[x+xx*Math.cos(yaw)+zz*Math.sin(yaw),y+p[1]*h/2,z-xx*Math.sin(yaw)+zz*Math.cos(yaw)]});[[0,3,2,1],[4,5,6,7],[0,4,7,3],[1,2,6,5],[3,7,6,2],[0,1,5,4]].forEach(f=>this.quad(...f.map(i=>pts[i]),color,part));return this}
+ cylinder(x,y,z,r1,r2,h,color,sides=8,part=0){for(let i=0;i<sides;i++){let a=i/sides*Math.PI*2,b=(i+1)/sides*Math.PI*2;const v=(an,r,yy)=>[x+Math.cos(an)*r,yy,z+Math.sin(an)*r];let p=v(a,r1,y-h/2),q=v(b,r1,y-h/2),r=v(b,r2,y+h/2),s=v(a,r2,y+h/2);this.quad(p,s,r,q,color,part);if(r1)this.tri([x,y-h/2,z],p,q,color,part);if(r2)this.tri([x,y+h/2,z],r,s,color,part)}return this}
+ roof(x,y,z,w,h,d,color,yaw=0,part=0){let p=[[-w/2,0,-d/2],[w/2,0,-d/2],[w/2,0,d/2],[-w/2,0,d/2],[0,h,-d/2],[0,h,d/2]].map(p=>[x+p[0]*Math.cos(yaw)+p[2]*Math.sin(yaw),y+p[1],z-p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw)]);this.quad(p[0],p[3],p[5],p[4],color,part);this.quad(p[4],p[5],p[2],p[1],color,part);this.tri(p[0],p[4],p[1],color,part);this.tri(p[3],p[2],p[5],color,part);return this}
+ ellipse(x,y,z,rx,rz,color,n=12){for(let i=0;i<n;i++){let a=i*2*Math.PI/n,b=(i+1)*2*Math.PI/n;this.tri([x,y,z],[x+rx*Math.cos(b),y,z+rz*Math.sin(b)],[x+rx*Math.cos(a),y,z+rz*Math.sin(a)],color)}return this}
+}
+J.Geometry=Geometry;
+const COMMON=`
+precision highp float;
+uniform mat4 uVP;
+uniform vec3 uEye;
+uniform float uTime;
+uniform vec3 uSun;
+`;
+const OUTPUT=`
+vec3 finishColor(vec3 rgb, vec3 pos){
+ float d=length(pos-uEye);float fog=1.-exp(-max(0.,d-220.)*.00038);
+ fog*=.77+.23*exp(-max(pos.y,0.)*.012);
+ vec3 haze=vec3(.76,.76,.70);rgb=mix(rgb,haze,clamp(fog,0.,.9));
+ rgb=rgb/(rgb*.18+.92);return clamp(rgb,0.,1.);
+}
+vec3 lighting(vec3 n,vec3 base,vec3 p){
+ n=normalize(n);float lam=max(dot(n,uSun),0.);float sky=n.y*.5+.5;
+ vec3 amb=mix(vec3(.38,.40,.40),vec3(.66,.68,.66),sky);
+ vec3 col=base*(amb+lam*vec3(.59,.51,.39));
+ return finishColor(col,p);
+}
+`;
+const STATIC_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNorm;layout(location=2)in vec3 aColor;layout(location=3)in float aPart;layout(location=6)in vec2 aUV;
+out vec3 vPos;out vec3 vNorm;out vec3 vColor;out vec2 vUV;
+${OUTPUT}
+void main(){vPos=aPos;vNorm=aNorm;vColor=lighting(aNorm,aColor,aPos);vUV=aUV;gl_Position=uVP*vec4(aPos,1.);}`;
+const STATIC_FS=`#version 300 es
+${COMMON}
+in vec3 vPos;in vec3 vNorm;in vec3 vColor;in vec2 vUV;uniform int uKind;uniform sampler2D uGround;out vec4 frag;
+${OUTPUT}
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+1.),f.x),f.y);}
+void main(){vec3 base=vColor;if(uKind==1){float large=texture(uGround,vPos.xz*.002).r;float grain=texture(uGround,vPos.xz*.026).r;base*=.88+.17*large+.10*grain;}else if(uKind==2){base*=.91+.11*texture(uGround,(vPos.xz+vPos.y*.4)*.025).r;}frag=vec4(base,1.);}`;
+const GROUPS=`uniform vec4 uPose[64];uniform vec4 uAnim[64];uniform vec4 uFall[64];uniform vec4 uTravel[64];
+vec3 ry(vec3 p,float a){float s=sin(a),c=cos(a);return vec3(c*p.x+s*p.z,p.y,-s*p.x+c*p.z);}
+vec3 rx(vec3 p,float a){float s=sin(a),c=cos(a);return vec3(p.x,c*p.y-s*p.z,s*p.y+c*p.z);}
+`;
+const SOLDIER_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNorm;layout(location=2)in vec3 aColor;layout(location=3)in float aPart;
+layout(location=4)in vec4 aTroop;layout(location=5)in vec4 aData;
+out vec3 vPos;out vec3 vNorm;out vec3 vColor;
+uniform int uShadow;
+${OUTPUT}
+void main(){
+ int g=int(aTroop.w+.5);vec4 pose=uPose[g],an=uAnim[g];float seed=aTroop.z;float dead=smoothstep(seed,seed+.006,an.z)*step(.001,an.z);
+ vec3 p=aPos,n=aNorm;float walk=an.x*(1.-dead);float fight=an.y*(1.-dead);float rhythm=sin(uTravel[g].x*4.7+seed*61.);
+ if(aPart>0.5&&aPart<2.5){float signP=aPart<1.5?1.:-1.;float angle=rhythm*.42*walk*signP;vec3 pivot=vec3(aPart<1.5?-.16:.16,.76,0.);p=rx(p-pivot,angle)+pivot;n=rx(n,angle);}
+ if(aPart>2.5&&aPart<4.5){float side=aPart<3.5?-1.:1.;float attack=fight*(.45+.6*max(0.,sin(uTime*6.+seed*82.)));float angle=side*rhythm*.3*walk+attack;vec3 pivot=vec3(side*.36,1.36,0.);p=rx(p-pivot,angle)+pivot;n=rx(n,angle);}
+ p.y+=abs(rhythm)*.065*walk;p.z+=sin(uTime*5.+seed*43.)*.22*fight;
+ if(dead>.001){vec3 fp=rx(p,1.48)+vec3(sin(seed*111.)*.5,.16,0.);p=mix(p,fp,dead);n=mix(n,rx(n,1.48),dead);pose=mix(pose,vec4(aData.y,uFall[g].y,aData.z,aData.w),dead);}
+ float packing=mix(1.,.32,an.w);vec3 local=vec3(aTroop.x*packing,0.,aTroop.y*mix(1.,.48,an.w));
+ p=ry(p+local,pose.w)+pose.xyz;n=ry(n,pose.w);
+ vPos=p;vNorm=n;vColor=aColor;
+ if(aData.x<.5)vColor*=vec3(.64,.7,.70);else if(aData.x<1.5)vColor*=vec3(1.14,.49,.40);else if(aData.x<2.5)vColor*=vec3(.62,.86,.82);else vColor*=vec3(1.15,.92,.53);
+ if(aPart<.5)vColor=mix(aColor,vColor,.62);vColor*=mix(.92,1.07,seed);vColor=mix(vColor,vec3(.28,.275,.24),dead*.6);
+ vColor=lighting(vNorm,vColor,p);gl_Position=uVP*vec4(p,1.);
+}`;
+const SOLDIER_FS=`#version 300 es
+${COMMON}
+in vec3 vPos;in vec3 vNorm;in vec3 vColor;out vec4 frag;${OUTPUT}
+void main(){frag=vec4(vColor,1.);}`;
+
+const FAR_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNorm;layout(location=2)in vec3 aColor;layout(location=3)in float aPart;layout(location=4)in vec4 aTroop;layout(location=5)in vec4 aData;
+out vec3 vPos;out vec3 vNorm;out vec3 vColor;
+${OUTPUT}
+void main(){int g=int(aTroop.w+.5);vec4 pose=uPose[g],an=uAnim[g];float seed=aTroop.z;float dead=smoothstep(seed,seed+.006,an.z)*step(.001,an.z);vec3 p=aPos,n=aNorm;
+if(aPart>3.5&&aPart<4.5){p=rx(p-vec3(.43,1.36,0.),an.y*.82)+vec3(.43,1.36,0.);n=rx(n,an.y*.82);}
+if(dead>.001){p=mix(p,rx(p,1.48)+vec3(0.,.16,0.),dead);n=mix(n,rx(n,1.48),dead);pose=mix(pose,vec4(aData.y,uFall[g].y,aData.z,aData.w),dead);}
+vec3 local=vec3(aTroop.x*mix(1.,.32,an.w),0.,aTroop.y*mix(1.,.48,an.w));float c=cos(pose.w),ss=sin(pose.w);p+=local;vPos=vec3(c*p.x+ss*p.z,p.y,-ss*p.x+c*p.z)+pose.xyz;vNorm=vec3(c*n.x+ss*n.z,n.y,-ss*n.x+c*n.z);
+vec3 tint=aData.x<.5?vec3(.64,.7,.7):aData.x<1.5?vec3(1.14,.49,.4):aData.x<2.5?vec3(.62,.86,.82):vec3(1.15,.92,.53);vColor=aColor*mix(vec3(1.),tint,.75)*(.93+seed*.12);vColor=mix(vColor,vec3(.28,.275,.24),dead*.6);vColor=lighting(vNorm,vColor,vPos);gl_Position=uVP*vec4(vPos,1.);}`;
+
+const SHADOW_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=0)in vec3 aPos;layout(location=4)in vec4 aTroop;layout(location=5)in vec4 aData;
+out vec2 vUV;out float vAlpha;
+void main(){int g=int(aTroop.w+.5);vec4 pose=uPose[g],an=uAnim[g];if(aTroop.z<an.z)pose=aTroop.z>.997?uFall[g]:vec4(aData.y,uFall[g].y,aData.z,aData.w);vec3 p=vec3(aTroop.x,0.,aTroop.y);p=ry(p,pose.w)+pose.xyz; p.y+=.035;p.xz+=aPos.xz*(aTroop.z>.997?vec2(10.,12.):vec2(.8,1.2));vUV=aPos.xz;vAlpha=(1.-an.w)*(aTroop.z>.997?.045:.20);gl_Position=uVP*vec4(p,1.);}`;
+const SHADOW_FS=`#version 300 es
+precision highp float;in vec2 vUV;in float vAlpha;out vec4 frag;void main(){float a=(1.-smoothstep(.25,1.,length(vUV)))*vAlpha;if(a<.01)discard;frag=vec4(.16,.17,.16,a);}`;
+const INST_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNorm;layout(location=2)in vec3 aColor;layout(location=4)in vec4 aOffset;layout(location=5)in vec4 aScale;
+out vec3 vPos;out vec3 vNorm;out vec3 vColor;
+${OUTPUT}
+void main(){float c=cos(aOffset.w),s=sin(aOffset.w);vec3 p=aPos*aScale.xyz;vec3 n=aNorm;vPos=vec3(c*p.x+s*p.z,p.y,-s*p.x+c*p.z)+aOffset.xyz;vNorm=vec3(c*n.x+s*n.z,n.y,-s*n.x+c*n.z);vColor=aColor*aScale.w;vColor=lighting(vNorm,vColor,vPos);gl_Position=uVP*vec4(vPos,1.);}`;
+const WATER_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=6)in vec2 aUV;out vec3 vPos;out vec2 vUV;
+void main(){vUV=aUV;vPos=aPos;vPos.y+=sin(aPos.x*.17+uTime*.8)*.11+sin(aPos.z*.22-uTime*.6)*.07;gl_Position=uVP*vec4(vPos,1.);}`;
+const WATER_FS=`#version 300 es
+${COMMON}
+in vec3 vPos;in vec2 vUV;out vec4 frag;uniform sampler2D uGround;uniform float uFlow;
+${OUTPUT}
+void main(){
+ vec2 uv=vPos.xz;float n0=texture(uGround,uv*vec2(.038,.17)+vec2(uTime*.045,0.)).r;
+ float n1=texture(uGround,uv*vec2(.013,.075)-vec2(uTime*.015,0.)).r;
+ vec3 view=normalize(uEye-vPos);float fr=1.-clamp(view.y,0.,1.);fr*=fr;
+ vec3 c=mix(vec3(.22,.335,.36),vec3(.54,.64,.66),fr);
+ c+=(n0-.5)*.037+(n1-.5)*.028;
+ float edge=smoothstep(.85,1.,abs(vUV.y*2.-1.));c=mix(c,vec3(.53,.565,.49),edge*.42);
+ float line=1.-smoothstep(.035,.11,abs(fract(uv.y*.34)-.5));
+ float dash=smoothstep(.0,.18,fract(uv.x*.043+uTime*.09))* (1.-smoothstep(.68,.99,fract(uv.x*.043+uTime*.09)));
+ c+=vec3(.19,.30,.31)*line*dash*(.18+.38*uFlow)*(1.-edge);
+ frag=vec4(finishColor(c,vPos),1.);
+}`;
+const FLAG_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=0)in vec3 aPos;layout(location=6)in vec2 aUV;layout(location=4)in vec4 aFlag;
+out vec3 vPos;out vec2 vUV;out float vShade;out float vAlive;
+void main(){int g=int(aFlag.x+.5);vec4 pose=uPose[g];vec3 p=aPos;float loss=uAnim[g].z;float down=smoothstep(.63,.84,loss);p.z+=sin(p.x*1.2+uTime*3.2+float(g))*p.x*.17;p.x+=sin(uTime*1.7+float(g))*.06*p.x;p=rx(p,down*1.05);p=ry(p,pose.w)+pose.xyz;vPos=p;vUV=vec2((aUV.x+aFlag.y)/4.,aUV.y);vShade=.93+.07*sin(uTime*3.+aPos.x*1.2+float(g));vAlive=1.-down*.6;gl_Position=uVP*vec4(p,1.);}`;
+const FLAG_FS=`#version 300 es
+${COMMON}
+uniform sampler2D uAtlas;in vec3 vPos;in vec2 vUV;in float vShade;in float vAlive;out vec4 frag;${OUTPUT}
+void main(){vec4 c=texture(uAtlas,vUV);if(c.a<.3)discard;frag=vec4(finishColor(c.rgb*vShade,vPos),c.a*vAlive);}`;
+const POLE_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNorm;layout(location=2)in vec3 aColor;layout(location=4)in vec4 aFlag;
+out vec3 vPos;out vec3 vNorm;out vec3 vColor;
+${OUTPUT}
+void main(){int g=int(aFlag.x+.5);vec4 pose=uPose[g];vec3 p=aPos;float down=smoothstep(.63,.84,uAnim[g].z);p=rx(p,down*1.05);p=ry(p,pose.w)+pose.xyz;vPos=p;vNorm=ry(aNorm,pose.w);vColor=lighting(vNorm,aColor,p);gl_Position=uVP*vec4(p,1.);}`;
+const POINT_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=2)in vec4 aColor;layout(location=3)in float aSize;
+uniform float uPointScale;out vec4 vColor;
+void main(){vColor=aColor;gl_Position=uVP*vec4(aPos,1.);gl_PointSize=clamp(aSize*uPointScale/max(gl_Position.w,1.),1.,120.);}`;
+const POINT_FS=`#version 300 es
+precision highp float;in vec4 vColor;out vec4 frag;
+void main(){float d=length(gl_PointCoord-.5)*2.;float a=(1.-smoothstep(.05,1.,d))*vColor.a;if(a<.012)discard;frag=vec4(vColor.rgb,a);}`;
+const LINE_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=2)in vec3 aColor;out vec3 vPos;out vec3 vColor;
+void main(){vPos=aPos;vColor=aColor;gl_Position=uVP*vec4(aPos,1.);}`;
+const LINE_FS=`#version 300 es
+${COMMON}
+in vec3 vPos;in vec3 vColor;out vec4 frag;${OUTPUT}
+void main(){frag=vec4(finishColor(vColor,vPos),.86);}`;
+const MOTION_VS=`#version 300 es
+${COMMON}
+layout(location=0)in vec3 aPos;layout(location=2)in vec4 aColor;out vec4 vColor;out vec3 vPos;
+void main(){vColor=aColor;vPos=aPos;gl_Position=uVP*vec4(aPos,1.);}`;
+const MOTION_FS=`#version 300 es
+${COMMON}
+in vec4 vColor;in vec3 vPos;out vec4 frag;${OUTPUT}
+void main(){frag=vec4(finishColor(vColor.rgb,vPos),vColor.a);}`;
+// Distant sprite LOD is used only by the smooth/slow-device path. Every close
+// soldier remains a true articulated 3D mesh; all LODs use the same formations.
+const CROWD_VS=`#version 300 es
+${COMMON}${GROUPS}
+layout(location=4)in vec4 aTroop;layout(location=5)in vec4 aData;
+uniform float uPointScale;uniform float uViewElev;uniform float uViewYaw;
+out vec3 vColor;out float vElev;out float vDead;out float vSeed;out float vFace;
+${OUTPUT}
+void main(){int g=int(aTroop.w+.5);vec4 po=uPose[g],an=uAnim[g];float seed=aTroop.z;float dead=smoothstep(seed,seed+.006,an.z)*step(.001,an.z);
+ vec3 loc=vec3(aTroop.x*mix(1.,.32,an.w),1.82,aTroop.y*mix(1.,.48,an.w));if(dead>.01){po=mix(po,vec4(aData.y,uFall[g].y,aData.z,aData.w),dead);loc.y=mix(1.82,.4,dead);}
+ vec3 pos=ry(loc,po.w)+po.xyz;vec4 clip=uVP*vec4(pos,1.);gl_Position=clip;gl_PointSize=clamp(uPointScale*4.35/max(1.,clip.w),2.,42.);
+ vec3 base=aData.x<.5?vec3(.28,.34,.32):aData.x<1.5?vec3(.61,.265,.185):aData.x<2.5?vec3(.34,.47,.37):vec3(.61,.48,.25);
+ vColor=finishColor(base*(.93+seed*.13),pos);vDead=dead;vElev=uViewElev;vSeed=seed;vFace=cos(po.w-uViewYaw);
+}`;
+const CROWD_FS=`#version 300 es
+precision highp float;in vec3 vColor;in float vElev;in float vDead;in float vSeed;in float vFace;out vec4 frag;
+void main(){vec2 q=gl_PointCoord-.5;float ce=max(.17,cos(vElev));float headY=-.09*ce;float head=step(length((q-vec2(0.,headY))*vec2(1.,1.1)),.066);
+ float body=step(abs(q.x),.079)*step(.005*ce,q.y)*step(q.y,.22*ce+.025);
+ float leg=step(.023,abs(q.x))*step(abs(q.x),.079)*step(.21*ce,q.y)*step(q.y,.38*ce+.023);
+ float shield=step(abs(q.x+.09),.039)*step(.06*ce,q.y)*step(q.y,.23*ce+.026);
+ float spear=step(abs(q.x-.15),.009)*step(-.45*ce-.025,q.y)*step(q.y,.27*ce+.03);
+ if(vDead>.5){body=step(abs(q.x),.20)*step(abs(q.y),.045);head=0.;leg=0.;shield=0.;spear=0.;}
+ if(max(max(max(head,body),max(leg,shield)),spear)<.5)discard;
+ vec3 col=vColor;if(head>.5)col=mix(vColor*.75,vec3(.59,.56,.42),max(vFace,0.)*.5);if(leg>.5||shield>.5)col*=.74;if(spear>.5)col=vec3(.50,.43,.28);if(vDead>.5)col=mix(col,vec3(.28,.28,.24),.68);frag=vec4(col,1.);
+}`;
+const SKY_VS=`#version 300 es
+precision highp float;out vec2 vUV;
+void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);vUV=p;gl_Position=vec4(p*2.-1.,1.,1.);}`;
+const SKY_FS=`#version 300 es
+precision highp float;in vec2 vUV;out vec4 frag;uniform vec3 uForward;uniform vec3 uRight;uniform vec3 uUp;uniform float uAspect;uniform float uTanFov;uniform float uShift;uniform vec3 uSun;
+void main(){vec2 q=(vUV*2.-1.+vec2(uShift,0.))*vec2(uAspect,1.)*uTanFov;
+ vec3 ray=uForward+uRight*q.x+uUp*q.y;float h=clamp(ray.y*.86,0.,1.);vec3 col=mix(vec3(.755,.781,.755),vec3(.435,.55,.59),h);
+ float front=dot(uSun,uForward);if(front>.04){vec2 sp=vec2(dot(uSun,uRight),dot(uSun,uUp))/front;float ds=dot(q-sp,q-sp);float glow=1.-smoothstep(0.,.80,ds);col+=vec3(.10,.071,.024)*glow*glow;float disc=1.-smoothstep(.00011,.00019,ds);col+=vec3(.23,.21,.14)*disc;}
+ frag=vec4(col,1.);}`;
+class Renderer{
+ constructor(canvas){this.canvas=canvas;this.gl=canvas.getContext('webgl2',{alpha:false,antialias:false,depth:true,stencil:false,preserveDrawingBuffer:false,powerPreference:'high-performance'});if(!this.gl)throw new Error('当前浏览器未能创建 WebGL2。请使用已开启硬件加速的新版桌面浏览器。');this.programs={};this.calls=0;this.triangles=0;this.points=0;this.buffers=0;this.pixelRatio=1;this.sun=J.v3.norm([-.65,1,.35]);this.vp=J.mat.perspective(.87,1,1,4000);this.eye=[0,500,600];this.compileAll();const g=this.gl;const info=g.getExtension('WEBGL_debug_renderer_info');this.software=!!(info&&/swiftshader|llvmpipe|software/i.test(g.getParameter(info.UNMASKED_RENDERER_WEBGL)));g.enable(g.DEPTH_TEST);g.depthFunc(g.LEQUAL);g.disable(g.CULL_FACE);g.blendFunc(g.SRC_ALPHA,g.ONE_MINUS_SRC_ALPHA);}
+ program(name,vs,fs){const gl=this.gl;const shader=(t,s)=>{let sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS)){let err=gl.getShaderInfoLog(sh);gl.deleteShader(sh);throw new Error(name+' shader: '+err)}return sh};let v=shader(gl.VERTEX_SHADER,vs),f=shader(gl.FRAGMENT_SHADER,fs),p=gl.createProgram();gl.attachShader(p,v);gl.attachShader(p,f);gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(name+' link: '+gl.getProgramInfoLog(p));gl.deleteShader(v);gl.deleteShader(f);this.programs[name]={p,u:{}};return this.programs[name]}
+ compileAll(){this.program('static',STATIC_VS,STATIC_FS);this.program('troop',SOLDIER_VS,SOLDIER_FS);this.program('troopfar',FAR_VS,SOLDIER_FS);this.program('shadow',SHADOW_VS,SHADOW_FS);this.program('inst',INST_VS,SOLDIER_FS);this.program('water',WATER_VS,WATER_FS);this.program('flag',FLAG_VS,FLAG_FS);this.program('pole',POLE_VS,SOLDIER_FS);this.program('point',POINT_VS,POINT_FS);this.program('line',LINE_VS,LINE_FS);this.program('sky',SKY_VS,SKY_FS);this.program('motion',MOTION_VS,MOTION_FS);this.program('crowd',CROWD_VS,CROWD_FS);}
+ loc(p,k){if(!(k in p.u))p.u[k]=this.gl.getUniformLocation(p.p,k);return p.u[k]}
+ use(name,time,groups=false){let p=this.programs[name],gl=this.gl;gl.useProgram(p.p);gl.uniformMatrix4fv(this.loc(p,'uVP'),false,this.vp);gl.uniform3fv(this.loc(p,'uEye'),this.eye);gl.uniform1f(this.loc(p,'uTime'),time);gl.uniform3fv(this.loc(p,'uSun'),this.sun);if(groups){gl.uniform4fv(this.loc(p,'uPose[0]'),J.pose);gl.uniform4fv(this.loc(p,'uAnim[0]'),J.anim);gl.uniform4fv(this.loc(p,'uFall[0]'),J.fall);gl.uniform4fv(this.loc(p,'uTravel[0]'),J.travel)}this.active=p;return p}
+ attrib(loc,size,array,usage,divisor=0){let gl=this.gl,b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,array instanceof Float32Array?array:new Float32Array(array),usage||gl.STATIC_DRAW);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,0,0);if(divisor)gl.vertexAttribDivisor(loc,divisor);this.buffers++;return b}
+ mesh(geo,instances=null){
+ const gl=this.gl,vao=gl.createVertexArray();gl.bindVertexArray(vao);
+ // Reuse equal vertices (including face normals). Instancing remains per formation.
+ const specs=[[0,3,'p'],[1,3,'n'],[2,3,'c'],[3,1,'part'],[6,2,'uv']].filter(q=>geo[q[2]]?.length),count=geo.p.length/3;
+ const arrays=Object.fromEntries(specs.map(q=>[q[2],[]])),seen=new Map(),indices=[];let unique=0;
+ for(let i=0;i<count;i++){let key='';for(const [,size,k]of specs)for(let j=0;j<size;j++)key+=Math.round(geo[k][i*size+j]*100000)+',';
+ let id=seen.get(key);if(id===undefined){id=unique++;seen.set(key,id);for(const [,size,k]of specs)for(let j=0;j<size;j++)arrays[k].push(geo[k][i*size+j]);}indices.push(id);}
+ for(const [loc,size,k]of specs)this.attrib(loc,size,arrays[k]);
+ const element=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,element);const wide=unique>65535;gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,wide?new Uint32Array(indices):new Uint16Array(indices),gl.STATIC_DRAW);
+ let m={vao,n:count,vertices:unique,indexed:true,indexType:wide?gl.UNSIGNED_INT:gl.UNSIGNED_SHORT,instances:0,instanced:!!instances};
+ if(instances){m.i0=this.attrib(4,4,instances.a,instances.dynamic?gl.DYNAMIC_DRAW:gl.STATIC_DRAW,1);if(instances.b)m.i1=this.attrib(5,4,instances.b,instances.dynamic?gl.DYNAMIC_DRAW:gl.STATIC_DRAW,1);m.instances=instances.a.length/4;}gl.bindVertexArray(null);
+ if(!instances && count>6000){
+  const cells=new Map();
+  for(let i=0;i<count;i+=3){let x=0,y=0,z=0;for(let j=0;j<3;j++){x+=geo.p[(i+j)*3];y+=geo.p[(i+j)*3+1];z+=geo.p[(i+j)*3+2];}x/=3;y/=3;z/=3;
+   const key=Math.floor(x/150)+','+Math.floor(z/150);let c=cells.get(key);
+   if(!c){c={ids:[],min:[Infinity,Infinity,Infinity],max:[-Infinity,-Infinity,-Infinity]};cells.set(key,c);}
+   for(let j=0;j<3;j++){c.ids.push(indices[i+j]);for(let k=0;k<3;k++){c.min[k]=Math.min(c.min[k],geo.p[(i+j)*3+k]);c.max[k]=Math.max(c.max[k],geo.p[(i+j)*3+k]);}}
+  }
+  const Type=wide?Uint32Array:Uint16Array;
+  m.chunks=[...cells.values()].map(c=>({ids:new Type(c.ids),center:c.min.map((v,i)=>(v+c.max[i])/2),radius:Math.hypot(...c.min.map((v,i)=>(c.max[i]-v)/2))+3}));
+  m.cullBuffer=new Type(count);m.element=element;m.fullCount=count;m.cullKey=null;
+ }
+ return m;
+ }
+ dynamic(locations,count){const gl=this.gl,vao=gl.createVertexArray();gl.bindVertexArray(vao);let d={vao,n:0,attrs:{},capacity:count};for(let [loc,size]of locations){let ar=new Float32Array(count*size),b=this.attrib(loc,size,ar,gl.DYNAMIC_DRAW);d.attrs[loc]={ar,b,size}}gl.bindVertexArray(null);return d}
+ updateDynamic(m,count){let gl=this.gl;m.n=count;gl.bindVertexArray(m.vao);for(let a of Object.values(m.attrs)){gl.bindBuffer(gl.ARRAY_BUFFER,a.b);gl.bufferSubData(gl.ARRAY_BUFFER,0,a.ar.subarray(0,count*a.size))}gl.bindVertexArray(null)}
+ updateInstances(m,a,b){const gl=this.gl;gl.bindBuffer(gl.ARRAY_BUFFER,m.i0);gl.bufferSubData(gl.ARRAY_BUFFER,0,a);if(b){gl.bindBuffer(gl.ARRAY_BUFFER,m.i1);gl.bufferSubData(gl.ARRAY_BUFFER,0,b)}}
+ sphereVisible(p,r){if(!this.frustum)return true;for(const f of this.frustum)if(f[0]*p[0]+f[1]*p[1]+f[2]*p[2]+f[3]<-r)return false;return true;}
+ cull(mesh){
+  let key='',count=0;
+  for(let i=0;i<mesh.chunks.length;i++){const c=mesh.chunks[i];if(this.sphereVisible(c.center,c.radius)){key+=i+',';mesh.cullBuffer.set(c.ids,count);count+=c.ids.length;}}
+  if(mesh.cullKey!==key){mesh.cullKey=key;this.gl.bindVertexArray(mesh.vao);this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER,mesh.element);this.gl.bufferSubData(this.gl.ELEMENT_ARRAY_BUFFER,0,mesh.cullBuffer.subarray(0,count));}
+  mesh.n=count;
+ }
+ draw(mesh,mode=null){const gl=this.gl;if(mesh.chunks)this.cull(mesh);if(!mesh.n||(mesh.instanced&&mesh.instances===0))return;gl.bindVertexArray(mesh.vao);let md=mode??gl.TRIANGLES;if(mesh.indexed){if(mesh.instanced)gl.drawElementsInstanced(md,mesh.n,mesh.indexType,0,mesh.instances);else gl.drawElements(md,mesh.n,mesh.indexType,0);}else if(mesh.instanced)gl.drawArraysInstanced(md,0,mesh.n,mesh.instances);else gl.drawArrays(md,0,mesh.n);this.calls++;if(md===gl.POINTS)this.points+=mesh.n*(mesh.instances||1);if(md===gl.TRIANGLES)this.triangles+=mesh.n/3*(mesh.instances||1)}
+ texture(canvas){const g=this.gl,t=g.createTexture();g.bindTexture(g.TEXTURE_2D,t);g.pixelStorei(g.UNPACK_FLIP_Y_WEBGL,true);g.texImage2D(g.TEXTURE_2D,0,g.RGBA,g.RGBA,g.UNSIGNED_BYTE,canvas);g.texParameteri(g.TEXTURE_2D,g.TEXTURE_MIN_FILTER,g.LINEAR_MIPMAP_LINEAR);g.texParameteri(g.TEXTURE_2D,g.TEXTURE_MAG_FILTER,g.LINEAR);g.texParameteri(g.TEXTURE_2D,g.TEXTURE_WRAP_S,g.CLAMP_TO_EDGE);g.texParameteri(g.TEXTURE_2D,g.TEXTURE_WRAP_T,g.CLAMP_TO_EDGE);g.generateMipmap(g.TEXTURE_2D);return t}
+ resize(w,h,dpr){this.width=w;this.height=h;this.pixelRatio=dpr;let ww=Math.max(1,Math.round(w*dpr)),hh=Math.max(1,Math.round(h*dpr));if(this.canvas.width!==ww||this.canvas.height!==hh){this.canvas.width=ww;this.canvas.height=hh;this.gl.viewport(0,0,ww,hh)}}
+ begin(camera,time){const gl=this.gl;this.eye=camera.eye;let projection=J.mat.perspective((camera.fov||48)*Math.PI/180,this.width/this.height,.7,4400);projection[8]=camera.shiftX||0;this.vp=J.mat.mul(projection,J.mat.lookAt(camera.eye,camera.target));const m=this.vp;this.frustum=[];for(let axis=0;axis<3;axis++)for(let sign of[-1,1]){const a=[m[3]+sign*m[axis],m[7]+sign*m[4+axis],m[11]+sign*m[8+axis],m[15]+sign*m[12+axis]],n=Math.hypot(a[0],a[1],a[2]);this.frustum.push(a.map(x=>x/n));}this.calls=0;this.triangles=0;this.points=0;gl.clearColor(.7,.74,.72,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.disable(gl.DEPTH_TEST);gl.depthMask(false);let p=this.use('sky',time);let forward=J.v3.norm(J.v3.sub(camera.target,camera.eye)),right=J.v3.norm(J.v3.cross(forward,[0,1,0])),up=J.v3.cross(right,forward);gl.uniform3fv(this.loc(p,'uForward'),forward);gl.uniform3fv(this.loc(p,'uRight'),right);gl.uniform3fv(this.loc(p,'uUp'),up);gl.uniform1f(this.loc(p,'uAspect'),this.width/this.height);gl.uniform1f(this.loc(p,'uTanFov'),Math.tan((camera.fov||48)*Math.PI/360));gl.uniform1f(this.loc(p,'uShift'),camera.shiftX||0);gl.bindVertexArray(null);gl.drawArrays(gl.TRIANGLES,0,3);this.calls++;gl.enable(gl.DEPTH_TEST);gl.depthMask(true);}
+}
+J.Renderer=Renderer;
+</script><script>'use strict';
+(()=>{
+const {mix,clamp,smooth}=J;
+J.DURATION=300;
+J.chapters=[
+ {at:0,key:'围城',title:'巨鹿被围',sub:'一座城，两支秦军，一条粮道。',text:'王离围攻巨鹿，章邯驻军其南，以甬道向围城军输粮。北面的救援军队尚未大举出战。',watch:'先看城南的运输线，再看北面的援军营垒。',source:'《史记·项羽本纪》《张耳陈馀列传》',supply:'输送中',chu:'河畔集结',qin:'围城 / 筑道',allies:'营垒观望'},
+ {at:32,key:'先遣',title:'先遣部队渡河',sub:'先渡河的，不是全部楚军。',text:'项羽先遣当阳君、蒲将军率部渡河救援，取得初步战果；陈馀再请增兵。画面渡口与航线为示意。',watch:'观察楚军前锋乘舟过河，主力仍在南岸。',source:'《史记·项羽本纪》',supply:'输送中',chu:'前锋渡河',qin:'维持围困',allies:'等待战局'},
+ {at:66,key:'渡河',title:'主力渡河 · 破釜沉舟',sub:'携三日粮，向战场推进。',text:'楚军主力渡河后沉船、破釜甑、烧庐舍。本演示压缩渡河与毁舟过程，不把五分钟对应为历史上的五分钟。',watch:'转到渡口，看船只抵岸、兵卒展开与毁舟。',source:'《史记·项羽本纪》',supply:'运输受扰',chu:'主力北进',qin:'南翼戒备',allies:'仍在营中'},
+ {at:105,key:'断道',title:'切断甬道',sub:'围城军的粮食，来自城外。',text:'史书记楚军截断秦军甬道，围城部队出现缺粮。运输线受阻，是观察本战局变化的重要线索。',watch:'粮车停止前进；楚军与护道秦军接战。',source:'《史记·项羽本纪》《张耳陈馀列传》',supply:'反复受阻',chu:'截击粮道',qin:'护道 / 接战',allies:'关注战局'},
+ {at:150,key:'交锋',title:'楚秦反复交锋',sub:'正面接战，侧面断粮。',text:'《项羽本纪》记“九战，绝其甬道”。楚军反复交锋、截断甬道，围城秦军面临战斗与补给中断的双重压力。',watch:'可暂停靠近：军阵推进、长兵交锋、箭矢与退阵。',source:'《史记·项羽本纪》',supply:'运输中断',chu:'多处接战',qin:'围城军受压',allies:'尚未全面投入'},
+ {at:205,key:'合击',title:'诸侯军进击',sub:'营垒外，新的军阵开始移动。',text:'《张耳陈馀列传》记章邯退却后，诸侯军进击围城秦军。本段依此呈现援军由观望到出动的变化。',watch:'看北侧与东侧援军；章邯部与王离部并非同一结局。',source:'《史记·张耳陈馀列传》',supply:'已经断绝',chu:'继续进击',qin:'章邯部脱离',allies:'出营接战'},
+ {at:240,key:'解围',title:'围城秦军败',sub:'王离被俘，巨鹿解围。',text:'围城秦军被击败，王离被俘。画面中的倒地、散退和降旗仅为战果的视觉表达，不对应精确伤亡。',watch:'对照城周围的军阵与仍在远处的章邯部。',source:'《史记·项羽本纪》《张耳陈馀列传》',supply:'围城体系瓦解',chu:'控制战场',qin:'王离部败',allies:'解除围困'},
+ {at:270,key:'尾声',title:'战役尾声',sub:'同一座城，已经不同的局面。',text:'巨鹿之战后项羽成为诸侯上将军。章邯与项羽后续的相持、战斗和投降，属于后续过程，不并入这一场解围战。',watch:'回到全景，对照开场；仍可自由旋转与回看任一阶段。',source:'《史记·项羽本纪》',supply:'演示完成',chu:'战后集结',qin:'后续另叙',allies:'会于巨鹿'}
+];
+J.phaseAt=t=>{let i=0;while(i<J.chapters.length-1&&t>=J.chapters[i+1].at)i++;return i};
+J.riverZ=x=>290+22*Math.sin(x*.006)+9*Math.sin(x*.014);
+J.height=(x,z)=>{
+ const rd=Math.abs(z-J.riverZ(x));
+ const plain=3.2+Math.sin(x*.018+z*.014)*.48+Math.cos(z*.018-x*.01)*.3;
+ const hillMask=smooth(420,850,Math.hypot(x*.95,z*.85));
+ const hills=hillMask*(21+28*Math.pow(Math.sin(x*.004+1.1)*Math.cos(z*.0037),2)+55*Math.pow(Math.sin(x*.0025-z*.003),4));
+ let h=plain+hills*smooth(45,185,rd);
+ const plateau=(1-smooth(77,116,Math.abs(x)))*(1-smooth(64,94,Math.abs(z+170)));
+ h=mix(h,3.5,plateau);
+ h=mix(-2.5,h,smooth(21,47,rd));return h;
+};
+J.ground=(x,z)=>Math.max(J.height(x,z),.5);
+const groups=J.groups=[];
+const mkroute=(a)=>a.map((p,i)=>{if(p.length<4){let nx=i+1;while(nx<a.length&&Math.hypot(a[nx][1]-p[1],a[nx][2]-p[2])<.01)nx++;let yaw=nx<a.length?Math.atan2(a[nx][1]-p[1],a[nx][2]-p[2]):i?Math.atan2(p[1]-a[i-1][1],p[2]-a[i-1][2]):Math.PI;p=[...p,yaw]}return p});
+// Hermite paths retain authored waypoints, align heading with actual velocity,
+// and stop only at authored holds. Distances are MODEL meters, not historic measurements.
+J.routeAt=(r,t)=>{
+ let k=0;while(k<r.length-2&&t>r[k+1][0])k++;
+ const a=r[k],b=r[k+1],dt=b[0]-a[0],u=clamp((t-a[0])/dt);
+ const vel=(i)=>{let before=r[Math.max(0,i-1)],cur=r[i],after=r[Math.min(r.length-1,i+1)];
+  if(i===0||i===r.length-1)return[0,0];
+  const v0=[(cur[1]-before[1])/(cur[0]-before[0]),(cur[2]-before[2])/(cur[0]-before[0])],v1=[(after[1]-cur[1])/(after[0]-cur[0]),(after[2]-cur[2])/(after[0]-cur[0])];
+  const s0=Math.hypot(...v0),s1=Math.hypot(...v1);if(s0<.02||s1<.02||v0[0]*v1[0]+v0[1]*v1[1]<0)return[0,0];
+  const sum=[v0[0]/s0+v1[0]/s1,v0[1]/s0+v1[1]/s1],len=Math.hypot(...sum)||1,sp=Math.min(s0,s1)*.85;
+  return sum.map(x=>x/len*sp);
+ };
+ if(!r._arc){r._arc=[];r._tangents=r.map((_,i)=>vel(i));let cumulative=0;
+  for(let i=0;i<r.length-1;i++){let a=r[i],b=r[i+1],d=b[0]-a[0],m=r._tangents[i],n=r._tangents[i+1],prev=[a[1],a[2]],arr=[0];
+   for(let j=1;j<=20;j++){let u=j/20,u2=u*u,u3=u2*u;let q=[0,1].map(c=>(2*u3-3*u2+1)*a[c+1]+(u3-2*u2+u)*d*m[c]+(-2*u3+3*u2)*b[c+1]+(u3-u2)*d*n[c]);arr.push(arr.at(-1)+Math.hypot(q[0]-prev[0],q[1]-prev[1]));prev=q;}
+   r._arc.push({offset:cumulative,samples:arr});cumulative+=arr.at(-1);
+  }
+ }
+ const m=r._tangents[k],n=r._tangents[k+1],u2=u*u,u3=u2*u;
+ const pos=[0,1].map(c=>(2*u3-3*u2+1)*a[c+1]+(u3-2*u2+u)*dt*m[c]+(-2*u3+3*u2)*b[c+1]+(u3-u2)*dt*n[c]);
+ const v=[0,1].map(c=>((6*u2-6*u)*a[c+1]+(3*u2-4*u+1)*dt*m[c]+(-6*u2+6*u)*b[c+1]+(3*u2-2*u)*dt*n[c])/dt);
+ const speed=Math.hypot(...v),moving=Math.hypot(b[1]-a[1],b[2]-a[2])>.01;
+ let yaw=moving?Math.atan2(speed>.015?v[0]:b[1]-a[1],speed>.015?v[1]:b[2]-a[2]):a[3];
+ if(moving){const turn=J.smooth(.87,1,u),da=((b[3]-yaw+Math.PI*3)%(Math.PI*2))-Math.PI;yaw+=da*turn;}
+ const arc=r._arc[k],iu=Math.min(19,Math.floor(u*20)),travel=arc.offset+mix(arc.samples[iu],arc.samples[iu+1],u*20-iu);
+ return{x:pos[0],z:pos[1],yaw,walk:smooth(.02,.65,speed),speed,travel};
+};
+function add(name,team,route,battle,loss,role='步阵'){let g={id:groups.length,name,team,route:mkroute(route),battle,loss,role,cols:10,rows:12};groups.push(g);return g}
+const PI=Math.PI;
+// All coordinates, durations, rendered formations and losses are illustrative, not measured historical data.
+for(let i=0;i<6;i++){
+ let x=-80+i*31;
+ add('王离 · 南面围城军',0,[[0,x,-66,0],[111,x,-66,0],[151,x,-10,0],[204,x,-10,0],[233,x+8,-45,0],[264,x+36,-52,1.5]], [135,243],[175,258,.79]);
+}
+for(let i=0;i<4;i++){
+ let z=-215+i*40;
+ add('王离 · 西面围城军',0,[[0,-115,z,-PI/2],[105,-115,z,-PI/2],[151,-144,z,-PI/2],[205,-144,z,-PI/2],[238,-103,z-10,PI/2],[264,-95,z-20,PI/2]],[129,242],[169,261,.80]);
+}
+for(let i=0;i<4;i++){
+ let z=-220+i*43;
+ add('王离 · 东面围城军',0,[[0,121,z,PI/2],[210,121,z,PI/2],[235,143,z,PI/2],[267,107,z+22,-PI/2]],[213,254],[226,268,.83]);
+}
+for(let i=0;i<4;i++){
+ let x=-54+i*35;
+ add('王离 · 北面围城军',0,[[0,x,-269,PI],[210,x,-269,PI],[237,x,-282,PI],[265,x,-251,0]],[215,255],[227,268,.82]);
+}
+for(let i=0;i<8;i++){
+ let x,z,targetX,targetZ;
+ if(i<3){x=95+i*31;z=34+i*51;targetX=x-1;targetZ=z+6;}
+ else {x=197+(i-3)%3*32;z=150+Math.floor((i-3)/3)*36;targetX=130+(i-3)%3*28;targetZ=83+Math.floor((i-3)/3)*38;}
+ add(i<3?'秦军 · 甬道守军':'章邯 · 南部军',0,[[0,x,z,-PI/2],[109,x,z,-PI/2],[150,targetX,targetZ,-PI/2],[198,targetX,targetZ,-PI/2],[229,302+(i%3)*28,120+Math.floor(i/3)*32,PI/2],[270,436+(i%3)*25,83+Math.floor(i/3)*34,PI/2]],[112+i*2,216],[145,227,i<3?.49:.23]);
+}
+const CHU_START=groups.length;
+for(let i=0;i<16;i++){
+ let col=i%4,row=Math.floor(i/4),sx=-256+col*40,sz=362+row*30;
+ let crossingX=-245+col*41,crossStart=i<3?35+i*4:i===10?68:68+(i-3)*1.14,crossEnd=i<3?53+i*3:i===10?87:84+(i-3)*1.16;
+ let route=[[0,sx,sz,PI],[crossStart,sx,sz,PI],[crossStart+6,crossingX,J.riverZ(crossingX)+33,PI],[crossEnd,crossingX,J.riverZ(crossingX)-40,PI]];
+ let tx,tz,start,end=245,face=PI;
+ if(i<4){tx=63+(i%2)*24;tz=39+Math.floor(i/2)*45;face=PI/2;route.push([98+i*2,-55+i*18,155,PI/2],[127,tx,tz,face],[210,tx,tz,face],[258,tx+24,tz-32,PI]);start=113;}
+ else if(i<8){let ii=i-4;tx=-166;tz=-215+ii*40;face=PI/2;route.push([111,-218,24+ii*5,PI],[145,tx,tz,face],[212,tx,tz,face],[264,-115,tz,face]);start=130;}
+ else if(i<14){let ii=i-8;tx=-80+ii*31;tz=12;route.push([113,-100+ii*22,127,PI],[152,tx,tz,PI],[215,tx,tz,PI],[264,tx,-46,PI]);start=137;}
+ else {let ii=i-14;tx=124+ii*26;tz=111+ii*20;face=PI/2;route.push([113,30+ii*20,178,PI/2],[150,tx,tz,face],[208,tx,tz,face],[259,185+ii*25,100,PI/2]);start=133;}
+ let g=add(i<3?'楚军先遣 · 当阳君、蒲将军':'楚军主力 · 项羽',1,route,[start,end],[151,237,.10+(i%4)*.025]);g.cross=[crossStart,crossEnd,crossingX];
+}
+const ALLIES_START=groups.length;
+const allies=[[-275,-273],[-235,-352],[-184,-359],[-126,-364],[-45,-388],[65,-373],[207,-345],[264,-283]];
+for(let i=0;i<8;i++){
+ let [x,z]=allies[i],tx,tz,face;
+ if(i<2){tx=-168;tz=-228+i*55;face=PI/2;}
+ else if(i<6){tx=-54+(i-2)*35;tz=-307;face=0;}
+ else{tx=167;tz=-220+(i-6)*60;face=-PI/2;}
+ add('诸侯援军',2,[[0,x,z,face],[205+i*.7,x,z,face],[235,tx,tz,face],[256,tx,tz,face],[290,tx+(i<2?38:i>5?-20:0),tz+(i>1&&i<6?30:0),face]],[222,257],[232,267,.065]);
+}
+for(let i=0;i<2;i++){add('巨鹿 · 赵军',3,[[0,-25+i*50,-167,0],[300,-25+i*50,-167,0]],[0,0],[300,301,0]);}
+J.CHU_START=CHU_START;J.ALLIES_START=ALLIES_START;
+J.travel=new Float32Array(64*4);
+J.pose=new Float32Array(64*4);J.anim=new Float32Array(64*4);J.fall=new Float32Array(64*4);
+J.unitCount=groups.reduce((s,g)=>s+g.cols*g.rows,0);
+J.updateBattle=function(t){
+ for(let g of groups){let s=J.routeAt(g.route,t),b=g.battle;
+ let combat=b[1]>b[0]?smooth(b[0],b[0]+9,t)*(1-smooth(b[1]-8,b[1]+3,t)):0;
+ let loss=smooth(g.loss[0],g.loss[1],t)*g.loss[2];
+ let rd=Math.abs(s.z-J.riverZ(s.x));let pack=g.cross?(1-smooth(24,52,rd))*(1-smooth(g.cross[1],g.cross[1]+5,t)):0;
+ let y=J.height(s.x,s.z);y=mix(y,1.06,pack);y=Math.max(.45,y);
+ let k=g.id*4;J.pose.set([s.x,y,s.z,s.yaw],k);J.anim.set([s.walk,combat,loss,pack],k);J.travel.set([s.travel,s.speed,0,0],k);
+ let f=J.routeAt(g.route,g.loss[0]+6);J.fall.set([f.x,J.ground(f.x,f.z),f.z,f.yaw],k);
+ g.state={...s,y,combat,loss,pack};
+ }
+};
+J.updateBattle(0);
+})();
+</script><script>'use strict';
+(()=>{
+const G=J.Geometry,{rng,mix,smooth,clamp}=J;
+J.buildWorld=function(R){
+ const random=rng(207031),world={};
+ const terra=new G();let NX=88,NZ=82,W=2800,D=2500;
+ for(let z=0;z<NZ;z++)for(let x=0;x<NX;x++){
+ const v=(xx,zz)=>{let a=xx/NX*W-W/2,b=zz/NZ*D-D/2;return[a,J.height(a,b),b]};let a=v(x,z),b=v(x+1,z),c=v(x+1,z+1),d=v(x,z+1);
+ let center=[(a[0]+c[0])/2,(a[2]+c[2])/2],r=clamp(Math.abs(center[1]-J.riverZ(center[0]))/70),h=(a[1]+c[1])/2;
+ let field=((Math.floor((center[0]+70)/85)+Math.floor((center[1]+70)/67)*3)%7);
+ let col=field<2?[.51,.515,.387]:field<4?[.535,.52,.40]:[.48,.50,.375];
+ if(h>18)col=[.455,.489,.396];col=col.map((v,i)=>mix([.56,.55,.445][i],v,smooth(.4,1,r)));
+ // Central battle plain has a coherent earth palette; distant parcels remain subtle.
+ if(Math.abs(center[0])<325&&Math.abs(center[1])<530)col=col.map((v,i)=>mix(v,[.555,.542,.434][i],.5));
+ terra.tri(a,d,c,col);terra.tri(a,c,b,col);
+ }
+ world.terrain=R.mesh(terra);
+ const grain=document.createElement('canvas');grain.width=grain.height=256;let gc=grain.getContext('2d'),gi=gc.createImageData(256,256);
+ for(let y=0;y<256;y++)for(let x=0;x<256;x++){let value=clamp(.45+Math.sin(x*.071)*Math.sin(y*.061)*.13+(random()-.5)*.49),k=(y*256+x)*4;gi.data[k]=gi.data[k+1]=gi.data[k+2]=Math.round(value*255);gi.data[k+3]=255}gc.putImageData(gi,0,0);
+ R.gl.activeTexture(R.gl.TEXTURE1);world.groundTex=R.texture(grain);R.gl.texParameteri(R.gl.TEXTURE_2D,R.gl.TEXTURE_WRAP_S,R.gl.REPEAT);R.gl.texParameteri(R.gl.TEXTURE_2D,R.gl.TEXTURE_WRAP_T,R.gl.REPEAT);R.gl.activeTexture(R.gl.TEXTURE0);
+
+ const water=new G();for(let i=0;i<300;i++){let x1=-1600+i*3200/300,x2=-1600+(i+1)*3200/300;for(let j=0;j<4;j++){let v1=j/4,v2=(j+1)/4;let a=[x1,.12,J.riverZ(x1)+(v1-.5)*64],b=[x2,.12,J.riverZ(x2)+(v1-.5)*64],c=[x2,.12,J.riverZ(x2)+(v2-.5)*64],d=[x1,.12,J.riverZ(x1)+(v2-.5)*64];water.quad(a,d,c,b,[1,1,1],0,[[0,v1],[0,v2],[1,v2],[1,v1]])}}
+ world.water=R.mesh(water);
+ const buildings=new G(),details=new G(),roads=new G(),stamps=new G();
+ function lineRoad(points,width,col){for(let i=0;i<points.length-1;i++){let a=points[i],b=points[i+1],l=Math.hypot(b[0]-a[0],b[1]-a[1]),nx=-(b[1]-a[1])/l*width/2,nz=(b[0]-a[0])/l*width/2;const v=(x,z)=>[x,J.ground(x,z)+.06,z];roads.quad(v(a[0]-nx,a[1]-nz),v(a[0]+nx,a[1]+nz),v(b[0]+nx,b[1]+nz),v(b[0]-nx,b[1]-nz),col)}}
+ J.supplyPath=[[196,214],[181,175],[157,135],[139,97],[117,56],[103,13],[84,-35],[64,-73]];
+ lineRoad(J.supplyPath,14,[.615,.579,.475]);
+ for(let i=0;i<J.supplyPath.length-1;i++){
+  let a=J.supplyPath[i],b=J.supplyPath[i+1],len=Math.hypot(b[0]-a[0],b[1]-a[1]),yaw=Math.atan2(b[0]-a[0],b[1]-a[1]);
+  for(let side of[-1,1]){let nx=Math.cos(yaw)*9*side,nz=-Math.sin(yaw)*9*side,x=(a[0]+b[0])/2+nx,z=(a[1]+b[1])/2+nz;buildings.box(x,J.ground(x,z)+1.1,z,2.3,2.1,len+2,[.49,.452,.342],yaw)}
+ }
+ lineRoad([[-18,-230],[-18,-430]],7,[.55,.521,.43]);lineRoad([[0,-113],[0,-54]],9,[.61,.575,.485]);
+ // Flat, rammed-earth city: open gate, crenellations and simple gabled watchtowers.
+ const base=3.5,wall=[.525,.49,.40],roof=[.285,.326,.314];
+ buildings.box(0,base+5.8,-229,142,11.6,5.5,wall);
+ buildings.box(-69,base+5.8,-170,5.5,11.6,122,wall);buildings.box(69,base+5.8,-170,5.5,11.6,122,wall);
+ buildings.box(-41,base+5.8,-111,59,11.6,5.5,wall);buildings.box(41,base+5.8,-111,59,11.6,5.5,wall);buildings.box(0,base+10.7,-111,24,2.2,5.5,wall);
+ for(let z of[-111,-229])for(let x=-68;x<=68;x+=5.3){buildings.box(x,base+12.6,z,2.8,2,6,wall)}
+ for(let x of[-69,69])for(let z=-224;z<-116;z+=5.3)buildings.box(x,base+12.6,z,6,2,2.8,wall);
+ const tower=(x,z,gate=false)=>{let h=gate?13.5:13;buildings.box(x,base+h/2,z,gate?20:12,h,gate?10:12,[.50,.475,.402]);buildings.box(x,base+h+1.8,z,gate?16:10,3.6,gate?9:10,[.39,.37,.305]);buildings.roof(x,base+h+3.6,z,gate?23:16,4,gate?14:16,roof);for(let a=-1;a<=1;a+=2)buildings.box(x+a*(gate?6:3),base+h+1.8,z+5.08,1.3,2.1,.15,[.12,.17,.17]);};
+ for(let x of[-69,69])for(let z of[-111,-229])tower(x,z);
+ // Gatehouse sits above lintel, leaving a true passage below.
+ buildings.box(0,base+13.2,-111,21,3.2,11,[.45,.421,.346]);buildings.roof(0,base+14.8,-111,25,4.1,15,roof);
+ for(let xx of[-6.1,6.1])buildings.box(xx,base+3.6,-112,5.5,7.2,1.1,[.25,.254,.216],xx<0?-.4:.4);
+ for(let i=0;i<92;i++){let x=-57+random()*114,z=-215+random()*93;if(Math.abs(x)<10||Math.abs(z+173)<9)continue;let w=6+random()*5,d=5+random()*5,h=3+random()*3;buildings.box(x,base+h/2,z,w,h,d,[.54+random()*.08,.50+random()*.07,.415+random()*.05]);buildings.roof(x,base+h,z,w+1.1,2.3,d+1.2,[.32+random()*.04,.35+random()*.035,.325]);stamps.ellipse(x+4,base+.04,z-2,w*.9,d*.8,[.40,.40,.33],8)}
+ buildings.box(0,base+3,-198,21,6,13,[.48,.45,.37]);buildings.roof(0,base+6,-198,25,4,18,roof);
+ // Wall texture: bands and buttress details, kept in a single static draw.
+ for(let x of[-71.9,71.9])for(let z=-219;z<=-123;z+=13)details.box(x,base+4.5,z,1.1,9,1.7,[.46,.441,.369]);
+ for(let x=-65;x<66;x+=14){if(Math.abs(x)>13)details.box(x,base+4,-107.9,1.7,8,1.3,[.46,.441,.369]);details.box(x,base+4,-232.1,1.7,8,1.3,[.46,.441,.369])}
+ lineRoad([[-61,-172],[61,-172]],6,[.56,.529,.444]);lineRoad([[0,-219],[0,-119]],7,[.56,.529,.444]);
+ // Camps are real structures, not map icons.
+ function camp(cx,cz,n,team){const tcol=team===0?[.365,.39,.37]:team===1?[.47,.40,.32]:[.49,.49,.391];for(let i=0;i<n;i++){let x=cx+(i%5-2)*14,z=cz+(Math.floor(i/5)-1.5)*16,h=J.ground(x,z);buildings.roof(x,h,z,8.5,5.7,10,tcol);details.box(x,h+1.7,z+5.04,2.3,3.3,.15,[.20,.229,.21]);stamps.ellipse(x+4,h+.04,z-2,6,6,[.40,.414,.334],8)}for(let i=0;i<30;i++){let x=cx-42+i*2.8,z=cz-40;details.cylinder(x,J.ground(x,z)+2,z,.32,.2,4,[.32,.297,.225],5)} }
+ camp(260,194,20,0);camp(170,200,15,0);camp(-320,480,20,1);camp(-78,490,15,1);camp(-253,-359,15,2);camp(-117,-415,15,2);camp(86,-427,15,2);camp(259,-375,15,2);
+ // Shore shelter / clay cooking pots; broken pots replace the intact set at the scripted moment.
+ const pots=new G(),broken=new G();for(let i=0;i<14;i++){let x=-250+i*10,z=J.riverZ(x)-52,y=J.ground(x,z);pots.cylinder(x,y+.8,z,.8,1.1,1.3,[.30,.31,.285],7);pots.cylinder(x,y+1.51,z,1.1,.92,.14,[.38,.37,.31],8);for(let k=0;k<3;k++)broken.box(x+(random()-.5)*3,y+.14,z+(random()-.5)*3,.7,.2,.9,[.34,.335,.29],random()*3);}
+ world.pots=R.mesh(pots);world.brokenPots=R.mesh(broken);
+ for(let i=0;i<4;i++){let x=-250+i*39,z=J.riverZ(x)-59;buildings.roof(x,J.ground(x,z),z,12,6.5,13,[.42,.40,.30])}
+ // Smooth low hills and dispersed copses, never a mountainous strait.
+ const tree=new G();tree.box(0,3,0,.7,6,.7,[.31,.32,.253]);tree.cylinder(0,6.6,0,3.7,0,6,[.38,.425,.324],4);tree.cylinder(0,9.4,0,2.7,0,5,[.42,.467,.362],4);
+ let ti=[],ts=[];for(let i=0;i<650;i++){let x=(random()-.5)*2200,z=(random()-.5)*1920,r=Math.abs(z-J.riverZ(x));if(r<42||Math.abs(x)<320&&z>-450&&z<530)continue;if(Math.abs(x)<420&&z>-300&&z<230)continue;let sc=.5+random()*.7,h=J.ground(x,z);ti.push(x,h,z,random()*6.28);ts.push(sc,sc*(.8+random()*.6),sc,.88+random()*.24);stamps.ellipse(x+3,h+.06,z-2,sc*4,sc*3,[.405,.425,.335],7)}
+ world.treeA=new Float32Array(ti);world.treeB=new Float32Array(ts);world.treeCullA=new Float32Array(ti.length);world.treeCullB=new Float32Array(ts.length);world.treeKey='';world.trees=R.mesh(tree,{a:world.treeA,b:world.treeB,dynamic:true});
+ // Sparse rocks, shrubs and field edges add scale without per-object CPU updates.
+ for(let i=0;i<240;i++){let x=(random()-.5)*1260,z=(random()-.5)*1120;if(Math.abs(x)<315&&z>-425&&z<510)continue;let y=J.ground(x,z);if(Math.abs(z-J.riverZ(x))<35)continue;let s=.7+random()*2.4;details.cylinder(x,y+s*.3,z,s,s*.35,s*.9,[.48,.492,.424],5)}
+ const grass=new G();for(let i=0;i<2200;i++){let x=(random()-.5)*1600,z=(random()-.5)*1500;if(Math.abs(x)<310&&z>-420&&z<495)continue;let y=J.ground(x,z);if(Math.abs(z-J.riverZ(x))<30)continue;let s=.7+random()*1.8;grass.tri([x-s*.22,y,z],[x,y+s,z+.2],[x+s*.22,y,z],[.45,.473,.34]);}
+ world.grass=R.mesh(grass);world.buildings=R.mesh(buildings);world.details=R.mesh(details);world.roads=R.mesh(roads);world.stamps=R.mesh(stamps);
+ // Single merged infantry mesh, animated in the vertex shader; no CPU skeleton per soldier.
+ const man=new G();
+ man.box(0,1.20,0,.66,.70,.39,[.47,.48,.431]);
+ man.box(0,.79,0,.76,.28,.47,[.50,.476,.403],0,6);
+ man.box(0,1.12,.211,.52,.08,.07,[.27,.285,.255]);
+ man.box(0,1.46,0,.76,.08,.48,[.31,.35,.325]);
+ man.cylinder(0,1.76,0,.225,.20,.40,[.68,.562,.421],6);
+ man.cylinder(0,1.94,0,.28,.21,.18,[.34,.37,.348],6);
+ man.box(0,2.05,-.08,.17,.18,.2,[.23,.265,.249]);
+ man.box(-.16,.39,0,.235,.68,.245,[.37,.369,.316],0,1);man.box(.16,.39,0,.235,.68,.245,[.37,.369,.316],0,2);
+ man.box(-.16,.10,.07,.25,.20,.40,[.20,.245,.233],0,1);man.box(.16,.10,.07,.25,.20,.40,[.20,.245,.233],0,2);
+ man.box(-.42,1.19,0,.24,.55,.25,[.49,.478,.4],0,3);man.box(.42,1.19,0,.24,.55,.25,[.49,.478,.4],0,4);
+ man.box(-.57,1.02,.14,.12,.78,.62,[.305,.328,.295],0,3);man.box(-.645,1.03,.14,.03,.07,.6,[.56,.485,.32],0,3);
+ man.cylinder(.5,2.10,.1,.035,.028,3.10,[.46,.376,.248],4,4);man.cylinder(.5,3.77,.1,.10,0,.30,[.69,.706,.648],4,4);
+ let troopA=[],troopB=[];for(let g of J.groups)for(let r=0;r<g.rows;r++)for(let c=0;c<g.cols;c++){
+ let x=(c-(g.cols-1)/2)*1.5+(random()-.5)*.10,z=(r-(g.rows-1)/2)*1.58+(random()-.5)*.10;
+ const seed=.003+random()*.99;
+ let fallTime=g.loss[1];if(seed<g.loss[2]){let lo=0,hi=1;const q=clamp((seed+.003)/Math.max(.00001,g.loss[2]));for(let j=0;j<19;j++){const m=(lo+hi)/2;if(m*m*(3-2*m)<q)lo=m;else hi=m;}fallTime=mix(g.loss[0],g.loss[1],(lo+hi)/2);}
+ const fp=J.routeAt(g.route,fallTime);troopA.push(x,z,seed,g.id);troopB.push(g.team,fp.x,fp.z,fp.yaw);
+ }
+ world.troopA=new Float32Array(troopA);world.troopB=new Float32Array(troopB);
+ 
+ // Three true 3D levels of detail. Only nearby, in-view formations use the detailed mesh.
+ const medium=new G();medium.box(0,1.12,0,.66,.85,.4,[.46,.48,.425]);medium.box(0,1.74,0,.44,.39,.40,[.60,.548,.426]);medium.roof(0,1.91,0,.52,.18,.48,[.32,.367,.335]);medium.box(-.16,.39,0,.23,.72,.24,[.35,.368,.31],0,1);medium.box(.16,.39,0,.23,.72,.24,[.35,.368,.31],0,2);medium.box(.43,1.2,0,.22,.5,.23,[.47,.46,.40],0,4);medium.box(-.48,1.04,.1,.10,.79,.59,[.31,.34,.294],0,3);medium.quad([.46,.52,.10],[.46,3.71,.10],[.54,3.87,.10],[.54,.52,.10],[.47,.412,.295],4);medium.quad([.5,.52,.06],[.5,3.71,.06],[.5,3.87,.14],[.5,.52,.14],[.52,.46,.33],4);
+ const far=new G();
+ const body=[[-.31,.43,-.20],[.31,.43,-.20],[.31,1.60,-.20],[-.31,1.60,-.20],[-.31,.43,.20],[.31,.43,.20],[.31,1.60,.20],[-.31,1.60,.20]];
+ for(const f of[[0,3,2,1],[4,5,6,7],[0,4,7,3],[1,2,6,5],[3,7,6,2]])far.quad(...f.map(i=>body[i]),[.44,.468,.402]);
+ for(let i=0;i<4;i++){let a=i*Math.PI/2+Math.PI/4,b=a+Math.PI/2;far.tri([Math.cos(a)*.32,1.6,Math.sin(a)*.32],[0,2.03,0],[Math.cos(b)*.32,1.6,Math.sin(b)*.32],[.49,.50,.42]);}
+ far.tri([-.29,0,0],[-.29,.65,0],[-.05,.65,0],[.32,.35,.29],1);far.tri([.05,.65,0],[.29,.65,0],[.29,0,0],[.32,.35,.29],2);
+ far.quad([.47,.6,.1],[.47,3.76,.1],[.54,3.95,.1],[.54,.6,.1],[.51,.45,.32],4);
+
+ world.lodMeshes=[man,medium,far].map(g=>R.mesh(g,{a:new Float32Array(world.troopA.length),b:new Float32Array(world.troopB.length),dynamic:true}));world.lodKeys=[null,null,null];world.lodCounts=[0,0,0];world.lodMemory=new Int8Array(J.groups.length).fill(-1);world.lodBuffers=[0,1,2,3].map(()=>[new Float32Array(world.troopA.length),new Float32Array(world.troopB.length)]);world.farPoints=R.dynamic([[4,4],[5,4]],J.unitCount);
+
+ const shadow=new G();shadow.quad([-1,0,-1],[-1,0,1],[1,0,1],[1,0,-1],[0,0,0]);world.troopShadows=R.mesh(shadow,{a:world.troopA,b:world.troopB,dynamic:true});
+ const armyA=[],armyB=[];for(let g of J.groups){armyA.push(0,0,.999,g.id);armyB.push(g.team,1,0,0)}world.armyShadows=R.mesh(shadow,{a:new Float32Array(armyA),b:new Float32Array(armyB)});world.shadowKey=null;
+
+ // Banners use one self-generated texture atlas, four real Chinese faction glyphs.
+ let flagCanvas=document.createElement('canvas');flagCanvas.width=1024;flagCanvas.height=256;let fc=flagCanvas.getContext('2d');['秦','楚','援','赵'].forEach((s,i)=>{fc.fillStyle=['#2b3436','#983e33','#526966','#9b8052'][i];fc.fillRect(i*256,0,256,256);fc.strokeStyle='#d1bd88';fc.lineWidth=7;fc.strokeRect(i*256+14,14,228,228);fc.fillStyle='#eee0bd';fc.font='bold 161px "Noto Serif CJK SC","SimSun",serif';fc.textAlign='center';fc.textBaseline='middle';fc.fillText(s,i*256+128,139)});world.flagTex=R.texture(flagCanvas);
+ const flag=new G();for(let i=0;i<9;i++){let a=i/9,b=(i+1)/9;flag.quad([a*4.8,8.8,0],[a*4.8,4.2,0],[b*4.8,4.2,0],[b*4.8,8.8,0],[1,1,1],0,[[a,1],[a,0],[b,0],[b,1]])}
+ let fi=[];for(let g of J.groups)fi.push(g.id,g.team,0,0);world.flagInstances=new Float32Array(fi);world.flags=R.mesh(flag,{a:world.flagInstances});
+ let pole=new G();pole.cylinder(0,4.45,0,.085,.06,8.9,[.41,.346,.242],5);pole.cylinder(0,9.07,0,.21,0,.38,[.7,.616,.418],5);world.poles=R.mesh(pole,{a:world.flagInstances});
+ // River transports. Main formations compress onto visible decks while on the river.
+ const boat=new G();boat.box(0,.4,0,7.8,.9,18,[.34,.31,.24]);boat.box(-3.8,1.1,0,.5,1.5,18,[.40,.345,.252]);boat.box(3.8,1.1,0,.5,1.5,18,[.40,.345,.252]);boat.roof(0,.2,-9,7.8,1.8,3.4,[.34,.31,.24],Math.PI/2);boat.roof(0,.2,9,7.8,1.8,3.4,[.34,.31,.24],Math.PI/2);for(let z=-7;z<8;z+=2)boat.box(0,.93,z,7.2,.2,.33,[.48,.411,.301]);
+ world.boatA=new Float32Array(16*4);world.boatB=new Float32Array(16*4);world.boats=R.mesh(boat,{a:world.boatA,b:world.boatB,dynamic:true});
+ // Ox-drawn grain carts, simplified animal anatomy and functioning wheels.
+ const cart=new G();cart.box(0,1.8,0,2.8,.6,4.2,[.43,.35,.249]);cart.box(-1.3,2.3,0,.16,1.,4.1,[.50,.409,.28]);cart.box(1.3,2.3,0,.16,1.,4.1,[.50,.409,.28]);for(let k=0;k<4;k++)cart.cylinder((k%2-.5)*1.2,2.65,Math.floor(k/2)*1.5-.75,.6,.56,1.0,[.64,.572,.413],6);for(let x of[-1.6,1.6])for(let z of[-1.5,1.5]){cart.box(x,.9,z,.23,1.5,1.5,[.29,.291,.238]);cart.box(x,.9,z,.28,.28,1.72,[.54,.465,.326]);}cart.box(0,1.3,4.1,.17,.15,4.0,[.39,.34,.25]);cart.box(0,1.63,5.5,1.4,1.25,2.7,[.40,.376,.307]);cart.box(0,1.83,7.0,1.0,.9,.9,[.37,.35,.297]);for(let x of[-.48,.48])for(let z of[4.6,6.5])cart.box(x,.54,z,.23,1.1,.24,[.29,.296,.247]);cart.box(0,2.33,6.95,1.8,.12,.13,[.70,.639,.48]);
+ world.cartA=new Float32Array(20*4);world.cartB=new Float32Array(20*4);world.carts=R.mesh(cart,{a:world.cartA,b:world.cartB,dynamic:true});
+ // Dynamic effects use a bounded pool. Nothing accumulates after scrubbing.
+ world.effects=R.dynamic([[0,3],[2,4],[3,1]],1000);
+ world.arrows=R.dynamic([[0,3],[2,3]],1500);
+ world.paths=R.dynamic([[0,3],[2,3]],1500);
+ world.motion=R.dynamic([[0,3],[2,4]],10000);
+ // A small number of mounted command markers. Geometry is illustrative, not portraiture.
+ const horse=new G();
+ horse.box(0,1.40,0,.93,1.12,2.28,[.27,.245,.203]);
+ horse.box(0,1.9,.95,.69,1.27,.68,[.28,.255,.205]);horse.box(0,2.4,1.40,.48,.63,.95,[.30,.262,.202]);
+ for(let x of[-.34,.34])for(let z of[-.78,.77]){horse.box(x,.55,z,.22,1.13,.27,[.22,.223,.194]);horse.box(x,.08,z+.07,.25,.16,.36,[.12,.157,.16]);}
+ horse.box(0,1.2,-1.33,.18,1.06,.19,[.13,.17,.16]);
+ horse.box(0,2.04,-.15,1.02,.16,1.25,[.52,.255,.198]);
+ horse.box(0,2.65,-.14,.69,.83,.44,[.38,.36,.284]);horse.box(0,3.32,-.14,.39,.40,.37,[.69,.575,.436]);
+ horse.roof(0,3.52,-.14,.51,.28,.46,[.29,.34,.33]);horse.box(0,3.76,-.22,.13,.31,.24,[.65,.27,.19]);
+ for(let x of[-.51,.51])horse.box(x,1.76,-.03,.21,.79,.28,[.22,.28,.266]);
+ horse.box(-.39,2.56,-.14,.22,.60,.24,[.39,.36,.282]);horse.box(.39,2.56,-.14,.22,.60,.24,[.39,.36,.282]);
+ horse.box(0,2.48,-.46,.75,.96,.09,[.52,.24,.19]);
+ let ca=[];for(let id of[3,22,26,28,36,31,46,48])ca.push(id,0,0,0);world.commanders=R.mesh(horse,{a:new Float32Array(ca)});
+ J.world=world;return world;
+};
+J.pathPoint=function(path,u){let lens=[],total=0;for(let i=0;i<path.length-1;i++){let l=Math.hypot(path[i+1][0]-path[i][0],path[i+1][1]-path[i][1]);lens.push(l);total+=l}let dist=clamp(u)*total;for(let i=0;i<lens.length;i++){if(dist<=lens[i]||i===lens.length-1){let p=clamp(dist/lens[i]),a=path[i],b=path[i+1];return{x:mix(a[0],b[0],p),z:mix(a[1],b[1],p),yaw:Math.atan2(b[0]-a[0],b[1]-a[1])}}dist-=lens[i]}};
+J.updateWorld=function(R,w,t){
+ for(let i=0;i<16;i++){
+  const tr=J.transports[i],p=J.boatAt(tr,t),k=i*4;
+  w.boatA.set([p.x,p.y,p.z,p.yaw],k);w.boatB.set([1,1,1,1],k);
+ }
+ R.updateInstances(w.boats,w.boatA,w.boatB);
+ for(let i=0;i<20;i++){const p=J.cartAt(i,t),k=i*4;w.cartA.set([p.x,J.ground(p.x,p.z),p.z,p.yaw],k);w.cartB.set([p.visibility,p.visibility,p.visibility,.90],k);}
+ R.updateInstances(w.carts,w.cartA,w.cartB);
+ const fx=w.effects;let n=0;const point=(x,y,z,r,g,b,a,size)=>{if(n>=fx.capacity)return;fx.attrs[0].ar.set([x,y,z],n*3);fx.attrs[2].ar.set([r,g,b,a],n*4);fx.attrs[3].ar[n]=size;n++};
+ // Marching dust, especially along the contact line; air remains transparent enough to read formations.
+ for(let gr of J.groups){let s=gr.state,intensity=Math.max(s.walk*.42,s.combat);if(intensity<.02||s.pack>.2)continue;for(let j=0;j<6;j++){let seed=(gr.id*37+j*17)*.123,f=((t*.17+seed)%1+1)%1;let x=s.x+Math.sin(seed*37)*10+f*5,z=s.z+Math.cos(seed*21)*9;point(x,s.y+1.5+f*10,z,.64,.60,.49,intensity*smooth(0,.18,f)*(1-smooth(.55,1,f))*.145,5+f*11)}}
+ // Fires are confined to the shore shelters and the interrupted transport corridor.
+ let burn=smooth(90,99,t)*(1-smooth(119,143,t));for(let i=0;i<4;i++){let x=-250+i*39,z=J.riverZ(x)-58,y=J.ground(x,z);for(let j=0;j<15;j++){let f=(t*.25+j*.139+i*.07)%1;point(x+Math.sin(j*47+i)*2+f*7,y+3+f*32,z+Math.cos(j*53)*2,.32,.331,.30,burn*smooth(0,.18,f)*(1-f)*.2,5+f*17);if(j<9)point(x+Math.sin(j*77)*3,y+2+f*7,z+Math.cos(j*43)*2,1.,.50,.13,burn*(1-f)*.8,2.4+f*2.5)}}
+ let roadBurn=smooth(119,137,t)*(1-smooth(216,248,t));for(let i=0;i<3;i++){let x=109+i*18,z=35+i*36,y=J.ground(x,z);for(let j=0;j<13;j++){let f=(t*.13+j*.079+i*.18)%1;point(x+f*6+Math.sin(j*41)*1.8,y+2+f*27,z+Math.cos(j*12)*2,.40,.40,.347,roadBurn*smooth(0,.16,f)*(1-f)*.14,4+f*18)}}
+ R.updateDynamic(fx,n);
+ // Archery volleys are an illustrative combat effect, not a casualty simulation.
+ let a=w.arrows,an=0;const segment=(x,y,z,x2,y2,z2,col)=>{if(an+2>a.capacity)return;a.attrs[0].ar.set([x,y,z,x2,y2,z2],an*3);a.attrs[2].ar.set([...col,...col],an*3);an+=2};
+ for(let g of J.groups){if(g.state.combat<.35||g.state.loss>.7)continue;let target=null,dd=1e9;for(let o of J.groups){if(o.id===g.id||(g.team===0)===(o.team===0)||o.team===3||o.state.combat<=.2)continue;let d=Math.hypot(o.state.x-g.state.x,o.state.z-g.state.z);if(d<dd){dd=d;target=o}}if(!target||dd>140||dd<12)continue;
+ for(let j=0;j<9;j++){let p=(t*.45+j*.103+g.id*.051)%1;if(p>.78)continue;p/=.78;let s=g.state,e=target.state,off=(j-4)*1.35;let x=mix(s.x+off,e.x+off,p),z=mix(s.z-2,e.z+1,p),y=mix(s.y+2,e.y+1,p)+Math.sin(p*Math.PI)*Math.min(22,dd*.3);let p2=Math.max(0,p-.024),x2=mix(s.x+off,e.x+off,p2),z2=mix(s.z-2,e.z+1,p2),y2=mix(s.y+2,e.y+1,p2)+Math.sin(p2*Math.PI)*Math.min(22,dd*.3);segment(x,y,z,x2,y2,z2,[.47,.40,.265]);}}
+ R.updateDynamic(a,an);
+ // Optional tactical overlay: only a schematic path, never the claimed exact historic route.
+ let lp=w.paths,ln=0;for(let i=0;i<7;i++){let a=J.supplyPath[i],b=J.supplyPath[i+1];lp.attrs[0].ar.set([a[0],J.ground(...a)+3,a[1],b[0],J.ground(...b)+3,b[1]],ln*3);let col=t<120?[.79,.675,.38]:[.67,.34,.28];lp.attrs[2].ar.set([...col,...col],ln*3);ln+=2;}R.updateDynamic(lp,ln);
+};
+
+J.updateLOD=function(R,w){
+ let batches=[[],[],[]];for(let g of J.groups){let s=g.state,p=J.mat.project([s.x,s.y+2,s.z],R.vp),dist=Math.hypot(s.x-R.eye[0],s.y-R.eye[1],s.z-R.eye[2]),extent=60/Math.max(20,p[3]);let visible=dist<=52||!(p[3]<0||Math.abs(p[0])>1.13+extent||Math.abs(p[1])>1.12+extent||p[2]>1.002);if(s.loss>.001){let k=g.id*4,fp=J.mat.project([J.fall[k],J.fall[k+1]+1,J.fall[k+2]],R.vp),fd=Math.hypot(J.fall[k]-R.eye[0],J.fall[k+1]-R.eye[1],J.fall[k+2]-R.eye[2]),fe=60/Math.max(20,fp[3]);visible=visible||(fp[3]>0&&Math.abs(fp[0])<1.13+fe&&Math.abs(fp[1])<1.12+fe);dist=Math.min(dist,fd);}if(!visible)continue;let low=J.app.quality==='smooth'||J.app.quality==='auto'&&R.software, d0=low?27:52,d1=low?72:140,old=w.lodMemory[g.id];let tier=dist<d0?0:dist<d1?1:2;if(old===0&&dist<d0*1.22)tier=0;else if(old===1&&dist>d0*.83&&dist<d1*1.20)tier=1;else if(old===2&&dist>d1*.83)tier=2;w.lodMemory[g.id]=tier;batches[tier].push(g.id)}
+ for(let tier=0;tier<3;tier++){let ids=batches[tier],key=ids.join(',');if(key===w.lodKeys[tier])continue;w.lodKeys[tier]=key;let count=ids.length*120,a=w.lodBuffers[tier][0].subarray(0,count*4),b=w.lodBuffers[tier][1].subarray(0,count*4);for(let i=0;i<ids.length;i++){let src=ids[i]*120*4;a.set(w.troopA.subarray(src,src+480),i*480);b.set(w.troopB.subarray(src,src+480),i*480)}R.updateInstances(w.lodMeshes[tier],a,b);if(tier===2){w.farPoints.attrs[4].ar.set(a);w.farPoints.attrs[5].ar.set(b);R.updateDynamic(w.farPoints,count);}w.lodMeshes[tier].instances=count;w.lodCounts[tier]=count;}
+ let near=batches[0].concat(batches[1]),sk=near.join(',');if(sk!==w.shadowKey){w.shadowKey=sk;let aa=w.lodBuffers[3][0].subarray(0,near.length*480),bb=w.lodBuffers[3][1].subarray(0,near.length*480);for(let i=0;i<near.length;i++){let src=near[i]*480;aa.set(w.troopA.subarray(src,src+480),i*480);bb.set(w.troopB.subarray(src,src+480),i*480)}R.updateInstances(w.troopShadows,aa,bb);w.troopShadows.instances=near.length*120;}
+};
+
+J.renderWorld=function(R,w,t,opts){
+ const gl=R.gl;J.updateLOD(R,w);let p=R.use('static',t);gl.uniform1i(R.loc(p,'uGround'),1);gl.uniform1i(R.loc(p,'uKind'),1);R.draw(w.terrain);gl.uniform1i(R.loc(p,'uKind'),0);R.draw(w.roads);R.draw(w.stamps);
+ p=R.use('water',t);gl.uniform1i(R.loc(p,'uGround'),1);gl.uniform1f(R.loc(p,'uFlow'),opts.paths?1:0);R.draw(w.water);
+ p=R.use('static',t);gl.uniform1i(R.loc(p,'uKind'),2);R.draw(w.buildings);R.draw(w.details);R.draw(t<98?w.pots:w.brokenPots);gl.uniform1i(R.loc(p,'uKind'),0);R.draw(w.grass);
+ let treeKey='',treeN=0;for(let i=0;i<w.treeA.length;i+=4){const x=w.treeA[i],y=w.treeA[i+1]+6,z=w.treeA[i+2];if(R.sphereVisible([x,y,z],15)){treeKey+=i+',';w.treeCullA.set(w.treeA.subarray(i,i+4),treeN*4);w.treeCullB.set(w.treeB.subarray(i,i+4),treeN*4);treeN++;}}
+ if(treeKey!==w.treeKey){w.treeKey=treeKey;R.updateInstances(w.trees,w.treeCullA.subarray(0,treeN*4),w.treeCullB.subarray(0,treeN*4));w.trees.instances=treeN;}
+ R.use('inst',t);R.draw(w.trees);R.draw(w.boats);R.draw(w.carts);
+ gl.enable(gl.BLEND);gl.depthMask(false);R.use('shadow',t,true);R.draw(w.armyShadows);R.draw(w.troopShadows);gl.depthMask(true);gl.disable(gl.BLEND);
+ R.use('troop',t,true);R.draw(w.lodMeshes[0]);R.draw(w.lodMeshes[1]);if(opts.quality==='smooth'||opts.quality==='auto'&&(R.software||opts.adaptivePoints)){p=R.use('crowd',t,true);gl.uniform1f(R.loc(p,'uPointScale'),R.height*R.pixelRatio/(2*Math.tan((J.camera.fov||48)*Math.PI/360)));gl.uniform1f(R.loc(p,'uViewElev'),J.camera.elev);gl.uniform1f(R.loc(p,'uViewYaw'),J.camera.yaw);R.draw(w.farPoints,gl.POINTS);}else{R.use('troopfar',t,true);R.draw(w.lodMeshes[2]);}
+ R.use('pole',t,true);R.draw(w.poles);R.draw(w.commanders);
+ p=R.use('flag',t,true);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,w.flagTex);gl.uniform1i(R.loc(p,'uAtlas'),0);R.draw(w.flags);
+ gl.enable(gl.BLEND);gl.depthMask(false);if(opts.paths){J.updateMotion(R,w,t,opts);R.use('motion',t);R.draw(w.motion,gl.TRIANGLES);}R.use('line',t);R.draw(w.arrows,gl.LINES);
+ p=R.use('point',t);gl.uniform1f(R.loc(p,'uPointScale'),R.height*R.pixelRatio*1.07);R.draw(w.effects,gl.POINTS);
+ gl.depthMask(true);gl.disable(gl.BLEND);
+};
+})();
+</script><script>'use strict';
+(()=>{
+ const {mix,clamp,smooth}=J,PI=Math.PI;
+ const range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
+ // Unit identities have source support; subdivisions and placement are explicitly illustrative.
+ J.forces=[
+ {id:'xiang',label:'项羽',force:'楚军主力',team:1,lead:36,ids:range(34,39),role:'主力推进',note:'统领救赵楚军。画面按观察需要分为数个分队，不等于史载“左军、右军”。',source:7},
+ {id:'bu',label:'英布',force:'楚军先遣 · 当阳君',team:1,lead:26,ids:[26,27],role:'先遣渡河',note:'《黥布列传》记英布为当阳君、先渡河击秦；与蒲将军的精确分兵及路线不详。',source:91},
+ {id:'pu',label:'蒲将军',force:'楚军先遣',team:1,lead:28,ids:[28],role:'先遣救援',note:'《项羽本纪》记当阳君、蒲将军合率二万人先渡河；此处不拆分确定人数。',source:7},
+ {id:'wang',label:'王离',force:'秦军 · 围城部',team:0,lead:3,ids:range(0,5),role:'围攻巨鹿',note:'王离围巨鹿有记载；围城军在不同城侧的编组、阵位为示意。',source:7},
+ {id:'zhang',label:'章邯',force:'秦军 · 南部军',team:0,lead:22,ids:range(21,25),role:'南部驻军 / 输粮',note:'章邯军巨鹿南、筑甬道输粮。其后续投降不并入本场解围。',source:89},
+ {id:'chen',label:'陈馀',force:'赵军 · 城北援军',team:2,lead:46,ids:range(44,47),role:'城北驻军',note:'《张耳陈馀列传》记陈馀收常山兵、军巨鹿北。出营动作与具体交战位置为示意。',source:89},
+ {id:'ao',label:'张敖',force:'代地援军',team:2,lead:48,ids:[48,49],role:'收代兵来援',note:'列传记张敖收代兵万余人来援，壁陈馀旁；本场阵位、行军方向均为示意。',source:89},
+ {id:'zhao',label:'张耳 · 赵王歇',force:'巨鹿城内',team:3,lead:50,ids:[50,51],role:'被围 / 守城',note:'二人在巨鹿城中。守城军的具体编制、城池规模不作考证性主张。',source:89},
+ {id:'west',label:'楚军 · 西侧分队',force:'项羽统属 / 示意编组',team:1,lead:31,ids:range(30,33),role:'西侧推进',note:'为显示多方向接敌而设置的视觉分队；不冒称史载左军或某将独立军。',source:7},
+ {id:'east',label:'楚军 · 粮道分队',force:'项羽统属 / 示意编组',team:1,lead:40,ids:[29,40,41],role:'接应断道',note:'截断甬道有史载；具体参与分队、行军路线、位置与时刻为示意。',source:7},
+ {id:'guard',label:'秦军 · 护道分队',force:'甬道守军 / 示意编组',team:0,lead:19,ids:[18,19,20],role:'守护粮运',note:'为解释甬道关系而作的编组。不据此指认苏角或涉间的确切部署。',source:89},
+ {id:'qinWest',label:'秦军 · 城西部',force:'王离围城军 / 示意编组',team:0,lead:7,ids:range(6,9),role:'围城西侧',note:'具体阵位与分队为示意，非史载独立军号。',source:7},
+ {id:'qinNorth',label:'秦军 · 北东部',force:'王离围城军 / 示意编组',team:0,lead:15,ids:range(10,17),role:'围城北东侧',note:'具体阵位与分队为示意，非史载独立军号。',source:7},
+ {id:'allies',label:'诸侯援军',force:'其他援军 / 合并示意',team:2,lead:42,ids:[42,43],role:'营中观望',note:'燕、齐、楚来救赵见《张耳陈馀列传》；合并显示未能具体定位的援军。',source:89}
+ ];
+ J.forceById=Object.fromEntries(J.forces.map(f=>[f.id,f]));
+ for(const f of J.forces)for(const id of f.ids)J.groups[id].forceId=f.id;
+ J.forceState=(id,t)=>{
+  const f=J.forceById[id]||J.forces[0],g=J.groups[f.lead],s=g.state;
+  let status='驻守',action='驻阵',sp=s.speed;
+  if(f.team===1){status=t<32?'河畔集结':t<66?(f.id==='bu'||f.id==='pu'?'先遣北进':'待命集结'):t<102?'渡河 / 展开':t<150?'向战场推进':t<240?'持续接战':'战后集结';}
+  else if(f.team===0){status=f.id==='zhang'?(t<110?'南部驻军':t<198?'与楚军接战':t<270?'脱离战场':'后续另叙'):(t<110?'围城 / 护道':t<150?'粮运受扰':t<235?'补给中断':'围城军败');}
+  else if(f.team===2){status=t<205?'营垒观望':t<235?'出营进击':t<258?'接战解围':'城下会合';}
+  else status=t<245?'被围守城':'围困解除';
+  if(s.pack>.28)action='渡河';else if(s.loss>.64)action='溃退 / 失序';else if(sp>.15)action=f.id==='zhang'&&t>198?'撤离':s.combat>.4?'推进接敌':'行进';else if(s.combat>.4)action='交锋';else action=f.team===2&&t<205?'观望':'驻阵';
+  return{f,g,s,status,action,speed:sp};
+ };
+ // [start,end,shot title,narrative,focus,anchor, start/end radius,yaw,elevation,FOV,world title]
+ // yaw values are intentional screen directions, not historic camera positions.
+ const S=(at,end,name,line,focus,anchor,r,y,e,fov=48,title='')=>({at,end,name,line,focus,anchor,r:Array.isArray(r)?r:[r,r],y:Array.isArray(y)?y:[y,y],e:Array.isArray(e)?e:[e,e],fov:Array.isArray(fov)?fov:[fov,fov],title});
+ J.shots=[
+ S(0,9,'城内与城外','巨鹿被围。秦军驻在城外，救援诸军的营垒在更远处。','zhao',[0,8,-169],[590,450],[-.72,-.48],[.52,.42],[47,48],'巨 鹿'),
+ S(9,18,'城下的压力','王离部驻于城外。守城者与援军之间，隔着秦军。','wang',[0,8,-104],[175,135],[.48,.18],[.20,.24],51,''),
+ S(18,26,'甬道输粮','章邯部通过甬道输粮，王离的围城军依靠这条通路。','zhang','cart',[78,106],[-1.0,-.75],[.27,.43],50,'甬 道'),
+ S(26,32,'北面的营垒','城北已有援军，但围困还没有解开。','chen','unit',[160,185],[2.6,2.85],[.27,.43],48,'城 北'),
+ S(32,42,'先遣北渡','当阳君英布与蒲将军率先渡河，楚军主力仍在南岸。','bu','unit',[80,65],[-.7,-.30],[.25,.21],50,'楚军先遣'),
+ S(42,52,'渡水向北','前部渡河，后队仍在岸边。楚军先遣逐次向北推进。','bu','unit',[58,68],[-1.23,-1.52],[.13,.22],51,''),
+ S(52,60,'前部抵岸','先遣部队抵岸展开。主力仍在后面。','pu','unit',[97,84],[2.45,2.80],[.25,.32],49,''),
+ S(60,66,'南岸与北岸','先遣已经渡河；楚军主力尚在后面，巨鹿在更远的北方。','bu',[-90,5,98],[560,630],[-.42,-.35],[1.09,1.16],50,''),
+ S(66,77,'主力渡河','楚军主力离开集结地，向渡口推进。','xiang','unit',[96,73],[-.32,-.16],[.26,.16],52,'主力渡河'),
+ S(77,88,'河面上的军阵','楚军乘舟渡河，抵岸后重新集结，准备继续北进。','xiang','unit',[182,215],[-1.05,-.84],[.50,.67],48,''),
+ S(88,96,'不再准备归舟','部队抵岸之后，舟船开始沉下。','xiang',[-168,2,279],[125,89],[-1.35,-1.0],[.27,.15],50,'破釜沉舟'),
+ S(96,105,'岸边的余火','舟船沉没，釜甑破碎，岸边庐舍起火；楚军向前。','xiang',[-185,5,237],[118,167],[-1.0,-.66],[.21,.39],49,''),
+ S(105,116,'楚军北进','渡河之后，楚军向巨鹿方向推进。前方是秦军的围城与粮运体系。','xiang','unit',[78,64],[-1.15,-.83],[.18,.17],53,'北 进'),
+ S(116,127,'先遣接敌','楚军先遣靠近运输通道，与附近秦军接战。','bu','unit',[118,101],[-1.05,-.71],[.40,.30],50,''),
+ S(127,138,'粮道中断','看这条通路：运输停止，围城军的补给受到影响。','guard',[125,4,65],[240,178],[-.61,-.42],[.90,.72],47,'断其甬道'),
+ S(138,150,'西侧接战','西侧楚军与城外秦军接战，另一侧的甬道仍受攻击。','west','unit',[89,74],[-.58,-.99],[.22,.17],51,''),
+ S(150,161,'长兵相接','楚秦双方在城外反复交锋。前排接战，后排维持队形。','xiang','contact',[88,70],[-1.35,-1.15],[.24,.16],54,'楚秦交锋'),
+ S(161,171,'围城军受压','秦军正面承受进攻，身后的粮食供应也已经中断。','wang','contact',[96,77],[1.31,1.08],[.23,.18],51,''),
+ S(171,183,'交锋未止','城南交锋持续，城内赵军的围困尚未解除。','xiang','contact',[122,105],[-.70,.45],[.43,.32],50,''),
+ S(183,193,'西侧交锋','秦楚交锋不止一处。西侧战线，双方仍在接战。','west','contact',[61,73],[-1.72,-1.31],[.16,.24],52,''),
+ S(193,205,'围城与断粮','围城军、甬道与南部秦军，原本相互支持；断粮正在改变这一局面。','zhang',[35,4,-47],[560,650],[-.37,-.25],[1.04,1.17],48,'战 局'),
+ S(205,216,'章邯部退却','章邯部向外脱离，与仍在巨鹿城外的王离部逐渐分开。','zhang','unit',[102,80],[2.6,2.9],[.31,.20],50,''),
+ S(216,228,'援军走出营垒','北面的军阵开始移动。观望的局面发生了变化。','chen','unit',[111,89],[2.90,2.62],[.29,.20],52,'诸侯进击'),
+ S(228,240,'诸军合击','诸侯军出营进击，围城秦军受到新的攻击。','ao',[24,5,-254],[285,235],[2.80,2.35],[.72,.62],49,''),
+ S(240,249,'围城军败','王离部败，围城军阵瓦解。巨鹿的围困即将解除。','wang','unit',[101,83],[.45,.12],[.29,.25],50,''),
+ S(249,260,'巨鹿解围','王离被俘，巨鹿得以解围。城外已经是另一种局面。','zhao',[0,10,-111],[229,270],[.36,.67],[.22,.35],48,'巨鹿解围'),
+ S(260,270,'围困解除','秦军的围城体系瓦解，楚军与诸侯援军在城下会合。','xiang',[0,4,-155],[520,635],[-.50,-.70],[.86,.97],48,''),
+ S(270,282,'楚军在城下','楚军在巨鹿城下集结。章邯部退去后的战事，属于后续过程。','xiang','unit',[100,137],[-.82,-.36],[.24,.38],50,''),
+ S(282,292,'回望巨鹿','城仍在这里。围城的军阵退散，前来救援的军队已经抵达。','zhao',[0,4,-126],[660,820],[-.63,-.43],[.76,.85],48,''),
+ S(292,300,'尾声','解围战至此结束。时间可以回看，战局不会因观察而改变。','zhao',[0,5,-75],[900,975],[-.42,-.34],[.91,.99],48,'巨 鹿 · 解 围')
+ ];
+ J.shotAt=t=>J.shots.find(s=>t>=s.at&&t<s.end)||J.shots.at(-1);
+ J.nearestEnemy=(g)=>{let best=null,dd=Infinity;for(let o of J.groups){if((g.team===0)===(o.team===0)||o.team===3)continue;let d=Math.hypot(o.state.x-g.state.x,o.state.z-g.state.z);if(d<dd){best=o;dd=d;}}return best;};
+ J.anchor=(shot,t)=>{
+  const f=J.forceById[shot.focus],s=J.groups[f.lead].state;
+  if(Array.isArray(shot.anchor))return [...shot.anchor];
+  if(shot.anchor==='cart'){let p=J.pathPoint(J.supplyPath,(.38+Math.min(t,127)*.008)%1);return[p.x,J.ground(p.x,p.z)+2,p.z];}
+  if(shot.anchor==='contact'){let enemy=J.nearestEnemy(J.groups[f.lead]);if(enemy&&Math.hypot(s.x-enemy.state.x,s.z-enemy.state.z)<120)return[(s.x+enemy.state.x)/2,(s.y+enemy.state.y)/2+2.2,(s.z+enemy.state.z)/2];}
+  return[s.x,s.y+3.2,s.z];
+ };
+ J.directedPose=t=>{const shot=J.shotAt(t),u=clamp((t-shot.at)/(shot.end-shot.at)),v=u*u*(3-2*u);return{shot,target:J.anchor(shot,t),distance:mix(...shot.r,v),yaw:mix(...shot.y,v),elev:mix(...shot.e,v),fov:mix(...shot.fov,v)};};
+ // Ground-projected motion graphics: bounded buffers and no timeline-dependent accumulation.
+ J.updateMotion=(R,w,t,opts)=>{
+  const mesh=w.motion;let n=0;const sh=J.shotAt(t),motionAlpha=opts.guide?smooth(.1,1.45,t-sh.at):1;
+  const vertex=(x,y,z,col)=>{if(n>=mesh.capacity)return;mesh.attrs[0].ar.set([x,y,z],n*3);mesh.attrs[2].ar.set([col[0],col[1],col[2],col[3]*motionAlpha],n*4);n++;};
+  const strip=(a,b,width,col)=>{const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);if(len<.05)return;const nx=-dz/len*width*.5,nz=dx/len*width*.5;
+   const vs=[[a[0]+nx,a[1]+nz],[a[0]-nx,a[1]-nz],[b[0]-nx,b[1]-nz],[b[0]+nx,b[1]+nz]];
+   for(const i of[0,1,2,0,2,3])vertex(vs[i][0],J.ground(...vs[i])+.55,vs[i][1],col);
+  };
+  const focus=opts.focusId||'xiang',selected=J.forceById[focus]||J.forces[0],wide=J.camera?.distance>380;
+  let fs=wide?J.forces.filter(f=>['xiang','bu','pu','zhang','chen','ao','west'].includes(f.id)):[selected];
+  for(const f of fs){const g=J.groups[f.lead],s=g.state,col=f.team===0?[.78,.87,.90]:f.team===1?[.94,.44,.29]:[.49,.84,.76];
+   if(s.speed<.18||s.loss>.65)continue;
+   let previous=null;
+   for(let i=0;i<=22;i++){let tt=Math.max(0,t-13+i*13/22),p=J.routeAt(g.route,tt),pos=[p.x,p.z];if(previous)strip(previous,pos,wide?3.2:1.1,[...col,.08+i/22*.20]);previous=pos;}
+   // Forward chevrons flow with simulation time and freeze when paused.
+   for(let j=0;j<4;j++){const loop=(t*.22+j/4)%1,fade=smooth(0,.16,loop)*(1-smooth(.73,1,loop)),tt=t+loop*9,p=J.routeAt(g.route,tt);if(p.speed<.1)continue;const dx=Math.sin(p.yaw),dz=Math.cos(p.yaw),q=[p.x,p.z],w=wide?9:5.6;
+    strip([q[0]-dx*w+dz*w*.6,q[1]-dz*w-dx*w*.6],q,.8,[...col,.65*fade]);strip([q[0]-dx*w-dz*w*.6,q[1]-dz*w+dx*w*.6],q,.8,[...col,.65*fade]);
+   }
+   // Thin streaks outside the formation read as motion without obscuring soldiers.
+   for(let j=0;j<4&&!wide;j++){const p=J.routeAt(g.route,Math.max(0,t-(j*.63+(t*.8)%1)*1.2)),dx=Math.sin(p.yaw),dz=Math.cos(p.yaw),off=(j%2?1:-1)*12,len=clamp(s.speed*1.4,3,13),fa=smooth(0,.12,(t*.8)%1)*(1-smooth(.72,1,(t*.8)%1));strip([p.x+dz*off-dx*len,p.z-dx*off-dz*len],[p.x+dz*off,p.z-dx*off],.22,[...col,.47*fa]);}
+  }
+  // Supply flow, independent of camera; stops when supply is cut in the narrative.
+  if(wide||['zhang','guard','bu','pu','east'].includes(focus)){
+   for(let i=0;i<J.supplyPath.length-1;i++)strip(J.supplyPath[i],J.supplyPath[i+1],2.4,t<127?[.90,.73,.39,.21]:[.87,.35,.25,.22]);
+   for(let j=0;j<9;j++){let q=J.pathPoint(J.supplyPath,(j/9+Math.min(t,127)*.012)%1),d=[Math.sin(q.yaw),Math.cos(q.yaw)],c=t<127?[.97,.80,.45,.75]:[.85,.33,.24,.5];strip([q.x-d[0]*4+d[1]*2,q.z-d[1]*4-d[0]*2],[q.x,q.z],.5,c);strip([q.x-d[0]*4-d[1]*2,q.z-d[1]*4+d[0]*2],[q.x,q.z],.5,c);}
+  }
+  // Four small brackets, not a game selection disc.
+  if(!wide){let s=J.groups[selected.lead].state;for(let sx of[-1,1])for(let sz of[-1,1]){let x=s.x+sx*13,z=s.z+sz*13;strip([x-sx*4,z],[x,z],.35,[.96,.85,.59,.63]);strip([x,z-sz*4],[x,z],.35,[.96,.85,.59,.63]);}}
+  R.updateDynamic(mesh,n);
+ };
+})();
+</script><script>'use strict';
+/* V3 — authoritative continuous time. No spawn/despawn lists, no accumulated physics.
+   Every replay/seek samples the same immutable tracks. All distances are illustrative. */
+(()=>{
+ const {clamp,mix,smooth}=J,PI=Math.PI;
+ const ease=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10);};
+ J.ease=ease;
+ J.angleMix=(a,b,u)=>a+Math.atan2(Math.sin(b-a),Math.cos(b-a))*u;
+ const rawRoute=J.routeAt;
+ // The old last-13%-of-segment yaw rule became discontinuous on arriving at a hold.
+ // Keep position/velocity Hermite, but author continuous headings independently.
+ J.routeAt=(r,t)=>{
+  const s=rawRoute(r,t);let k=0;while(k<r.length-2&&t>=r[k+1][0])k++;
+  const a=r[k],b=r[k+1],span=b[0]-a[0],u=clamp((t-a[0])/span);
+  const moving=Math.hypot(b[1]-a[1],b[2]-a[2])>.01;
+  if(!moving)s.yaw=J.angleMix(a[3],b[3],ease(u));
+  else{
+   // Velocity direction is sampled inside the segment, avoiding atan2(0,0).
+   const h=Math.min(.06,span*.002),q0=rawRoute(r,clamp(t-h,a[0]+.0001,b[0]-.0001)),q1=rawRoute(r,clamp(t+h,a[0]+.0001,b[0]-.0001));
+   const dx=q1.x-q0.x,dz=q1.z-q0.z;
+   let heading=Math.hypot(dx,dz)>.000001?Math.atan2(dx,dz):Math.atan2(b[1]-a[1],b[2]-a[2]);
+   heading=J.angleMix(a[3],heading,ease(u/.20));
+   s.yaw=J.angleMix(heading,b[3],ease((u-.76)/.24));
+  }
+  return s;
+ };
+ // Sixteen persistent boats, each with its own berth. Formerly four overlapping berths
+ // separated instantaneously on landing. The new route and its passenger share x/z.
+ J.transports=[];
+ for(let i=0;i<16;i++){
+  const g=J.groups[J.CHU_START+i],old=g.route,start=g.cross[0],end=g.cross[1];
+  const lane=i%4,row=Math.floor(i/4),x=-282+lane*49+row*10.9,rz=J.riverZ(x);
+  const depart=start+6,arrive=end-2,clear=end+5;
+  const board=start+2,approach=Math.max(1,start-9);
+  const tr={id:'boat-'+String(i+1).padStart(2,'0'),group:g.id,x,rz,board,depart,arrive,clear,sinkAt:Math.max(94,clear+5)};
+  const tail=old.slice(4).filter(p=>p[0]>clear+.3);
+  const initial=[old[0][0],old[0][1],old[0][2],PI];
+  g.route=[initial,[approach,initial[1],initial[2],PI],[board,x,rz+44,PI],
+   [depart,x,rz+21,PI],[arrive,x,rz-21,PI],[end+2,x,rz-44,PI],[clear,x,rz-54,PI],...tail];
+  g.transport=tr;g.cross=[approach,clear,x];J.transports.push(tr);
+ }
+ J.boatAt=(tr,t)=>{
+  const g=J.groups[tr.group];let p=J.routeAt(g.route,clamp(t,tr.depart,tr.arrive));
+  const sink=ease((t-tr.sinkAt)/8);
+  const heave=Math.sin(t*1.35+tr.group*.73)*.055;
+  const y=-.03+heave-sink*5.6;
+  return{id:tr.id,x:p.x,y,z:p.z,yaw:PI,roll:Math.sin(t*.93+tr.group)*.022*(1-sink),sink,
+    phase:t<tr.board?'泊岸':t<tr.depart?'登舟':t<tr.arrive?'渡河':t<tr.clear?'离舟':sink>0?'沉舟':'北岸停泊'};
+ };
+ // Sparse analytic samples used by director, tests and overlays. One shared elevation.
+ J.stateAt=(g,t)=>{
+  const s=J.routeAt(g.route,t),b=g.battle;
+  s.combat=b[1]>b[0]?smooth(b[0],b[0]+9,t)*(1-smooth(b[1]-8,b[1]+3,t)):0;
+  s.loss=smooth(g.loss[0],g.loss[1],t)*g.loss[2];s.pack=0;s.aboard=0;
+  s.y=J.ground(s.x,s.z);
+  if(g.transport){const tr=g.transport,boat=J.boatAt(tr,t);
+   s.pack=smooth(tr.board-1,tr.depart,t)*(1-smooth(tr.arrive,tr.clear,t));
+   s.aboard=smooth(tr.board,tr.depart,t)*(1-smooth(tr.arrive,tr.clear-1,t));
+   s.y=mix(s.y,boat.y+.99,s.aboard);
+   // Marching stops on deck; a moving boat is not a running infantry animation.
+   s.walk*=1-smooth(.75,1,s.aboard);
+  }
+  return s;
+ };
+ // Cache loss anchors; they are constants, not O(groups × route-length) each frame.
+ for(const g of J.groups){const p=J.routeAt(g.route,g.loss[0]+6);g.fallAnchor=[p.x,J.ground(p.x,p.z),p.z,p.yaw];}
+ J.updateBattle=t=>{
+  J.simulationTime=t;
+  for(const g of J.groups){const s=g.state=J.stateAt(g,t),k=g.id*4;
+   J.pose.set([s.x,s.y,s.z,s.yaw],k);J.anim.set([s.walk,s.combat,s.loss,s.pack],k);
+   J.travel.set([s.travel,s.speed,Math.cos(s.yaw),Math.sin(s.yaw)],k);J.fall.set(g.fallAnchor,k);
+  }
+ };
+ // A contact partner remains a specific military formation, not a per-frame nearest
+ // neighbour that can flip between two lines of soldiers while the camera is tracking.
+ const enemyIds={xiang:2,bu:18,pu:19,wang:36,west:7,qinWest:31,guard:26,east:20,zhang:40,chen:15,ao:11,qinNorth:46,allies:6,zhao:3};
+ J.contactPartners=enemyIds;
+ J.contactAnchor=(id,t)=>{
+  const f=J.forceById[id],s=J.stateAt(J.groups[f.lead],t),other=J.groups[enemyIds[id]],e=other?J.stateAt(other,t):s;
+  const d=Math.hypot(e.x-s.x,e.z-s.z),k=(1-smooth(95,160,d))*.5;
+  return[mix(s.x,e.x,k),mix(s.y,e.y,k)+2.8,mix(s.z,e.z,k)];
+ };
+ // No looping cart anchor: the escorted wagon has a persistent identity and slows
+ // to a halt at the interrupted supply route instead of respawning at the road end.
+ J.cartAt=(i,t)=>{
+  const start=-.20+i*.047,advance=.0064*(t<121?t:t<127?121+6*((t-121)/6-Math.pow((t-121)/6,2)/2):124);
+  const u=clamp(start+advance,0,.977),p=J.pathPoint(J.supplyPath,u);
+  const vis=smooth(0,.025,start+advance)*(1-smooth(.95,1,start+advance));
+  return{...p,u,visibility:vis};
+ };
+ J.anchor=(shot,t)=>{
+  if(Array.isArray(shot.anchor))return [...shot.anchor];
+  if(shot.anchor==='cart'){const p=J.cartAt(7,t);return[p.x,J.ground(p.x,p.z)+2,p.z];}
+  if(shot.anchor==='contact')return J.contactAnchor(shot.focus,t);
+  const s=J.stateAt(J.groups[J.forceById[shot.focus].lead],t);return[s.x,s.y+3.2,s.z];
+ };
+ const poseOf=(shot,t)=>{
+  const u=ease((t-shot.at)/(shot.end-shot.at));
+  return{target:J.anchor(shot,t),distance:mix(...shot.r,u),yaw:mix(...shot.y,u),elev:mix(...shot.e,u),fov:mix(...shot.fov,u)};
+ };
+ J.directedPose=t=>{
+  const shot=J.shotAt(t),idx=J.shots.indexOf(shot),out=poseOf(shot,t);
+  let blend=1;
+  if(idx>0){const prev=J.shots[idx-1],end=poseOf(prev,t),length=1.75;
+   blend=ease((t-shot.at)/length);
+   if(blend<1){
+    out.target=out.target.map((v,i)=>mix(end.target[i],v,blend));
+    out.distance=Math.exp(mix(Math.log(end.distance),Math.log(out.distance),blend));
+    out.yaw=J.angleMix(end.yaw,out.yaw,blend);out.elev=mix(end.elev,out.elev,blend);out.fov=mix(end.fov,out.fov,blend);
+   }
+  }
+  return{...out,shot,blend};
+ };
+ J.chapterMoments=[0,34,70,93,127,152,217,249,273];
+ J.updateBattle(0);
+})();
+
+'use strict';
+/* V3 presentation director. DOM typography is separate from WebGL geometry.
+   Real-time navigation and layout easing never alter the historical demonstration. */
+(()=>{
+ const $=id=>document.getElementById(id),{clamp,mix,smooth}=J;
+ const text=(el,value)=>{if(el&&el.textContent!==value)el.textContent=value;};
+ J.setText=text;
+ J.Cinema=class {
+  constructor(app,camera,actions){
+   this.app=app;this.camera=camera;this.actions=actions;this.phase=-1;this.landmarks=[];this.lastInset=-1;
+   this.transport=null;this.loop=false;this.lastFocus='';this.chapterAlpha=0;
+   for(const [label,p]of[['巨鹿城',[0,24,-174]],['渡口 · 示意',[-208,5,277]],['甬道',[129,6,81]],['城北营垒',[-50,7,-390]]]){
+    const el=document.createElement('span');el.className='landmark';el.textContent=label;$('landmarks').append(el);this.landmarks.push({el,p});
+   }
+   const names=['一','二','三','四','五','六','七','八'];
+   for(let i=0;i<J.chapters.length;i++){
+    const ch=J.chapters[i],el=document.createElement('button');el.className='chapter-choice';el.dataset.chapter=i;
+    el.innerHTML='<span class="chapter-index">'+String(i+1).padStart(2,'0')+'</span><span><b></b><small></small></span><em></em>';
+    el.querySelector('b').textContent=ch.title;el.querySelector('small').textContent=ch.sub;el.querySelector('em').textContent=Math.floor(ch.at/60)+':'+String(ch.at%60).padStart(2,'0')+' →';
+    el.onclick=()=>{$('chaptersDialog').close();this.navigate(ch.at);};$('chapterChoices').append(el);
+   }
+   $('chapterMenu').onclick=()=>{$('chaptersDialog').showModal();};
+   $('nextBeat').onclick=()=>this.next();$('cancelTravel').onclick=()=>this.cancelNavigation();
+   $('loopBeat').onclick=()=>{this.loop=!this.loop;this.loopRange=this.loop?[J.chapters[J.phaseAt(app.time)].at,J.chapters[J.phaseAt(app.time)+1]?.at||300]:null;$('loopBeat').classList.toggle('active',this.loop);$('loopBeat').setAttribute('aria-pressed',String(this.loop));actions.toast(this.loop?'循环当前章节；再次点击关闭。':'已关闭章节循环。');};
+   $('inspectLocal').onclick=()=>this.inspect();$('inset').onclick=()=>this.inspect();
+   $('cinemaToggle').onchange=e=>app.cinema=e.target.checked;
+   $('insetToggle').onchange=e=>{$('localMap').hidden=!e.target.checked;app.inset=e.target.checked;};
+   window.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)||document.querySelector('dialog[open]'))return;if(e.key===']'){e.preventDefault();this.next();}if(e.key==='Escape'&&this.transport)this.cancelNavigation();});
+   this.names=names;app.cinema=true;app.inset=true;
+  }
+  navigate(target){
+   target=clamp(Number(target)||0,0,300);if(!this.app.started)this.actions.start(false);
+   if(Math.abs(target-this.app.time)<.05)return;
+   const c=this.camera,now=performance.now();
+   this.transport={startTime:this.app.time,target,start:now,duration:clamp(.7+Math.abs(target-this.app.time)*.025,.9,2.8),wasPlaying:this.app.playing,
+    camera:{target:[...c.target],yaw:c.yaw,elev:c.elev,distance:c.distance,fov:c.fov},destination:J.directedPose(target),u:0};
+   c.returnGuide(true);
+   this.app.playing=false;this.actions.updatePlay();J.audio?.sync(false);
+   this.loop=false;this.loopRange=null;$('loopBeat').classList.remove('active');$('loopBeat').setAttribute('aria-pressed','false');
+   text($('travelTitle'),(target>this.app.time?'快速推进':'回看')+' · '+J.chapters[J.phaseAt(target)].title);$('travelNotice').hidden=false;
+  }
+  next(){const n=J.chapterMoments.find(t=>t>this.app.time+1);this.navigate(n===undefined?300:n);}
+  cancelNavigation(){if(!this.transport)return;const was=this.transport.wasPlaying;this.transport=null;$('travelNotice').hidden=true;this.app.playing=was;this.actions.updatePlay();J.audio?.sync(was);this.camera.rejoin={start:performance.now(),target:[...this.camera.target],yaw:this.camera.yaw,elev:this.camera.elev,distance:this.camera.distance,fov:this.camera.fov};}
+  beforeFrame(now){
+   if(this.transport){const n=this.transport;n.u=clamp((now-n.start)/(n.duration*1000));this.app.time=mix(n.startTime,n.target,J.ease(n.u));
+    $('travelProgress').style.transform='scaleX('+n.u+')';
+    if(n.u>=1){this.app.time=n.target;const was=n.wasPlaying;this.transport=null;$('travelNotice').hidden=true;this.app.playing=was&&this.app.time<300;this.actions.updatePlay();J.audio?.sync(this.app.playing);if(this.app.time===300)document.body.classList.add('completed');else document.body.classList.remove('completed','continue-looking');}
+   }else if(this.loop&&this.app.playing&&this.loopRange&&this.app.time>=this.loopRange[1]){const range=[...this.loopRange];this.navigate(range[0]);this.loop=true;this.loopRange=range;$('loopBeat').classList.add('active');$('loopBeat').setAttribute('aria-pressed','true');}
+  }
+  overrideCamera(){
+   const nav=this.transport,c=this.camera;if(!nav||!this.app.guide)return;
+   const u=J.ease(nav.u),a=nav.camera,b=nav.destination;
+   c.target=a.target.map((v,i)=>mix(v,b.target[i],u));c.dest=[...c.target];c.yaw=J.angleMix(a.yaw,b.yaw,u);c.dyaw=c.yaw;
+   c.distance=Math.exp(mix(Math.log(a.distance),Math.log(b.distance),u));c.ddistance=c.distance;c.elev=mix(a.elev,b.elev,u);c.delev=c.elev;c.fov=mix(a.fov,b.fov,u);c.dfov=c.fov;
+   const ce=Math.cos(c.elev);c.eye=[c.target[0]+Math.sin(c.yaw)*ce*c.distance,c.target[1]+Math.sin(c.elev)*c.distance,c.target[2]+Math.cos(c.yaw)*ce*c.distance];c.eye[1]=Math.max(c.eye[1],J.ground(c.eye[0],c.eye[2])+5);
+  }
+  inspect(){
+   if(!this.app.started)this.actions.start(false);
+   const id=this.app.focusId||'xiang';this.camera.follow(id,'contact');this.camera.inspection=true;
+   this.actions.toast('局部观察：拖动看细节；按 D 回到此刻的电影导览。');
+  }
+  frame(t,dt,R,project){
+   const app=this.app,c=this.camera,idx=J.phaseAt(t),ch=J.chapters[idx],local=t-ch.at;
+   if(idx!==this.phase){this.phase=idx;text($('chapterKicker'),'第'+this.names[idx]+'章 / '+String(idx+1).padStart(2,'0'));text($('chapterBig'),ch.title.replace(' · ',' · '));text($('chapterSub'),ch.sub);}
+   let a=app.started&&app.guide&&app.cinema?smooth(.45,1.5,local)*(1-smooth(4.0,5.3,local)):0;
+   if(this.transport)a=0;this.chapterAlpha=a;
+   const title=$('chapterCurtain');title.style.opacity=String(a*.96);title.style.transform='translate3d(0,'+(mix(16,0,smooth(.45,2.1,local))).toFixed(2)+'px,0)';
+   $('chapterRule').style.transform='scaleX('+smooth(.45,2.4,local)+')';
+   const sh=J.shotAt(t),elapsed=t-sh.at,remaining=sh.end-t;
+   let copyAlpha=app.started?Math.min(smooth(.2,1.25,elapsed),smooth(.12,.65,remaining)):0;
+   if(!app.guide)copyAlpha=1;if(a>.1)copyAlpha*=1-a*.95;if(this.transport)copyAlpha*=1-Math.sin(this.transport.u*Math.PI);
+   document.querySelector('.caption').style.opacity=String(copyAlpha);
+   document.querySelector('.caption').style.transform='translate3d(0,'+(12*(1-smooth(0,1.5,elapsed))).toFixed(2)+'px,0)';
+   const lmVisible=app.labels&&app.places&&app.started&&!app.clean;
+   for(const l of this.landmarks){const p=project(l.p),visible=lmVisible&&p.w>1&&p.z<1&&p.x>28&&p.x<innerWidth-30&&p.y>148&&p.y<innerHeight-(app.footerHeight||109)-32;
+    const d=Math.hypot(l.p[0]-c.target[0],l.p[2]-c.target[2]);const opacity=visible?(1-a*.8)*smooth(45,145,d)*.72:0;
+    l.el.style.opacity=String(opacity);if(visible)l.el.style.transform=`translate3d(${p.x.toFixed(2)}px,${p.y.toFixed(2)}px,0)`;
+   }
+   // Screen-aligned currents are never used: lines are on the actual water plane.
+   const f=J.forceState(app.focusId,t);text($('insetTitle'),f.f.force);text($('insetState'),f.action);
+   text($('inspectLocal'),f.s.combat>.3?'放大交锋处 ↗':f.s.pack>.25?'靠近渡船 ↗':'靠近这支部队 ↗');
+   const timestamp=performance.now();if(app.inset&&timestamp-this.lastInset>100&&!app.clean){this.lastInset=timestamp;this.drawInset(t,f);}
+  }
+  drawInset(t,fc){
+   const cv=$('inset'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height,s=fc.s;
+   const radius=s.pack>.2?91:s.combat>.2?108:126,k=W/(radius*2),cx=s.x,cz=s.z;
+   const X=x=>(x-cx)*k+W/2,Z=z=>(z-cz)*k+H/2;
+   ctx.fillStyle='#18292b';ctx.fillRect(0,0,W,H);
+   ctx.strokeStyle='#c7d4be12';ctx.lineWidth=1;for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+   ctx.beginPath();for(let x=cx-radius;x<=cx+radius;x+=5){const z=J.riverZ(x);if(x===cx-radius)ctx.moveTo(X(x),Z(z));else ctx.lineTo(X(x),Z(z));}ctx.strokeStyle='#6c96975c';ctx.lineWidth=64*k;ctx.stroke();
+   ctx.fillStyle='#ccb87820';ctx.strokeStyle='#cabd89aa';ctx.lineWidth=2;ctx.fillRect(X(-69),Z(-229),138*k,118*k);ctx.strokeRect(X(-69),Z(-229),138*k,118*k);
+   ctx.strokeStyle=t<127?'#c3aa64':'#b16b53';ctx.lineWidth=4;ctx.beginPath();J.supplyPath.forEach(([x,z],i)=>i?ctx.lineTo(X(x),Z(z)):ctx.moveTo(X(x),Z(z)));ctx.stroke();
+   for(const g of J.groups){const a=g.state;if(Math.abs(a.x-cx)>radius+20||Math.abs(a.z-cz)>radius+20)continue;ctx.save();ctx.translate(X(a.x),Z(a.z));ctx.rotate(-a.yaw);ctx.fillStyle=['#adc7cb','#dc8269','#94bba3','#d9be81'][g.team];ctx.globalAlpha=1-a.loss*.5;ctx.fillRect(-6*k,-8*k,12*k,16*k);
+    if(a.speed>.3&&this.app.paths){const flow=(a.travel*.06)%1;ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=2;ctx.globalAlpha*=.7;ctx.beginPath();ctx.moveTo(-3*k,12*k);ctx.lineTo(0,(18+flow*4)*k);ctx.lineTo(3*k,12*k);ctx.stroke();}ctx.restore();}
+   ctx.strokeStyle='#edcf8e';ctx.lineWidth=1;for(let sx of[-1,1])for(let sy of[-1,1]){const x=W/2+sx*18,y=H/2+sy*18;ctx.beginPath();ctx.moveTo(x-sx*6,y);ctx.lineTo(x,y);ctx.lineTo(x,y-sy*6);ctx.stroke();}
+   ctx.fillStyle='#b4c4b5';ctx.font='15px Arial';ctx.fillText('N ↑',W-42,23);ctx.fillStyle='#a9b9a788';ctx.font='12px Arial';ctx.fillText('动态示意 · 非另一路摄像机',12,H-12);
+  }
+ };
+})();
+
+'use strict';
+(()=>{
+class BattleAudio{
+ constructor(){this.ctx=null;this.enabled=false;this.volume=.45;this.lastBeat=-1;this.lastFX=-1;this.music=true;this.ready=false}
+ async init(){if(this.ctx){if(this.ctx.state==='suspended')await this.ctx.resume();return}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error('浏览器不支持音频');this.ctx=new AC();const c=this.ctx;this.master=c.createGain();this.master.gain.value=0;const compressor=c.createDynamicsCompressor();compressor.threshold.value=-17;compressor.ratio.value=4;this.master.connect(compressor);compressor.connect(c.destination);
+ let buffer=c.createBuffer(1,c.sampleRate*3,c.sampleRate),a=buffer.getChannelData(0),r=J.rng(7127),last=0;for(let i=0;i<a.length;i++){let white=r()*2-1;last=(last+.025*white)/1.025;a[i]=last*5}this.noiseBuffer=buffer;
+ this.wind=c.createBufferSource();this.wind.buffer=buffer;this.wind.loop=true;let filter=c.createBiquadFilter();filter.type='lowpass';filter.frequency.value=620;this.windGain=c.createGain();this.windGain.gain.value=.17;this.wind.connect(filter);filter.connect(this.windGain);this.windGain.connect(this.master);this.wind.start();this.ready=true;await c.resume();}
+ async toggle(){this.enabled=!this.enabled;if(this.enabled)await this.init();this.sync(J.app?.playing||false);return this.enabled}
+ sync(playing){if(!this.ctx)return;let v=this.enabled&&playing?this.volume:0;this.master.gain.setTargetAtTime(v,this.ctx.currentTime,.09)}
+ drum(strength=1,high=false){let c=this.ctx,now=c.currentTime;let o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(high?147:86,now);o.frequency.exponentialRampToValueAtTime(high?62:36,now+.21);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.33*strength,now+.007);g.gain.exponentialRampToValueAtTime(.0001,now+.8);o.connect(g);g.connect(this.master);o.start(now);o.stop(now+.85);}
+ note(freq,duration=3,gain=.07){let c=this.ctx,now=c.currentTime;for(let detune of[-3,3]){let o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='triangle';o.frequency.value=freq;o.detune.value=detune;f.type='lowpass';f.frequency.value=740;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(gain*.5,now+.28);g.gain.exponentialRampToValueAtTime(.0001,now+duration);o.connect(f);f.connect(g);g.connect(this.master);o.start(now);o.stop(now+duration+.1)}}
+ rustle(strength=.15,metal=false){let c=this.ctx,now=c.currentTime,s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=this.noiseBuffer;f.type=metal?'bandpass':'highpass';f.frequency.value=metal?2300:900;f.Q.value=metal?4:.7;g.gain.setValueAtTime(strength,now);g.gain.exponentialRampToValueAtTime(.0001,now+(metal?.17:.34));s.connect(f);f.connect(g);g.connect(this.master);s.start(now,(now*.7)%1);s.stop(now+.4);if(metal){let o=c.createOscillator(),gg=c.createGain();o.type='sine';o.frequency.value=1260+(Math.floor(now*7)%5)*174;gg.gain.setValueAtTime(.023,now);gg.gain.exponentialRampToValueAtTime(.0001,now+.14);o.connect(gg);gg.connect(this.master);o.start();o.stop(now+.2)}}
+ update(t,playing,camera){if(!this.ctx||!this.enabled)return;this.sync(playing);if(!playing)return;let phase=J.phaseAt(t),real=this.ctx.currentTime,beat=Math.floor(real*1.2);let battle=phase>=3&&phase<=6; if(beat!==this.lastBeat){this.lastBeat=beat;if(this.music){if(beat%4===0)this.drum(battle?.65:.32);if(battle&&beat%4===2)this.drum(.36,true);if(beat%4===0){let melody=[110,130.81,146.83,164.81,196,164.81,146.83,130.81],f=melody[Math.floor(beat/4)%melody.length];this.note(f,3.7,battle?.062:.085);if(beat%8===0)this.note(55,6,.05)}}}
+ let fx=Math.floor(real*(battle?5:1.8));if(fx!==this.lastFX){this.lastFX=fx;if(battle)this.rustle(.20,true);else if(phase>=1&&phase<4)this.rustle(.15,false)}let riverDistance=Math.abs(camera.target[2]-J.riverZ(camera.target[0]));this.windGain.gain.setTargetAtTime(riverDistance<100?.32:.16,real,.4);
+ }
+}
+J.BattleAudio=BattleAudio;
+})();
+</script><script>'use strict';
+(()=>{
+const $=id=>document.getElementById(id),{mix,clamp,smooth}=J;
+const app=J.app={time:0,playing:false,speed:1,started:false,paths:true,labels:true,places:true,guide:true,quality:'auto',dpr:1,clean:false,scrubbing:false,focusId:'zhao',selectedId:'xiang',autoReturn:false,lastInteraction:0,frameLog:[],errors:[],version:'3.0.0',build:'2026-09-29',roster:false};
+let R,w,camera,audio,frameId,lastNow=0,lastScene=-1,lastHUD=0,lastMap=0,lastAuto=0,startNow=0,currentPhase=-1,currentShot=-1,toastTimeout,lastFocus='',cinema=null,lastRenderKey='';
+const clock=t=>Math.floor(Math.max(0,t)/60)+':'+String(Math.floor(Math.max(0,t))%60).padStart(2,'0');
+function toast(msg){$('toast').textContent=msg;document.body.classList.add('toast-on');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>document.body.classList.remove('toast-on'),2500);}
+function interact(){app.lastInteraction=performance.now();}
+window.addEventListener('error',e=>app.errors.push(e.message));window.addEventListener('unhandledrejection',e=>app.errors.push(String(e.reason)));
+function fail(e){app.errors.push(String(e));console.error(e);$('loading').style.display='flex';$('loading').replaceChildren();let d=document.createElement('div');d.className='error-panel';let h=document.createElement('h2');h.textContent='战场未能启动';let p=document.createElement('p');p.textContent=String(e.message||e);let q=document.createElement('p');q.textContent='请用支持 WebGL2 的浏览器打开，并检查硬件加速。';let b=document.createElement('button');b.textContent='重新载入';b.onclick=()=>location.reload();d.append(h,p,q,b);$('loading').append(d);}
+const angleDelta=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
+class Camera{
+ constructor(){this.target=[0,6,-157];this.dest=[...this.target];this.yaw=-.68;this.dyaw=this.yaw;this.distance=610;this.ddistance=610;this.elev=.40;this.delev=.4;this.fov=48;this.dfov=48;this.mode='guided';this.angle='side';this.eye=[0,250,450];this.keys=new Set();this.orbitClock=0;this.rejoin=null;this.focusBlend=null;this.shiftX=0;this.update(1,0);}
+ guided(t){const p=J.directedPose(t);app.focusId=p.shot.focus;let target=p.target,yaw=p.yaw,e=p.elev,d=p.distance,fov=p.fov;
+  if(this.rejoin){const u=smooth(0,.85,(performance.now()-this.rejoin.start)/1000),b=this.rejoin;target=target.map((v,i)=>mix(b.target[i],v,u));yaw=b.yaw+angleDelta(b.yaw,yaw)*u;e=mix(b.elev,e,u);d=mix(b.distance,d,u);fov=mix(b.fov,fov,u);if(u>=1)this.rejoin=null;}
+  this.target=target;this.dest=[...target];this.yaw=this.dyaw=yaw;this.distance=this.ddistance=d;this.elev=this.delev=e;this.fov=this.dfov=fov;
+ }
+ follow(id,angle='side'){
+  if(cinema?.transport)cinema.cancelNavigation();
+  if(!J.forceById[id])id='xiang';app.guide=false;app.focusId=app.selectedId=id;this.mode='follow';this.angle=angle;this.orbitClock=0;this.orbitStart=app.time;this.inspection=false;this.focusBlend={start:performance.now(),target:[...this.target]};this.rejoin=null;interact();updateModes();
+ }
+ returnGuide(instant=false){app.guide=true;this.mode='guided';this.inspection=false;this.focusBlend=null;this.rejoin=instant?null:{start:performance.now(),target:[...this.target],yaw:this.yaw,elev:this.elev,distance:this.distance,fov:this.fov};interact();updateModes();}
+ manual(){if(cinema?.transport)cinema.cancelNavigation();if(app.guide||this.mode!=='free'){this.dest=[...this.target];this.dyaw=this.yaw;this.delev=this.elev;this.ddistance=this.distance;this.dfov=this.fov;app.guide=false;this.mode='free';this.rejoin=null;this.focusBlend=null;this.inspection=false;updateModes();}interact();}
+ preset(name){this.manual();let t,d,y,e;
+  if(name==='overview'){t=[0,4,10];d=1030;y=-.26;e=1.08;}
+  else if(name==='river'){t=[-173,3,272];d=220;y=-.75;e=.40;}
+  else if(name==='supply'){t=[127,4,79];d=290;y=-.69;e=.79;}
+  else if(name==='city'){t=[0,11,-128];d=219;y=.68;e=.35;}
+  else if(name==='follow'){this.follow(app.selectedId,'side');return;}
+  else if(name==='battle'){let id=app.time<140?'bu':app.time<210?'xiang':'chen';this.follow(id,'contact');return;}
+  else return;
+  this.dest=t;this.ddistance=d;this.dyaw=y;this.delev=e;this.dfov=48;updateModes(name);
+ }
+ pan(dx,dy){let s=this.ddistance*.0012;this.dest[0]-=(Math.cos(this.dyaw)*dx+Math.sin(this.dyaw)*dy)*s;this.dest[2]-=(-Math.sin(this.dyaw)*dx+Math.cos(this.dyaw)*dy)*s;this.dest[0]=clamp(this.dest[0],-820,820);this.dest[2]=clamp(this.dest[2],-760,720);this.dest[1]=J.ground(this.dest[0],this.dest[2])+3;}
+ update(dt,t){
+  this.shiftX=innerWidth>1100&&!app.clean?.16:innerWidth>800&&!app.clean?.12:0;
+  if(app.started&&app.guide){this.mode='guided';this.guided(t);}
+  else{
+   if(this.mode==='follow'){
+    const f=J.forceById[app.selectedId],g=J.groups[f.lead],s=g.state;app.focusId=f.id;this.orbitClock=t-(this.orbitStart??t);
+    let target=[s.x,s.y+2.8,s.z],heading=s.yaw;
+    let configs={rear:[heading+Math.PI+.15,77,.21,52],side:[heading-Math.PI/2,82,.25,51],front:[heading+.14,80,.22,51],orbit:[-.6+this.orbitClock*.12,114,.38,50],overhead:[-.28,205,1.26,48],contact:[heading-Math.PI/2,67,.19,53]};
+    const c=configs[this.angle]||configs.side;this.dyaw=c[0];this.ddistance=c[1];this.delev=c[2];this.dfov=c[3];
+    if(this.angle==='contact')target=J.contactAnchor(f.id,t);if(this.inspection){this.ddistance=50;this.delev=.25;this.dfov=52;}
+    if(this.focusBlend){let k=smooth(0,.75,(performance.now()-this.focusBlend.start)/1000);target=target.map((v,i)=>mix(this.focusBlend.target[i],v,k));if(k>=1)this.focusBlend=null;}
+    // Translation follows the unit exactly after the blend. Only relative lens motion eases.
+    this.target=target;this.dest=[...target];
+   }
+   let ix=(this.keys.has('l')?1:0)-(this.keys.has('j')?1:0),iy=(this.keys.has('k')?1:0)-(this.keys.has('i')?1:0);if(ix||iy){this.manual();this.pan(ix*dt*200,iy*dt*200);}
+   let k=1-Math.exp(-dt*8);if(this.mode!=='follow')for(let i=0;i<3;i++)this.target[i]=mix(this.target[i],this.dest[i],k);
+   this.yaw+=angleDelta(this.yaw,this.dyaw)*k;this.distance=mix(this.distance,this.ddistance,k);this.elev=mix(this.elev,this.delev,k);this.fov=mix(this.fov,this.dfov,k);
+  }
+  if(cinema?.transport)cinema.overrideCamera();const ce=Math.cos(this.elev);this.eye=[this.target[0]+Math.sin(this.yaw)*ce*this.distance,this.target[1]+Math.sin(this.elev)*this.distance,this.target[2]+Math.cos(this.yaw)*ce*this.distance];this.eye[1]=Math.max(this.eye[1],J.ground(this.eye[0],this.eye[2])+3.8);
+ }
+}
+function updateModes(active=''){
+ if(!camera)return;document.body.classList.toggle('manual-view',app.started&&!app.guide);$('guide').classList.toggle('active',app.guide);$('guide').setAttribute('aria-pressed',String(app.guide));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===active));document.querySelectorAll('[data-angle]').forEach(b=>b.classList.toggle('active',camera.mode==='follow'&&b.dataset.angle===camera.angle));$('modeName').textContent=app.guide?'电影导览 · 连续运镜':camera.mode==='follow'?'部队跟拍 · '+J.forceById[app.selectedId].label:'自由观察 · 战局不受影响';
+ if(camera.mode==='follow')$('forceSelect').value=app.selectedId;
+}
+function updatePlay(){$('play').textContent=app.playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',app.playing?'暂停':'播放');$('topStatus').innerHTML='<span class="status-dot"></span>'+(app.playing?'战役进行中':'时间暂停');}
+async function start(play){if(app.started){setPlay(play);return;}app.started=true;app.playing=!!play;app.guide=!!play;camera.mode=play?'guided':'free';document.body.classList.remove('prestart');$('intro').classList.add('hidden');if(play)camera.returnGuide(true);updateModes();updatePlay();if(play){try{if(!audio.enabled)await audio.toggle();$('sound').textContent=audio.enabled?'声音 开':'声音 关';$('sound').setAttribute('aria-pressed',String(audio.enabled));}catch(e){audio.enabled=false;toast('可继续观看；声音未能启用。');}}audio.sync(app.playing);}
+function setPlay(v){if(cinema?.transport)cinema.cancelNavigation();if(!app.started){start(v);return;}app.playing=!!v;if(app.playing&&app.time>=300)setTime(0);audio?.sync(app.playing);updatePlay();}
+function setTime(t){if(cinema?.transport)cinema.cancelNavigation();app.time=clamp(Number(t)||0,0,300);if(!R)return;labelReset=true;w?.lodMemory?.fill(-1);J.updateBattle(app.time);J.updateWorld(R,w,app.time);lastScene=app.time;camera.rejoin=null;camera.focusBlend=null;camera.update(.016,app.time);if(app.time<300)document.body.classList.remove('completed','continue-looking');else{app.playing=false;audio.sync(false);document.body.classList.add('completed');}currentPhase=-1;currentShot=-1;for(const l of labels){l.alpha=0;l.active=false;}updatePlay();updateHUD(true);}
+function setSpeed(v){app.speed=clamp(Number(v)||1,.25,4);document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',+b.dataset.speed===app.speed));updateHUD();}
+function measureFooter(){const h=document.querySelector('.bottom').getBoundingClientRect().height;if(h>0){app.footerHeight=h;document.documentElement.style.setProperty('--actual-bottom',h+'px');}}
+function resize(){measureFooter();if(!R)return;const q=app.quality,dpr=q==='smooth'?.72:q==='balanced'?1:q==='sharp'?Math.min(1.65,devicePixelRatio||1):app.dpr;R.resize(innerWidth,innerHeight,dpr);const st=$('stems');st.width=innerWidth;st.height=innerHeight;labelReset=true;cachedSideVisible=innerWidth>800&&innerHeight>=590;}
+function setQuality(q){if(!['auto','smooth','balanced','sharp'].includes(q))return;app.quality=q;if(q==='auto'){app.dpr=Math.min(1.2,devicePixelRatio||1);app.adaptivePoints=false;}$('quality').value=$('qualityDialog').value=q;w.lodKeys=['!','!','!'];w.lodMemory?.fill(-1);resize();lastAuto=performance.now();}
+function download(name,blob){const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2500);}
+function diagnostics(){const arr=app.frameLog.map(f=>f.ms),sum=arr.reduce((a,b)=>a+b,0),sorted=[...arr].sort((a,b)=>a-b);let ext=R.gl.getExtension('WEBGL_debug_renderer_info');return{product:'巨鹿之战 · 战场纪实',version:app.version,build:app.build,exportedAt:new Date().toISOString(),userAgent:navigator.userAgent,viewport:[innerWidth,innerHeight],drawingBuffer:[R.canvas.width,R.canvas.height],renderer:ext?R.gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):R.gl.getParameter(R.gl.RENDERER),quality:app.quality,speed:app.speed,time:app.time,mode:camera.mode,shot:J.shots.indexOf(J.shotAt(app.time))+1,focus:app.focusId,farPointLOD:app.quality==='smooth'||app.quality==='auto'&&(R.software||!!app.adaptivePoints),sceneSoldiers:J.unitCount,visibleSoldiers:w.lodCounts.reduce((a,b)=>a+b,0),groups:J.groups.length,drawCalls:R.calls,triangles:R.triangles,pointSprites:R.points,frames:arr.length,renderedFrames:app.frameLog.filter(f=>f.rendered!==false).length,idleFrames:app.frameLog.filter(f=>f.rendered===false).length,meanFPS:sum?arr.length*1000/sum:0,p95FrameMs:sorted[Math.floor(sorted.length*.95)]||0,frameLog:app.frameLog,errors:app.errors,notice:'本机实测；暂停时未变化的场景不重复绘制，rendered=false表示仅刷新界面。性能比较应只取连续播放段。场景米制不是历史实测。'};}
+function exportDiagnostics(){download('巨鹿之战_V3_运行诊断.json',new Blob([JSON.stringify(diagnostics(),null,2)],{type:'application/json'}));toast('已保存最近最多900帧运行记录。');}
+function screenshot(){R.begin(camera,app.time);J.renderWorld(R,w,app.time,app);let cv=document.createElement('canvas');cv.width=R.canvas.width;cv.height=R.canvas.height;let c=cv.getContext('2d'),k=cv.width/innerWidth;c.drawImage(R.canvas,0,0);c.fillStyle='#10212abb';c.fillRect(0,cv.height-78*k,cv.width,78*k);c.font=`${24*k}px "Noto Serif CJK SC",SimSun,serif`;c.fillStyle='#eadbb4';c.fillText('巨鹿之战 · '+J.shotAt(app.time).name,26*k,cv.height-43*k);c.font=`${10*k}px Arial`;c.fillStyle='#c9d4bd';c.fillText('战场纪实 V3  /  叙事 '+clock(app.time)+'  /  地形与军阵示意重建',27*k,cv.height-19*k);cv.toBlob(b=>b&&download('巨鹿之战_V3_'+clock(app.time).replace(':','-')+'.png',b));}
+// Stable identities and persistent screen offsets. The geographic anchor itself is
+// projected exactly; only the offset of a card eases. No per-frame layout reassignment.
+let labels=[],labelReset=true,labelLayoutAt=-1,labelFocus='',cachedSideVisible=true;
+const stems=$('stems').getContext('2d');
+function buildLabels(){
+ for(let f of J.forces){const b=document.createElement('button');b.className='world-label';b.dataset.team=f.team;b.title=f.label+' / '+f.force+'。点击跟拍。'+f.note;
+  b.innerHTML='<b></b><span class=unit></span><small><span></span><em></em></small>';b.querySelector('.unit').textContent=f.force;b.querySelector('b').textContent=f.label;
+  b.onclick=e=>{e.stopPropagation();camera.follow(f.id,'side');toast('跟拍 '+f.label+'；切换机位只改变观察。');};$('labels').append(b);
+  labels.push({f,el:b,actionEl:b.querySelector('small span'),speedEl:b.querySelector('small em'),placed:false,active:false,alpha:0,off:[0,-78],dest:[0,-78],pos:[0,0],lastChange:0});
+ }
+ for(let f of J.forces){let opt=document.createElement('option');opt.value=f.id;opt.textContent=f.label+' · 跟拍';$('forceSelect').append(opt);let b=document.createElement('button');b.dataset.force=f.id;b.innerHTML='<span><b></b><small></small></span><i>跟拍 ↗</i>';b.querySelector('b').textContent=f.label;b.querySelector('small').textContent=f.force;b.title=f.note;b.onclick=()=>camera.follow(f.id,'side');$('forceRoster').append(b);}
+ $('forceSelect').value='xiang';
+}
+function project(p){const q=J.mat.project(p,R.vp);return{x:(q[0]*.5+.5)*innerWidth,y:(.5-q[1]*.5)*innerHeight,z:q[2],w:q[3]};}
+function updateLabels(dt=.016){
+ stems.clearRect(0,0,innerWidth,innerHeight);
+ const W=innerWidth,H=innerHeight,mobile=W<=800,landscape=H<590,bottom=app.footerHeight||109;
+ const right=(!mobile&&!landscape?W-(W>1650?319:286):W-12),top=landscape?120:mobile?146:155,foot=H-bottom-62;
+ const width=mobile?150:174,height=61,maxCount=mobile||landscape||W<1100?2:camera.distance>380?4:3,now=performance.now();
+ for(const l of labels){const s=J.groups[l.f.lead].state;l.base=project([s.x,s.y+8.7,s.z]);l.distance=Math.hypot(s.x-camera.target[0],s.z-camera.target[2]);l.inFrame=l.base.w>3&&l.base.z<1&&l.base.x>-45&&l.base.x<right+45&&l.base.y>top-20&&l.base.y<foot+height+50;}
+ const focusChanged=labelFocus!==app.focusId;
+ if(labelReset||focusChanged||now-labelLayoutAt>850){
+  labelFocus=app.focusId;labelLayoutAt=now;
+  const selected=labels.find(l=>l.f.id===app.focusId),eligible=labels.filter(l=>l.inFrame&&(l.base.w<1150)&&(camera.distance>360||l.distance<210));
+  // Keep already occupied identities first, rather than sorting by fluctuating distance.
+  const keep=eligible.filter(l=>l.active&&l!==selected).sort((a,b)=>a.lastChange-b.lastChange);
+  const fresh=eligible.filter(l=>!l.active&&l!==selected).sort((a,b)=>a.distance-b.distance);
+  const active=[selected?.inFrame?selected:null,...keep,...fresh].filter(Boolean).slice(0,maxCount);
+  const occupied=[];
+  for(const l of labels)if(!active.includes(l))l.active=false;
+  for(const l of active){
+   l.active=true;const p=l.base;let ox=l.dest[0],oy=l.dest[1];
+   // Card retains its side unless a real collision occurs. Change the offset smoothly.
+   const candidates=[[ox,oy],[0,-78],[115,-91],[-115,-91],[0,-150],[150,-150],[-150,-150]];
+   let best=null,bestCost=Infinity;
+   for(const [dx,dy]of candidates){const x=clamp(p.x+dx-width/2,12,Math.max(12,right-width)),y=clamp(p.y+dy,top,Math.max(top,foot-height));
+    const overlap=occupied.reduce((sum,r)=>sum+Math.max(0,Math.min(x+width+8,r.x+r.w)-Math.max(x,r.x))*Math.max(0,Math.min(y+height+7,r.y+r.h)-Math.max(y,r.y)),0);
+    const cost=overlap*8+Math.hypot(x+width/2-p.x-ox,y-p.y-oy)+Math.hypot(x+width/2-p.x,y+height/2-p.y)*.03;
+    if(cost<bestCost){bestCost=cost;best={x,y,dx:x+width/2-p.x,dy:y-p.y};}
+   }
+   if(best){l.dest=[best.dx,best.dy];if(labelReset||l.alpha<.02)l.off=[...l.dest];occupied.push({x:best.x,y:best.y,w:width+8,h:height+7});}
+   if(focusChanged)l.lastChange=now;
+  }
+  labelReset=false;
+ }
+ const k=1-Math.exp(-Math.min(dt,.15)*7.5),fade=1-Math.exp(-Math.min(dt,.15)*9);
+ const reduce=1-(cinema?.chapterAlpha||0)*.86,navAlpha=cinema?.transport?1-Math.sin(cinema.transport.u*Math.PI)*.97:1;
+ for(const l of labels){const p=l.base,isFocus=l.f.id===app.focusId;
+  l.off[0]=mix(l.off[0],l.dest[0],k);l.off[1]=mix(l.off[1],l.dest[1],k);
+  let x=p.x+l.off[0]-width/2,y=p.y+l.off[1];
+  const edge=smooth(-20,15,p.x)*(1-smooth(right,right+30,p.x))*smooth(top-35,top+5,p.y)*(1-smooth(foot+35,foot+90,p.y));
+  const goal=app.started&&app.labels&&l.active&&p.w>3&&p.z<1?edge*reduce*navAlpha:0;
+  l.alpha=mix(l.alpha,goal,fade);l.placed=l.alpha>.12;
+  l.el.style.opacity=l.alpha.toFixed(3);l.el.style.visibility=l.alpha>.005?'visible':'hidden';l.el.style.pointerEvents=l.alpha>.3?'auto':'none';
+  if(p.w>3&&Number.isFinite(x)&&Number.isFinite(y)){l.pos=[x,y];l.el.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`;}
+  l.el.classList.toggle('selected',isFocus);
+  if(l.alpha>.02&&p.w>3&&Number.isFinite(x)){
+   const lx=x+width/2,ly=y+height;stems.globalAlpha=l.alpha;stems.strokeStyle=isFocus?'#e2c990a8':'#b7cab264';stems.lineWidth=.85;
+   stems.beginPath();stems.moveTo(lx,ly);stems.lineTo(lx,ly+8);stems.lineTo(p.x,p.y);stems.stroke();stems.fillStyle=isFocus?'#e9c88c':'#d8dcc3';stems.beginPath();stems.arc(p.x,p.y,2,0,Math.PI*2);stems.fill();
+  }
+ }
+ stems.globalAlpha=1;$('rose').style.transform=`rotate(${-camera.yaw*180/Math.PI}deg)`;
+}
+function updatePlace(){if(cinema)cinema.frame(app.time,app.delta||.016,R,project);$('placeTitle').style.opacity='0';}
+function updateScale(){let right=J.v3.norm(J.v3.cross(J.v3.norm(J.v3.sub(camera.target,camera.eye)),[0,1,0])),base=[camera.target[0],J.ground(camera.target[0],camera.target[2]),camera.target[2]],p=project(base),q=project([base[0]+right[0]*10,base[1],base[2]+right[2]*10]);let px=Math.hypot(p.x-q.x,p.y-q.y)/10;if(!Number.isFinite(px)||px<.01)return;let values=[1,2,5,10,20,50,100,200,500],v=values.reduce((best,x)=>Math.abs(x*px-93)<Math.abs(best*px-93)?x:best,50),width=clamp(v*px,16,230);$('scaleRule').style.width=width.toFixed(1)+'px';$('scaleText').textContent=v+' 场景米';$('scaleHud').title='只量取当前焦点地面平面上的模型距离。地形与城池非历史实测。';}
+function updateMap(){let cv=$('map'),c=cv.getContext('2d'),W=cv.width,H=cv.height,X=x=>(x+520)/1040*W,Z=z=>(z+500)/1040*H;c.clearRect(0,0,W,H);c.fillStyle='#253738';c.fillRect(0,0,W,H);c.strokeStyle='#71877b24';c.lineWidth=1;for(let i=1;i<8;i++){c.beginPath();c.moveTo(i*W/8,0);c.lineTo(i*W/8,H);c.stroke();c.beginPath();c.moveTo(0,i*H/8);c.lineTo(W,i*H/8);c.stroke();}
+ c.strokeStyle='#6e9292';c.lineWidth=12;c.beginPath();for(let x=-550;x<=550;x+=20)x===-550?c.moveTo(X(x),Z(J.riverZ(x))):c.lineTo(X(x),Z(J.riverZ(x)));c.stroke();c.fillStyle='#d0bf8790';c.fillRect(X(-69),Z(-229),138/1040*W,118/1040*H);c.fillStyle='#243735';c.fillRect(X(-61),Z(-221),122/1040*W,101/1040*H);c.strokeStyle=app.time<127?'#d1b772':'#c17159';c.lineWidth=2;c.beginPath();J.supplyPath.forEach(([x,z],i)=>i?c.lineTo(X(x),Z(z)):c.moveTo(X(x),Z(z)));c.stroke();
+ for(let g of J.groups){let s=g.state;c.save();c.translate(X(s.x),Z(s.z));c.rotate(-s.yaw);c.globalAlpha=1-s.loss*.5;c.fillStyle=['#c9d7d0','#dc8166','#80bba0','#dcc182'][g.team];c.fillRect(-2,-2.4,4,4.8);c.restore();}
+ let tx=X(camera.target[0]),tz=Z(camera.target[2]),ex=clamp(X(camera.eye[0]),0,W),ez=clamp(Z(camera.eye[2]),0,H);c.strokeStyle='#e6d19699';c.lineWidth=1;c.beginPath();c.moveTo(ex,ez);c.lineTo(tx,tz);c.stroke();c.fillStyle='#dcc58b22';c.beginPath();c.moveTo(ex,ez);c.lineTo(tx-22,tz-10);c.lineTo(tx+22,tz+10);c.closePath();c.fill();c.strokeStyle='#f0d695';c.beginPath();c.arc(tx,tz,6,0,PI2);c.stroke();c.fillStyle='#e8d6a9';c.font='10px Arial';c.fillText('N ↑',W-30,14);c.fillStyle='#9caf98';c.font='9px Arial';c.fillText('示意',W-29,H-8);
+}
+const PI2=Math.PI*2;
+function updateHUD(force=false){if(!camera)return;const i=J.phaseAt(app.time),ch=J.chapters[i],sh=J.shotAt(app.time),si=J.shots.indexOf(sh),fc=J.forceState(app.focusId,app.time);
+ if(currentPhase!==i||force){currentPhase=i;$('chapterNo').textContent=String(i+1).padStart(2,'0')+' / 08';$('chapterTitle').textContent=ch.title;$('chapterText').textContent=ch.text;$('supplyStatus').textContent=ch.supply;$('supplyStatus').classList.toggle('cut',i>=3);$('sourceHint').textContent='史料：'+ch.source+' · 具体军阵与路线示意';document.querySelectorAll('.chapter-marker').forEach((b,j)=>{b.classList.toggle('current',j===i);b.setAttribute('aria-current',j===i?'step':'false');});}
+ if(si!==currentShot||force){currentShot=si;$('shotNo').textContent='镜头 '+String(si+1).padStart(2,'0')+' / '+J.shots.length;$('captionTitle').textContent=sh.name;$('captionText').textContent=sh.line;$('captionKicker').textContent=String(i+1).padStart(2,'0')+' / '+ch.key+'  ·  '+String(si+1).padStart(2,'0');$('eventText').textContent=sh.name;}
+ $('shotType').textContent=app.guide?'连续运镜':camera.mode==='follow'?'部队跟拍':'自由机位';$('cameraDescription').textContent=app.guide?'电影导览':camera.mode==='follow'?J.forceById[app.selectedId].label+' · '+{rear:'后随',side:'侧拍',front:'迎面',orbit:'环绕',overhead:'俯瞰',contact:'交锋线'}[camera.angle]:'自由观察';
+ $('timeNow').textContent=clock(app.time);$('trackFill').style.width=(app.time/3)+'%';$('trackThumb').style.left=(app.time/3)+'%';if(!app.scrubbing)$('seek').value=app.time;$('seek').setAttribute('aria-valuetext',clock(app.time)+'，'+ch.title);
+ $('focusName').textContent=fc.f.label;$('focusUnit').textContent=fc.f.force;$('focusAction').textContent=fc.action;$('focusName').title=fc.f.note;$('marchSpeed').textContent=fc.speed.toFixed(1);$('speedNeedle').style.transform=`rotate(${clamp(fc.speed/24)*180}deg)`;$('actualSpeed').textContent=(app.playing?'播放 '+app.speed+'×':'已暂停')+' · '+(app.playing?fc.speed*app.speed:0).toFixed(1)+' 米/秒';
+ if(lastFocus!==app.focusId){lastFocus=app.focusId;$('followFocus').textContent='跟拍 '+fc.f.label+' ↗';document.querySelectorAll('[data-force]').forEach(b=>b.classList.toggle('active',b.dataset.force===app.focusId));}
+ for(let l of labels){const fs=J.forceState(l.f.id,app.time);J.setText(l.actionEl,fs.action);J.setText(l.speedEl,fs.speed>.15?fs.speed.toFixed(1)+' 场景m/s':fs.f.team===3?(app.time<245?'城内':'解围'):fs.status.split(' / ')[0]);}
+ let recent=app.frameLog.slice(-100),mean=recent.reduce((v,x)=>v+x.ms,0)/(recent.length||1);$('perf').textContent=(mean?(1000/mean).toFixed(1):'—')+' FPS  ·  '+R.calls+' draw\n'+(R.triangles/1000).toFixed(0)+'k tris / '+w.lodCounts.reduce((a,b)=>a+b,0)+' 可见兵卒\n'+R.canvas.width+'×'+R.canvas.height+' · '+app.quality;
+ updateModes();updateScale();
+}
+function setPaths(v){app.paths=!!v;$('paths').classList.toggle('active',app.paths);$('paths').setAttribute('aria-pressed',String(app.paths));$('pathToggle').checked=app.paths;}
+function fullscreen(){try{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen().catch(()=>toast('可使用浏览器全屏功能。'));}catch(e){toast('当前浏览器未能全屏。');}}
+function toggleUI(){app.clean=!app.clean;document.body.classList.toggle('clean',app.clean);}
+function installControls(){
+ $('start').onclick=()=>start(true);$('explore').onclick=()=>start(false);$('play').onclick=()=>setPlay(!app.playing);$('restart').onclick=()=>{if(!app.started)start(true);setTime(0);camera.returnGuide(true);setPlay(true);};
+ $('guide').onclick=()=>{if(!app.started)start(true);else{camera.returnGuide();toast('回到当前时刻的电影导览。');}};$('returnDirector').onclick=()=>camera.returnGuide();
+ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{if(!app.started)start(false);camera.preset(b.dataset.view);});
+ document.querySelectorAll('[data-angle]').forEach(b=>b.onclick=()=>{if(!app.started)start(false);camera.follow(camera.mode==='follow'?app.selectedId:app.focusId,b.dataset.angle);});
+ $('forceSelect').onchange=e=>{if(!app.started)start(false);camera.follow(e.target.value,'side');};$('followFocus').onclick=()=>camera.follow(app.focusId,'side');
+ document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>setSpeed(+b.dataset.speed));
+ J.chapters.forEach((ch,i)=>{let b=document.createElement('button');b.className='chapter-marker';b.style.left=ch.at/3+'%';b.textContent=ch.key;b.title=clock(ch.at)+' · '+ch.title;b.setAttribute('aria-label','跳转到'+ch.title);b.onclick=()=>{if(!app.started)start(false);cinema.navigate(ch.at);};$('timeline').append(b);});
+ let wasPlayingSeek=false;$('seek').onpointerdown=()=>{wasPlayingSeek=app.playing;app.scrubbing=true;app.playing=false;audio.sync(false);updatePlay();};$('seek').oninput=e=>{if(!app.started)start(false);setTime(e.target.value);};const endSeek=()=>{if(app.scrubbing){app.scrubbing=false;app.playing=wasPlayingSeek&&app.time<300;audio.sync(app.playing);updatePlay();}};window.addEventListener('pointerup',endSeek);window.addEventListener('pointercancel',endSeek);
+ $('sound').onclick=async()=>{try{const v=await audio.toggle();$('sound').textContent=v?'声音 开':'声音 关';$('sound').setAttribute('aria-pressed',String(v));}catch(e){audio.enabled=false;toast('声音未能启用。');}};
+ $('paths').onclick=()=>setPaths(!app.paths);$('pathToggle').onchange=e=>setPaths(e.target.checked);$('labelToggle').onchange=e=>app.labels=e.target.checked;$('placeToggle').onchange=e=>app.places=e.target.checked;$('autoReturn').onchange=e=>{app.autoReturn=e.target.checked;interact();};
+ $('quality').onchange=e=>setQuality(e.target.value);$('qualityDialog').onchange=e=>setQuality(e.target.value);$('volume').oninput=e=>{audio.volume=e.target.value/100;audio.sync(app.playing);$('volumeValue').textContent=e.target.value+'%';};$('musicToggle').onchange=e=>audio.music=e.target.checked;$('perfToggle').onchange=e=>document.body.classList.toggle('show-perf',e.target.checked);$('exportDiag').onclick=exportDiagnostics;$('screenshot').onclick=screenshot;
+ for(let [b,d]of[['sources','sourcesDialog'],['help','helpDialog'],['settings','settingsDialog']])$(b).onclick=()=>$(d).showModal();document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
+ document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){let r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));
+ $('sideToggle').onclick=()=>{$('side').classList.toggle('open');$('sideToggle').classList.toggle('active',$('side').classList.contains('open'));};
+ function tab(roster){app.roster=roster;$('forceRoster').hidden=!roster;$('situationBody').hidden=roster;$('tabForces').classList.toggle('active',roster);$('tabSituation').classList.toggle('active',!roster);}$('tabSituation').onclick=()=>tab(false);$('tabForces').onclick=()=>tab(true);
+ $('hideUI').onclick=toggleUI;$('restoreUI').onclick=toggleUI;$('fullscreen').onclick=fullscreen;
+ $('replayEnd').onclick=()=>{setTime(0);camera.returnGuide(true);setPlay(true);};$('stayEnd').onclick=()=>{document.body.classList.add('continue-looking');camera.manual();};
+ $('map').onclick=e=>{let r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*1040-520,z=(e.clientY-r.top)/r.height*1040-500;camera.manual();camera.dest=[x,J.ground(x,z)+3,z];camera.ddistance=Math.min(camera.ddistance,350);camera.delev=.9;toast('地图定位；没有改变战局。');};
+ window.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)||document.querySelector('dialog[open]'))return;let k=e.key.toLowerCase();if(k===' '){e.preventDefault();setPlay(!app.playing);}else if(k==='arrowleft'||k==='arrowright'){e.preventDefault();setTime(app.time+(k==='arrowleft'?-1:1)*(e.shiftKey?15:5));}else if(k==='d'){if(app.started)camera.returnGuide();}else if(k==='0')camera.preset('overview');else if(k==='h')toggleUI();else if(k==='f')fullscreen();else if(k==='m')$('sound').click();else if(k==='+'||k==='=')setSpeed(app.speed*2);else if(k==='-')setSpeed(app.speed/2);else if(['i','j','k','l'].includes(k))camera.keys.add(k);});
+ window.addEventListener('keyup',e=>camera.keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>camera.keys.clear());
+ const pointers=new Map();let gesture=null,down=null,moved=false;const canvas=$('stage');canvas.oncontextmenu=e=>e.preventDefault();
+ canvas.addEventListener('pointerdown',e=>{if(!app.started)start(false);canvas.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,button:e.button});down={x:e.clientX,y:e.clientY};moved=false;gesture=null;interact();});
+ canvas.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;const prev=pointers.get(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,button:prev.button});let arr=[...pointers.values()];if(arr.length>=2){moved=true;camera.manual();let a=arr[0],b=arr[1],g={x:(a.x+b.x)/2,y:(a.y+b.y)/2,d:Math.hypot(a.x-b.x,a.y-b.y)};if(gesture){camera.ddistance=clamp(camera.ddistance*gesture.d/Math.max(2,g.d),20,1550);camera.pan(g.x-gesture.x,g.y-gesture.y);}gesture=g;}
+ else{let dx=e.clientX-prev.x,dy=e.clientY-prev.y;if(!moved&&down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)>4)moved=true;if(!moved)return;camera.manual();canvas.classList.add('dragging');if(prev.button===2||e.shiftKey)camera.pan(dx,dy);else{camera.dyaw-=dx*.0045;camera.delev=clamp(camera.delev+dy*.0035,.09,1.53);}}
+ });
+ const endPointer=e=>{const was=pointers.has(e.pointerId);pointers.delete(e.pointerId);gesture=null;if(!pointers.size){canvas.classList.remove('dragging');if(was&&!moved&&e.type==='pointerup'&&e.button===0){let best=null,d=Infinity;for(let f of J.forces){let s=J.groups[f.lead].state,p=project([s.x,s.y+3,s.z]),dist=Math.hypot(p.x-e.clientX,p.y-e.clientY);if(p.w>0&&dist<Math.max(18,Math.min(65,1700/p.w))&&dist<d){best=f;d=dist;}}if(best)camera.follow(best.id,'side');}down=null;}};
+ canvas.addEventListener('pointerup',endPointer);canvas.addEventListener('pointercancel',endPointer);canvas.addEventListener('lostpointercapture',endPointer);
+ canvas.addEventListener('wheel',e=>{e.preventDefault();camera.manual();camera.ddistance=clamp(camera.ddistance*Math.exp(e.deltaY*.001),20,1550);},{passive:false});
+ canvas.addEventListener('dblclick',e=>{const fw=J.v3.norm(J.v3.sub(camera.target,camera.eye)),rt=J.v3.norm(J.v3.cross(fw,[0,1,0])),up=J.v3.cross(rt,fw),f=Math.tan(camera.fov*Math.PI/360),nx=(e.clientX/innerWidth*2-1+camera.shiftX)*innerWidth/innerHeight*f,ny=(1-e.clientY/innerHeight*2)*f,ray=J.v3.norm(fw.map((v,i)=>v+rt[i]*nx+up[i]*ny));if(ray[1]>-.035)return;const d=(3-camera.eye[1])/ray[1],x=clamp(camera.eye[0]+ray[0]*d,-820,820),z=clamp(camera.eye[2]+ray[2]*d,-750,720);camera.manual();camera.dest=[x,J.ground(x,z)+3,z];});
+ const footerObserver=new ResizeObserver(measureFooter);footerObserver.observe(document.querySelector('.bottom'));window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){if(cinema?.transport)cinema.cancelNavigation();app.playing=false;audio.sync(false);camera.keys.clear();updatePlay();}lastNow=performance.now();});
+ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(frameId);app.playing=false;audio.sync(false);toast('图形上下文中断，等待恢复。');});canvas.addEventListener('webglcontextrestored',()=>location.reload());
+}
+function frame(now){const elapsed=lastNow?(now-lastNow)/1000:.016,dt=Math.min(.25,elapsed),ms=lastNow?now-lastNow:16.67;lastNow=now;app.delta=dt;cinema?.beforeFrame(now);
+ if(app.playing&&!app.scrubbing&&!cinema?.transport){app.time=Math.min(300,app.time+Math.min(1,elapsed)*app.speed);if(app.time>=300){app.playing=false;document.body.classList.add('completed');audio.sync(false);updatePlay();}}
+ if(lastScene!==app.time){J.updateBattle(app.time);J.updateWorld(R,w,app.time);lastScene=app.time;}
+ if(app.autoReturn&&!app.guide&&app.playing&&now-app.lastInteraction>20000&&!document.querySelector('dialog[open]'))camera.returnGuide();
+ camera.update(dt,app.time);
+ // A frozen scene is not redrawn merely because the UI has another animation frame.
+ // Time, camera, canvas size and visual switches all invalidate this cache.
+ const renderKey=[app.time,...camera.eye.map(v=>v.toFixed(4)),...camera.target.map(v=>v.toFixed(4)),camera.fov.toFixed(4),camera.shiftX,R.canvas.width,R.canvas.height,app.quality,app.paths].join('|');
+ const rendered=renderKey!==lastRenderKey;
+ if(rendered){R.begin(camera,app.time);J.renderWorld(R,w,app.time,app);lastRenderKey=renderKey;}
+ updatePlace();updateLabels(dt);audio.update(app.time,app.playing,camera);
+ if(ms>0&&Number.isFinite(ms)){app.frameLog.push({ms:+ms.toFixed(3),rendered,playing:app.playing,time:+app.time.toFixed(3),shot:J.shots.indexOf(J.shotAt(app.time))+1,mode:camera.mode,dpr:R.pixelRatio,triangles:R.triangles});if(app.frameLog.length>900)app.frameLog.shift();}
+ if(now-lastHUD>120){lastHUD=now;updateHUD();}if(now-lastMap>240){lastMap=now;if(cachedSideVisible||$('side').classList.contains('open'))updateMap();}
+ // Resize without rebuilding geometry, motion or camera; hysteresis prevents oscillation.
+ if(app.quality==='auto'&&now-startNow>6500&&now-lastAuto>8000&&app.frameLog.length>60){const l=app.frameLog.slice(-60),mean=l.reduce((a,b)=>a+b.ms,0)/l.length;if(mean>30&&app.dpr>.70){if(app.dpr<.97)app.adaptivePoints=true;app.dpr=Math.max(.70,app.dpr-.12);resize();lastAuto=now;}}
+ frameId=requestAnimationFrame(frame);
+}
+async function init(){try{
+ await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));R=J.renderer=new J.Renderer($('stage'));$('loadSub').textContent='构建军阵、地形与三十个镜头';await new Promise(r=>setTimeout(r,10));w=J.buildWorld(R);camera=J.camera=new Camera();audio=J.audio=new J.BattleAudio();app.dpr=Math.min(devicePixelRatio||1,1.2);resize();J.updateBattle(0);J.updateWorld(R,w,0);lastScene=0;buildLabels();cinema=J.cinema=new J.Cinema(app,camera,{toast,start,updatePlay});installControls();setPaths(true);updateModes();updatePlay();setSpeed(1);updateHUD(true);$('loading').style.display='none';startNow=performance.now();frameId=requestAnimationFrame(frame);
+ window.__JULU={navigate:t=>cinema.navigate(t),cancelNavigation:()=>cinema.cancelNavigation(),inspect:()=>cinema.inspect(),labels:()=>labels.map(l=>({id:l.f.id,alpha:l.alpha,active:l.active,offset:[...l.off],pos:[...l.pos],anchor:l.base})),ready:true,version:app.version,seek:setTime,play:()=>setPlay(true),pause:()=>setPlay(false),start,guide:(instant=false)=>camera.returnGuide(instant),follow:(id,angle='side')=>camera.follow(id,angle),setSpeed,setQuality,view:name=>camera.preset(name),diagnostics,exportDiagnostics,renderOnce:()=>{camera.update(.016,app.time);R.begin(camera,app.time);J.renderWorld(R,w,app.time,app);updateHUD(true);updatePlace();updateLabels();},state:()=>({time:app.time,transporting:!!cinema.transport,loop:cinema.loop,playing:app.playing,started:app.started,speed:app.speed,phase:J.phaseAt(app.time),chapter:J.chapters[J.phaseAt(app.time)].title,mode:camera.mode,guide:app.guide,angle:camera.angle,focus:app.focusId,shot:J.shots.indexOf(J.shotAt(app.time)),shotCount:J.shots.length,eye:[...camera.eye],target:[...camera.target],distance:camera.distance,fov:camera.fov,dpr:R.pixelRatio,farPointLOD:app.quality==='smooth'||app.quality==='auto'&&(R.software||!!app.adaptivePoints),sceneSoldiers:J.unitCount,visibleSoldiers:w.lodCounts.reduce((a,b)=>a+b,0),groups:J.groups.length,drawCalls:R.calls,triangles:R.triangles,pointSprites:R.points,lodCounts:[...w.lodCounts],frameCount:app.frameLog.length,transportCount:J.transports.length,boats:J.transports.map(tr=>J.boatAt(tr,app.time)),visibleLabels:labels.filter(l=>l.placed).map(l=>l.f.id),marchSpeed:J.forceState(app.focusId,app.time).speed,paths:app.paths,errors:[...app.errors],glError:R.gl.getError(),battle:J.groups.map(g=>({id:g.id,team:g.team,x:+g.state.x.toFixed(5),z:+g.state.z.toFixed(5),yaw:+g.state.yaw.toFixed(5),speed:+g.state.speed.toFixed(5),loss:+g.state.loss.toFixed(5),combat:+g.state.combat.toFixed(5),pack:+g.state.pack.toFixed(5)}))})};
+ }catch(e){fail(e);}}
+init();
+})();
+</script></body></html>
